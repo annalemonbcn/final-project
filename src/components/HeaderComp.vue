@@ -3,7 +3,7 @@
     <nav>
       <div>
         <router-link to="/">
-          <img src="" alt="logo">
+          <img src="../img/a_faire.png" alt="logo">
           Home
         </router-link>
         <router-link to="/my-account">
