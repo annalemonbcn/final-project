@@ -1,11 +1,19 @@
 <template>
-  <main>
-    <h1>Home view</h1>
+  <main class="row">
+    <ProjectTitle />
+    <TaskContainer />
   </main>
 </template>
 
 <script>
+import ProjectTitle from '../components/ProjectTitleComp.vue'
+import TaskContainer from '../components/TaskContainerComp.vue'
+
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  components: {
+    ProjectTitle,
+    TaskContainer
+  }
 }
 </script>

@@ -7,7 +7,14 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      children: [
+        {
+          path: 'list/task',
+          name: 'details',
+          component: () => import('../components/TaskDetailsComp.vue')
+        }
+      ]
     },
     {
       path: '/my-account',

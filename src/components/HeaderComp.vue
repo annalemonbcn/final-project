@@ -1,7 +1,7 @@
 <template>
-  <header class="bigP">
+  <header class="row">
     <nav>
-      <div class="main-links">
+      <div class="mainLinks">
         <router-link to="/">
           <img src="../img/a_faire.png" alt="logo" class="logo" />
         </router-link>
@@ -32,16 +32,15 @@ export default {
   header nav {
     display: flex;
     flex-flow: row nowrap;
-    width: 100vw;
     justify-content: space-between;
     align-items: center;
   }
 
-  header nav .main-links{
+  header nav .mainLinks{
     display: flex;
     align-items: center;
   }
-  header nav .main-links a{
+  header nav .mainLinks a{
     margin: 0 10px;
   }
 </style>
