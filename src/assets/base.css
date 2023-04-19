@@ -65,6 +65,43 @@ body a{
   }
 }
 
+/* SECTION PADDINGS */
+.bigP{
+  padding: 3rem 2rem;
+}
+@media screen and (min-width:768px){
+  header.bigP{
+    padding: 1.5rem 3rem;
+  }
+}
+@media screen and (min-width: 1024px){
+  .bigP{
+    padding: 3rem 50px;
+  }
+  header.bigP{
+    padding: 3rem 50px;
+  }
+}
+@media(min-width: 1200px){
+.bigP{
+    padding: 3em 170px;
+  }
+  header.bigP{
+    padding: 3rem 170px;
+  }
+}
+
+.smallP{
+  width: 90%;
+  margin: 3rem auto;
+}
+@media(min-width: 1024px){
+  .smallP{
+    margin: 5rem;
+  }
+}
+
+
 /* BUTTONS + LINKS */
 .btn{
   border: 0;
