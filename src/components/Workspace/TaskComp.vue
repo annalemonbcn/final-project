@@ -1,11 +1,11 @@
 <template>
     <router-link to="/task/task1" class="task">
-      <p class="task-title" >Task title</p>
-      <p class="task-status pending">Pending</p>
-      <p class="task-person">
-        <UserLogo />
+      <p class="task-title">{{ title }}</p>
+      <p class="task-status">{{ status }}</p>
+      <p class="task-user">
+        <UserLogo :initials="initials" />
       </p>
-      <p class="task-date">13/05/2023</p>
+      <p class="task-date">{{ date }}</p>
     </router-link>
 </template>
 
@@ -14,10 +14,23 @@ import UserLogo from '../Account/UserLogoComp.vue';
 
 export default {
   name: 'SingleTask',
-  data() {
-    return {
-
-    }
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    status: {
+      type: String,
+      required: true
+    },
+    initials: {
+      type: String,
+      required: true
+    },
+    date: {
+      type: String,
+      required: true
+    },
   },
   components: {
     UserLogo,
@@ -39,6 +52,10 @@ export default {
     gap: 2rem;
     color: var(--tertiary-accent);
   }
+
+  /* .task > *{
+    flex-grow: 1;
+  } */
 
   .task .task-status.pending{
     background-color: orange;

@@ -7,9 +7,15 @@ export default{
   name: 'UserLogo',
   data() {
     return {
-      initials: 'AE'
+      // initials: 'AE'
     };
   },
+  props: {
+    initials: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 
