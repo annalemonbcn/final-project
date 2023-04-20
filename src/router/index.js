@@ -10,7 +10,7 @@ const router = createRouter({
       component: HomeView,
       children: [
         {
-          path: 'list/task',
+          path: 'task',
           name: 'details',
           component: () => import('../components/TaskDetailsComp.vue')
         }
