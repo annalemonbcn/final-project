@@ -1,6 +1,15 @@
 /* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;300;400;700&family=Roboto:wght@100;300;400;700');
 
+/* Colors */
+:root{
+  --primary-color: fff;
+  --secondary-color: fff;
+  --tertiary-color: #babfcc;
+  --tertiary-accent: #464952;
+  --background-color: #F2F3F3;
+}
+
 /* Global styles */
 *,
 *::before,
@@ -18,19 +27,19 @@ html, body{
 }
 
 body {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Roboto, Roboto Mono, 'Helvetica Neue', sans-serif;
   font-size: 20px;
   position: relative;
 
-  background-color: #F2F3F3;
+  background-color: var(--background-color);
   color: #08143c;
 }
 
 body a{
   text-decoration: none;
-  color: #6B707D;
+  color: var(--tertiary-color); 
 }
 
 body a.active{
-  color: #32343F;
+  color: var(--tertiary-accent);
 }

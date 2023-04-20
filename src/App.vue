@@ -1,7 +1,6 @@
 <template>
   <NavComp />
-
-  <!-- <RouterView /> -->
+  <router-view></router-view>
 </template>
 
 <script>

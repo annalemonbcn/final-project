@@ -1,7 +1,7 @@
 <template>
   <header>
     <nav>
-      <div>
+      <div class="nav-border-bottom">
         <router-link to="/">
           <img src="../../img/a_faire.png" alt="logo" class="logo" />
         </router-link>
@@ -19,28 +19,31 @@
           </a>
         </div>
         <div>
-          <router-link to="/logout">
+          <!-- <router-link to="/logout">
             <fa icon="arrow-right-from-bracket" />
-          </router-link>
+          </router-link> -->
         </div>
       </div>
-      <div>
-        <UserLogo />
-        <!-- <router-link to="/my-account">
-           <UserLogo /> 
-          <div id="nav-user-id">AE</div> 
-        </router-link> -->
+      <div class="nav-border-top">
+        <router-link to="/my-account">
+          <UserLogo />
+        </router-link>
       </div>
     </nav>
   </header>
 </template>
 
 <script>
-import UserLogo from '../Account/UserLogoComp.vue'
+import UserLogo from '../Account/UserLogoComp.vue';
 
 export default {
   name: 'HeaderComp',
-  components: UserLogo
+  data() {
+    return {};
+  },
+  components: {
+    UserLogo,
+  },
 }
 </script>
 
@@ -73,7 +76,7 @@ header svg {
 }
 
 header nav img.logo {
-  max-width: 80px;
+  max-width: 70px;
 }
 
 header nav #nav-main {
@@ -93,9 +96,24 @@ header nav #nav-main #mainNavigation {
   gap: 1rem;
 }
 
-header #nav-user-id {
-  border: 1px solid #6b707d;
-  border-radius: 50px;
-  padding: 12px;
+.nav-border-bottom{
+  border-bottom: 2px solid var(--tertiary-color);
+  padding-bottom: 15px;
+  width: 80%;
+}
+
+.nav-border-top{
+  border-top: 2px solid var(--tertiary-color);
+  padding-top: 15px;
+  width: 80%;
+}
+
+.nav-border-top a{
+  display: block;
+  width: 45px;
+  margin: 0 auto;
+
+  color: var(--tertiary-accent);
+  font-weight: 700;
 }
 </style>
