@@ -1,10 +1,16 @@
 <template>
   <div id="actionButtons">
-    <button @click="_createNewTask">New Task</button>
+    <router-link to="/task/add-task">
+      <button>New Task</button>
+    </router-link>
+    
   </div>
 </template>
 
 <script>
+import { mapActions } from 'pinia'
+import TasksStore from '../../stores/tasks';
+
 export default {
   name: 'ActionButtons',
   data() {
@@ -13,9 +19,7 @@ export default {
     }
   },
   methods: {
-    _createNewTask(){
-      console.log('Button new task');
-    }
+    ...mapActions(TasksStore, ['_addTask']),
   }
 }
 </script>

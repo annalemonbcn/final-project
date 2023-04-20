@@ -6,10 +6,13 @@
         <UserLogo :initials="initials" />
       </p>
       <p class="task-date">{{ date }}</p>
+      <button @click="_removeTask(this)">Remove</button>
     </router-link>
 </template>
 
 <script>
+import { mapActions } from 'pinia'
+import TasksStore from '../../stores/tasks';
 import UserLogo from '../Account/UserLogoComp.vue';
 
 export default {
@@ -31,6 +34,9 @@ export default {
       type: String,
       required: true
     },
+  },
+  methods: {
+    ...mapActions(TasksStore, ['_removeTask']),
   },
   components: {
     UserLogo,
