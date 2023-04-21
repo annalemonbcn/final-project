@@ -10,9 +10,14 @@ const router = createRouter({
       children: [
         {
           path: "task/:taskTitle",
-          name: "task",
-          component: () => import('../components/TaskDetails/TaskDetails.vue'),
+          name: "task details",
+          component: () => import('../views/TaskDetailsView.vue'),
         },
+        {
+          path: "task/add-task",
+          name: "add task",
+          component: () => import('../views/TaskDetailsView.vue'),
+        }
       ],
     },
     {

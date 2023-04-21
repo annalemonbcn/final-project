@@ -1,5 +1,6 @@
 <template>
   <div class="task-container">
+    <p>{{ title }}</p>
     <TaskComp
       v-for="(task, index) in tasks"
       :key="index"
@@ -12,44 +13,40 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia'
+import TasksStore from '../../stores/tasks'
+
 import TaskComp from './TaskComp.vue'
 
 export default {
   name: 'TaskStatus',
-  data() {
+  data(){
     return {
-      tasks: [
-        {
-          title: 'Task num 1',
-          status: 'Pending',
-          user: 'AA',
-          date: '20/04/2023'
-        },
-        {
-          title: 'Task num 2',
-          status: 'Done',
-          user: 'AB',
-          date: '23/04/2023'
-        },
-        {
-          title: 'Task num 3',
-          status: 'Pending',
-          user: 'AC',
-          date: '28/04/2023'
-        },
-        {
-          title: 'Task num 4',
-          status: 'Done',
-          user: 'AD',
-          date: '22/04/2023'
-        },
-        {
-          title: 'Task num 5',
-          status: 'Done',
-          user: 'AE',
-          date: '26/04/2023'
-        }
-      ]
+      tasks: []
+    }
+  },
+  methods: {
+    ...mapActions(TasksStore, ['_getPendingTasks', '_getDoneTasks'])
+  },
+  mounted(){
+    console.log(`pending: ${this._getPendingTasks()}`);
+    console.log(`done: ${this._getDoneTasks()}`);
+  },
+  created(){
+    if(this.status === 'Pending'){
+      this.tasks = this._getPendingTasks();
+    } else if (this.status === 'Done'){
+      this.tasks = this._getDoneTasks();
+    }
+  },
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    status: {
+      type: String,
+      required: true
     }
   },
   components: {
@@ -58,4 +55,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.task-container {
+  margin-top: 30px;
+}
+</style>

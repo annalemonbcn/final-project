@@ -1,6 +1,7 @@
 <template>
   <div id="tasks-container-grouper">
-    <TaskContainer />
+    <TaskContainer status="Pending" title="Pending" />
+    <TaskContainer status="Done" title="Done" />
   </div>
 </template>
 
@@ -11,7 +12,7 @@ export default {
   name: 'TasksGrouper',
   data() {
     return {
-
+      
     }
   },
   components: {

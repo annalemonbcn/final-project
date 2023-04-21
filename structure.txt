@@ -1,0 +1,12 @@
+App.vue
+  |
+  |-> NavComp
+  |-> routerview --> HomeView.vue
+    |
+    |-> ProjectTitle --> ProjectTitleComp.vue
+    |-> ActionButtons --> ActionButtonsComp.vue
+    |-> TasksGrouper --> TaskContGrouperComp.vue
+          |
+          |-> TaskContainer --> TaskContainerComp.vue --> Pending tasks
+          |-> TaskContainer --> TaskContainerComp.vue --> Done tasks
+    |-> routerview --> TaskDetailsView.vue

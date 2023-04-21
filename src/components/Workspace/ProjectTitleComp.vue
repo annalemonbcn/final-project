@@ -4,29 +4,41 @@
       <h1>{{ projectTitle}}</h1>
       <p>{{ projectDescription }}</p>
     </div>
-    <div id="percent">{{ percent }}% done ({{ `${tasksDone} of ${totalTasks} tasks done` }})</div>
+    <div id="percent">{{ `${percent}` }}% done ({{ `${tasksDone} of ${totalTasks} tasks done` }})</div>
   </div>
 </template>
 
 <script>
+import TasksStore from '../../stores/tasks'
+import { mapState, mapActions } from 'pinia'
+
 export default {
   name: 'ProjectTitle',
   data() {
     return {
       projectTitle: 'Project title',
       projectDescription: 'This is the project brief description',
-      totalTasks: 6,
-      tasksDone: 2,
+      totalTasks: null,
+      tasksDone: null,
       percent: null
     }
   },
   methods: {
+    ...mapActions(TasksStore, ['_getTotalTasksCount', '_getDoneTasksCount']),
+
     _calculatePercent() {
-      this.percent = ((this.tasksDone / this.totalTasks) * 100).toFixed(2)
+      const integer = Math.floor(this.tasksDone / this.totalTasks * 100)
+      const decimal = (this.tasksDone / this.totalTasks * 100) - integer;
+      this.percent = decimal < 0.5 ? integer : integer + 1;
     }
   },
   created() {
-    this._calculatePercent()
+    // Get count of total tasks and tasks done
+    this.totalTasks = this._getTotalTasksCount();
+    this.tasksDone = this._getDoneTasksCount();
+
+    // Calculate percent
+    this._calculatePercent();
   }
 }
 </script>
