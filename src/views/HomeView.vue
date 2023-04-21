@@ -27,7 +27,7 @@ export default {
 <style>
   #board{
     width: 100%;
-    padding: 70px 100px;
+    padding: 70px 100px 70px 200px;
   }
 
   #tasks-info{

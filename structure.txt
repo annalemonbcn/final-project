@@ -7,5 +7,6 @@ App.vue
     |-> ActionButtons --> ActionButtonsComp.vue
     |-> TasksGrouper --> TaskContGrouperComp
           |
-          |-> TaskContainer --> TaskContainerComp.vue
+          |-> TaskContainer --> TaskContainerComp.vue --> Pending tasks
+          |-> TaskContainer --> TaskContainerComp.vue --> Done tasks
     |-> routerview --> TaskDetailsView.vue

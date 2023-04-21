@@ -12,10 +12,10 @@
             <fa icon="fa-circle-dot" />
           </router-link>
           <a href="#">
-            <fa icon="fa-regular fa-bell" />
+            <fa icon="fa-regular fa-star" />
           </a>
           <a href="#">
-            <fa icon="fa-regular fa-star" />
+            <fa icon="fa-regular fa-flag" />
           </a>
         </div>
         <div>
@@ -50,12 +50,16 @@ export default {
 <style scoped>
 header {
   box-sizing: border-box;
+  padding: 30px 10px;
 
   background-color: #ebeded;
+
   height: 100vh;
   max-width: 100px;
 
-  padding: 30px 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 header nav {
