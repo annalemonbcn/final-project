@@ -51,6 +51,13 @@ export default {
   },
   created(){
     this._setInfo(this._getSingleTask(this.$route.params.taskTitle)[0]);
+
+    this.$watch(
+      () => this.$route.params,
+      (newParams, oldParams) => {
+        this._setInfo(this._getSingleTask(newParams.taskTitle));
+      }
+    )
   }
 }
 </script>
