@@ -11,12 +11,12 @@
           <router-link to="/" class="active">
             <fa icon="fa-circle-dot" />
           </router-link>
-          <a href="#">
+          <router-link to="/task/favourites" class="active">
             <fa icon="fa-regular fa-star" />
-          </a>
-          <a href="#">
+          </router-link>
+          <router-link to="/task/flag" class="active">
             <fa icon="fa-regular fa-flag" />
-          </a>
+          </router-link>
         </div>
         <div>
           <!-- <router-link to="/logout">

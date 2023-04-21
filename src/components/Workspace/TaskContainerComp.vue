@@ -28,10 +28,6 @@ export default {
   methods: {
     ...mapActions(TasksStore, ['_getPendingTasks', '_getDoneTasks'])
   },
-  mounted(){
-    console.log(`pending: ${this._getPendingTasks()}`);
-    console.log(`done: ${this._getDoneTasks()}`);
-  },
   created(){
     if(this.status === 'Pending'){
       this.tasks = this._getPendingTasks();
