@@ -11,10 +11,10 @@
           <router-link to="/" class="active">
             <fa icon="fa-circle-dot" />
           </router-link>
-          <router-link to="/task/favourites" class="active">
+          <router-link to="/task/favourites">
             <fa icon="fa-regular fa-star" />
           </router-link>
-          <router-link to="/task/flag" class="active">
+          <router-link to="/task/flag">
             <fa icon="fa-regular fa-flag" />
           </router-link>
         </div>

@@ -8,5 +8,9 @@ App.vue
     |-> TasksGrouper --> TaskContGrouperComp.vue
           |
           |-> TaskContainer --> TaskContainerComp.vue --> Pending tasks
+                |
+                |-> TaskComp.vue
           |-> TaskContainer --> TaskContainerComp.vue --> Done tasks
+                |
+                |-> TaskComp.vue
     |-> routerview --> TaskDetailsView.vue

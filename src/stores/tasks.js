@@ -10,7 +10,8 @@ export default defineStore('tasks', {
           user: 'AA',
           date: '20/04/2023',
           flag: true,
-          favourite: true
+          favourites: true,
+          url: 'task_num_1'
         },
         {
           title: 'Task num 2',
@@ -18,7 +19,8 @@ export default defineStore('tasks', {
           user: 'AB',
           date: '23/04/2023',
           flag: false,
-          favourite: true
+          favourites: true,
+          url: 'task_num_2'
         },
         {
           title: 'Task num 3',
@@ -26,7 +28,8 @@ export default defineStore('tasks', {
           user: 'AC',
           date: '28/04/2023',
           flag: false,
-          favourite: false
+          favourites: false,
+          url: 'task_num_3'
         },
         {
           title: 'Task num 4',
@@ -34,7 +37,8 @@ export default defineStore('tasks', {
           user: 'AD',
           date: '22/04/2023',
           flag: false,
-          favourite: true
+          favourites: true,
+          url: 'task_num_4'
         },
         {
           title: 'Task num 5',
@@ -42,7 +46,8 @@ export default defineStore('tasks', {
           user: 'AE',
           date: '26/04/2023',
           flag: false,
-          favourite: false
+          favourites: false,
+          url: 'task_num_5'
         },
         {
           title: 'Task num 6',
@@ -50,7 +55,8 @@ export default defineStore('tasks', {
           user: 'AE',
           date: '26/04/2023',
           flag: false,
-          favourite: true
+          favourites: true,
+          url: 'task_num_6'
         }
       ],
     }
@@ -59,8 +65,8 @@ export default defineStore('tasks', {
     _addTask(newTask){
       this.tasks.push(newTask);
     },
-    _removeTask(taskToRemove){
-      this.tasks = this.tasks.filter(task => task.title !== taskToRemove.title);
+    _getSingleTask(taskUrl){
+      return this.tasks.filter(task => task.url === taskUrl);
     },
     _getPendingTasks(){
       return this.tasks.filter(task => task.status === 'Pending');
@@ -68,8 +74,8 @@ export default defineStore('tasks', {
     _getDoneTasks(){
       return this.tasks.filter(task => task.status === 'Done');
     },
-    _getFavouriteTasks(){
-      return this.tasks.filter(task => task.favourite === true);
+    _getfavouritesTasks(){
+      return this.tasks.filter(task => task.favourites === true);
     },
     _getFlaggedTasks(){
       return this.tasks.filter(task => task.flag === true);
@@ -83,8 +89,8 @@ export default defineStore('tasks', {
     _getDoneTasksCount(){
       return this._getDoneTasks().length;
     },
-    _geFavouriteTasksCount(){
-      return this._getFavouriteTasks().length;
+    _gefavouritesTasksCount(){
+      return this._getfavouritesTasks().length;
     },
     _getFlaggedTasksCount(){
       return this._getFlaggedTasks().length;

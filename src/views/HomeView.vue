@@ -2,7 +2,7 @@
   <main id="board">
     <ProjectTitle />
     <ActionButtons />
-    <div id="tasks-info">
+    <div id="task-info">
       <TasksGrouper />
       <router-view></router-view>
     </div>
@@ -30,11 +30,11 @@ export default {
     padding: 70px 100px 70px 200px;
   }
 
-  #tasks-info{
+  #task-info{
     display: flex;
     flex-flow: row nowrap;
     gap: 100px;
 
-    margin-top: 80px;
+    margin-top: 50px;
   }
 </style>

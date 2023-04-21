@@ -23,7 +23,7 @@ export default {
 
 <style>
   #tasks-container-grouper{
-    width: 40%;
+    /* width: 50%; */
   }
 
   #tasks-container-grouper .user-initials{

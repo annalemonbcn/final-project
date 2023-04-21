@@ -1,25 +1,22 @@
 <template>
-    <router-link :to="`/task/${titleURL}`" class="task">
+    <router-link :to="`/task/${url}`" class="task">
       <p class="task-title">{{ title }}</p>
       <p class="task-status">{{ status }}</p>
       <p class="task-user">
         <UserLogo :initials="initials" />
       </p>
       <p class="task-date">{{ date }}</p>
-      <button @click="_removeTask(this)">Remove</button>
+      <button @click="_removeTask()">Remove</button>
     </router-link>
 </template>
 
 <script>
-import { mapActions } from 'pinia'
-import TasksStore from '../../stores/tasks';
 import UserLogo from '../Account/UserLogoComp.vue';
 
 export default {
   name: 'SingleTask',
   data() {
     return{
-      titleURL: ''
     }
   },
   props: {
@@ -39,15 +36,16 @@ export default {
       type: String,
       required: true
     },
-  },
-  methods: {
-    ...mapActions(TasksStore, ['_removeTask']),
-    _titleToUrl(){
-      this.titleURL = this.title.toLowerCase().split(' ').join('_');
+    url: {
+      type: String,
+      required: true
     }
   },
-  created(){
-    this._titleToUrl();
+  methods: {
+    // ...mapActions(TasksStore, ['_removeTask']),
+    _removeTask(){
+      this.$emit('remove-task', this.title)
+    }
   },
   components: {
     UserLogo,

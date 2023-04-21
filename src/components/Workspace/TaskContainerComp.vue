@@ -2,18 +2,20 @@
   <div class="task-container">
     <p>{{ title }}</p>
     <TaskComp
-      v-for="(task, index) in tasks"
+      v-for="(task, index) in tasksFiltered"
       :key="index"
       :title="task.title"
       :status="task.status"
       :initials="task.user"
       :date="task.date"
+      :url="task.url"
+      @remove-task="onRemoveTask"
     />
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'pinia'
+import { mapActions } from 'pinia'
 import TasksStore from '../../stores/tasks'
 
 import TaskComp from './TaskComp.vue'
@@ -22,17 +24,21 @@ export default {
   name: 'TaskStatus',
   data(){
     return {
-      tasks: []
+      tasksFiltered: []
     }
   },
   methods: {
-    ...mapActions(TasksStore, ['_getPendingTasks', '_getDoneTasks'])
+    ...mapActions(TasksStore, ['_getPendingTasks', '_getDoneTasks']),
+
+    onRemoveTask(taskTitle){
+      this.tasksFiltered = this.tasksFiltered.filter(task => task.title !== taskTitle);
+    }
   },
   created(){
     if(this.status === 'Pending'){
-      this.tasks = this._getPendingTasks();
+      this.tasksFiltered = this._getPendingTasks();
     } else if (this.status === 'Done'){
-      this.tasks = this._getDoneTasks();
+      this.tasksFiltered = this._getDoneTasks();
     }
   },
   props: {
