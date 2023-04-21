@@ -53,10 +53,6 @@ export default defineStore('tasks', {
           favourite: true
         }
       ],
-      pendingTasks: [],
-      doneTasks: [],
-      favouriteTasks: [],
-      flaggedTasks: [],
     }
   },
   actions: {
@@ -67,35 +63,31 @@ export default defineStore('tasks', {
       this.tasks = this.tasks.filter(task => task.title !== taskToRemove.title);
     },
     _getPendingTasks(){
-      this.pendingTasks = this.tasks.filter(task => task.status === 'Pending');
+      return this.tasks.filter(task => task.status === 'Pending');
     },
     _getDoneTasks(){
-      this.doneTasks = this.tasks.filter(task => task.status === 'Done');
+      return this.tasks.filter(task => task.status === 'Done');
     },
     _getFavouriteTasks(){
-      this.favouriteTasks = this.tasks.filter(task => task.favourite === true);
+      return this.tasks.filter(task => task.favourite === true);
     },
     _getFlaggedTasks(){
-      this.doneTasks = this.tasks.filter(task => task.flag === true);
+      return this.tasks.filter(task => task.flag === true);
     },
     _getTotalTasksCount(){
       return this.tasks.length;
     },
-    _getPendingTasksCount(){
-      this._getPendingTasks();
-      return this.pendingTasks.length;
+    _getPendingTasksCount(){      
+      return this._getPendingTasks().length;
     },
     _getDoneTasksCount(){
-      this._getDoneTasks();
-      return this.doneTasks.length;
+      return this._getDoneTasks().length;
     },
     _geFavouriteTasksCount(){
-      this._getFavouriteTasks();
-      return this.favouriteTasks.length;
+      return this._getFavouriteTasks().length;
     },
     _getFlaggedTasksCount(){
-      this._getFlaggedTasks();
-      return this.flaggedTasks.length;
+      return this._getFlaggedTasks().length;
     }
   }
 })

@@ -22,20 +22,29 @@ export default {
   name: 'TaskStatus',
   data(){
     return {
-
+      tasks: []
     }
-  },
-  computed: {
-    ...mapState(TasksStore, ['tasks','pendingTasks','doneTasks'])
   },
   methods: {
     ...mapActions(TasksStore, ['_getPendingTasks', '_getDoneTasks'])
   },
+  mounted(){
+    console.log(`pending: ${this._getPendingTasks()}`);
+    console.log(`done: ${this._getDoneTasks()}`);
+  },
   created(){
-    this._getPendingTasks()
+    if(this.status === 'Pending'){
+      this.tasks = this._getPendingTasks();
+    } else if (this.status === 'Done'){
+      this.tasks = this._getDoneTasks();
+    }
   },
   props: {
     title: {
+      type: String,
+      required: true
+    },
+    status: {
       type: String,
       required: true
     }

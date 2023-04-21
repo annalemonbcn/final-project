@@ -1,8 +1,7 @@
 <template>
   <div id="tasks-container-grouper">
-    <TaskContainer v-for="status in statusLists" :key="status"
-    title="Pending" />
-    <TaskContainer title="Done" />
+    <TaskContainer status="Pending" title="Pending" />
+    <TaskContainer status="Done" title="Done" />
   </div>
 </template>
 
@@ -13,7 +12,7 @@ export default {
   name: 'TasksGrouper',
   data() {
     return {
-      statusLists: ['pending, done']
+      
     }
   },
   components: {

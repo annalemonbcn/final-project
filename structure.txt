@@ -5,7 +5,7 @@ App.vue
     |
     |-> ProjectTitle --> ProjectTitleComp.vue
     |-> ActionButtons --> ActionButtonsComp.vue
-    |-> TasksGrouper --> TaskContGrouperComp
+    |-> TasksGrouper --> TaskContGrouperComp.vue
           |
           |-> TaskContainer --> TaskContainerComp.vue --> Pending tasks
           |-> TaskContainer --> TaskContainerComp.vue --> Done tasks

@@ -23,16 +23,13 @@ export default {
       percent: null
     }
   },
-  computed: {
-    ...mapState(TasksStore, ['totalCount', 'totalDoneTasks', 'totalPendingTasks'])
-  },
   methods: {
     ...mapActions(TasksStore, ['_getTotalTasksCount', '_getDoneTasksCount']),
 
     _calculatePercent() {
       const integer = Math.floor(this.tasksDone / this.totalTasks * 100)
       const decimal = (this.tasksDone / this.totalTasks * 100) - integer;
-      this.precent = decimal < 0.5 ? integer : integer + 1;
+      this.percent = decimal < 0.5 ? integer : integer + 1;
     }
   },
   created() {
