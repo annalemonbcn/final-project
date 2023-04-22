@@ -19,9 +19,9 @@
           </router-link>
         </div>
         <div>
-          <!-- <router-link to="/logout">
+          <router-link to="/logout">
             <fa icon="arrow-right-from-bracket" />
-          </router-link> -->
+          </router-link>
         </div>
       </div>
       <div class="nav-border-top">
