@@ -34,7 +34,14 @@ export default {
     display: flex;
     flex-flow: row nowrap;
     gap: 100px;
-
     margin-top: 50px;
+  }
+
+  .info-right{
+    background-color: #ebeded;
+    box-sizing: border-box;
+    padding: 30px 50px;
+    min-width: 50%;
+    border-radius: 25px;
   }
 </style>

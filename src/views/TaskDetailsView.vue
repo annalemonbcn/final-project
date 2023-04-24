@@ -1,5 +1,5 @@
 <template>
-  <div id="task-details">
+  <div class="info-right" id="task-details">
     <div class="task-row">
       <h2>{{ task.title }}</h2>
       <p id="task-status">{{ task.status }}</p>
@@ -68,13 +68,6 @@ export default {
     flex-flow: column nowrap;
     /* justify-content: space-between; */
     gap: 30px;
-    
-    background-color: #ebeded;
-
-    box-sizing: border-box;
-    padding: 30px 50px;
-    min-width: 50%;
-    border-radius: 25px;
   }
   #task-details > *{
     display: flex;
