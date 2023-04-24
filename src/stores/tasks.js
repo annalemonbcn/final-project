@@ -7,55 +7,61 @@ export default defineStore('tasks', {
         {
           title: 'Task num 1',
           status: 'Pending',
+          description: '',
           user: 'AA',
           date: '20/04/2023',
           flag: true,
-          favourites: true,
+          favourite: true,
           url: 'task_num_1'
         },
         {
           title: 'Task num 2',
           status: 'Done',
+          description: '',
           user: 'AB',
           date: '23/04/2023',
           flag: false,
-          favourites: true,
+          favourite: true,
           url: 'task_num_2'
         },
         {
           title: 'Task num 3',
           status: 'Pending',
+          description: '',
           user: 'AC',
           date: '28/04/2023',
           flag: false,
-          favourites: false,
+          favourite: false,
           url: 'task_num_3'
         },
         {
           title: 'Task num 4',
           status: 'Done',
+          description: '',
           user: 'AD',
           date: '22/04/2023',
           flag: false,
-          favourites: true,
+          favourite: true,
           url: 'task_num_4'
         },
         {
           title: 'Task num 5',
           status: 'Done',
+          description: '',
           user: 'AE',
           date: '26/04/2023',
           flag: false,
-          favourites: false,
+          favourite: false,
           url: 'task_num_5'
         },
         {
           title: 'Task num 6',
           status: 'Done',
+          description: '',
           user: 'AE',
           date: '26/04/2023',
           flag: false,
-          favourites: true,
+          favourite: true,
           url: 'task_num_6'
         }
       ],
@@ -89,7 +95,7 @@ export default defineStore('tasks', {
     _getDoneTasksCount(){
       return this._getDoneTasks().length;
     },
-    _gefavouritesTasksCount(){
+    _getFavouritesTasksCount(){
       return this._getfavouritesTasks().length;
     },
     _getFlaggedTasksCount(){
