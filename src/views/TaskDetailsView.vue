@@ -54,7 +54,8 @@ export default {
 
     this.$watch(
       () => this.$route.params,
-      (newParams, oldParams) => {
+      (newParams) => {
+        console.log(this._getSingleTask(newParams.taskTitle));
         this._setInfo(this._getSingleTask(newParams.taskTitle));
       }
     )
