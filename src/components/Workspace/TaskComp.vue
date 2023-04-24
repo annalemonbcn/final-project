@@ -2,9 +2,6 @@
     <router-link :to="`/task/${url}`" class="task">
       <p class="task-title">{{ title }}</p>
       <p class="task-status">{{ status }}</p>
-      <p class="task-user">
-        <UserLogo :initials="initials" />
-      </p>
       <p class="task-date">{{ date }}</p>
       <button @click="_removeTask()">Remove</button>
     </router-link>
@@ -25,10 +22,6 @@ export default {
       required: true
     },
     status: {
-      type: String,
-      required: true
-    },
-    initials: {
       type: String,
       required: true
     },

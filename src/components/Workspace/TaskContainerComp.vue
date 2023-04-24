@@ -6,7 +6,6 @@
       :key="index"
       :title="task.title"
       :status="task.status"
-      :initials="task.user"
       :date="task.date"
       :url="task.url"
       @remove-task="onRemoveTask"
