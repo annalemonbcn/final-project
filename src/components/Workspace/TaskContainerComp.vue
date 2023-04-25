@@ -2,7 +2,7 @@
   <div class="task-container">
     <p>{{ title }}</p>
     <TaskComp
-      v-for="(task, index) in pendingTasks"
+      v-for="(task, index) in tasksFiltered"
       :key="index"
       :title="task.title"
       :status="task.status"
@@ -38,9 +38,13 @@ export default {
   },
   created(){
     if(this.status === 'Pending'){
-      this.tasksFiltered = this._getPendingTasks();
+      this._getPendingTasks();
+      this.tasksFiltered = this.pendingTasks;
+      console.log(this.tasksFiltered);
     } else if (this.status === 'Done'){
-      this.tasksFiltered = this._getDoneTasks();
+      this._getDoneTasks();
+      this.tasksFiltered = this.doneTasks;
+      console.log(this.tasksFiltered);
     }
   },
   props: {

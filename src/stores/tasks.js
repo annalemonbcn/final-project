@@ -78,11 +78,11 @@ export default defineStore('tasks', {
     },
     _getPendingTasks(){
       this.pendingTasks = this.tasks.filter(task => task.status === 'Pending');
-      return this.tasks.filter(task => task.status === 'Pending');
+      // return this.tasks.filter(task => task.status === 'Pending');
     },
     _getDoneTasks(){
       this.doneTasks = this.tasks.filter(task => task.status === 'Done');
-      return this.tasks.filter(task => task.status === 'Done');
+      // return this.tasks.filter(task => task.status === 'Done');
     },
     _getfavouritesTasks(){
       return this.tasks.filter(task => task.favourites === true);
@@ -93,11 +93,13 @@ export default defineStore('tasks', {
     _getTotalTasksCount(){
       return this.tasks.length;
     },
-    _getPendingTasksCount(){      
-      return this._getPendingTasks().length;
+    _getPendingTasksCount(){
+      this._getPendingTasks();
+      return this.pendingTasks.length;
     },
     _getDoneTasksCount(){
-      return this._getDoneTasks().length;
+      this._getDoneTasks();
+      return this.doneTasks.length;
     },
     _getFavouritesTasksCount(){
       return this._getfavouritesTasks().length;

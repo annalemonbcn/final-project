@@ -61,7 +61,6 @@ export default {
       this._addTask(this.task);
       // Reset fields
       this._reset();
-      this._getPendingTasks();
       console.log(this.tasks);
     },
     _reset(){

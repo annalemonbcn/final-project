@@ -10,11 +10,6 @@ import TaskContainer from './TaskContainerComp.vue';
 
 export default {
   name: 'TasksGrouper',
-  data() {
-    return {
-      
-    }
-  },
   components: {
     TaskContainer,
   }
