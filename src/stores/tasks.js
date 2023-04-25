@@ -76,16 +76,24 @@ export default defineStore('tasks', {
     _getSingleTask(taskUrl) {
       return this.tasks.filter(task => task.url === taskUrl)[0];
     },
-    _getPendingTasks(){
-      this.pendingTasks = this.tasks.filter(task => task.status === 'Pending');
-      // return this.tasks.filter(task => task.status === 'Pending');
+    _getTasksBy(property) { // --> TIENE QUE REEMPLAZAR LOS GET PENDING TASKS Y GET DONE TASKS
+      if(property === 'Pending'){
+        this.pendingTasks = this.tasks.filter(task => task.status === property);
+      }
+      if(property === 'Done'){
+        this.doneTasks = this.tasks.filter(task => task.status === 'Done');
+      }
     },
-    _getDoneTasks(){
-      this.doneTasks = this.tasks.filter(task => task.status === 'Done');
-      // return this.tasks.filter(task => task.status === 'Done');
-    },
+    // _getPendingTasks(){
+    //   this.pendingTasks = this.tasks.filter(task => task.status === 'Pending');
+    //   // return this.tasks.filter(task => task.status === 'Pending');
+    // },
+    // _getDoneTasks(){
+    //   this.doneTasks = this.tasks.filter(task => task.status === 'Done');
+    //   // return this.tasks.filter(task => task.status === 'Done');
+    // },
     _getfavouritesTasks(){
-      return this.tasks.filter(task => task.favourites === true);
+      return this.tasks.filter(task => task.favourite === true);
     },
     _getFlaggedTasks(){
       return this.tasks.filter(task => task.flag === true);
@@ -94,11 +102,11 @@ export default defineStore('tasks', {
       return this.tasks.length;
     },
     _getPendingTasksCount(){
-      this._getPendingTasks();
+      this._getTasksBy('Pending');
       return this.pendingTasks.length;
     },
     _getDoneTasksCount(){
-      this._getDoneTasks();
+      this._getTasksBy('Done');
       return this.doneTasks.length;
     },
     _getFavouritesTasksCount(){

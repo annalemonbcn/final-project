@@ -15,30 +15,32 @@
       <p id="task-flag">{{ flag }}</p>
       <p id="task-favourites">{{ favourites }}</p>
     </div>
+    <button @click="_markTaskDone">Mark as done</button>
   </div>
 </template>
 
 <script>
 import TasksStore from '../stores/tasks';
-import { mapActions } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 
 export default {
   name: 'TaskDetails',
   data() {
     return {
-      // task: {
-        title: 'Title',
-        status: '',
-        user: '',
-        date: '',
-        description: '',
-        flag: null,
-        favourites: null
-      // }
+      title: '',
+      status: '',
+      user: '',
+      date: '',
+      description: '',
+      flag: null,
+      favourites: null
     }
   },
+  computed: {
+    ...mapState(TasksStore, ['tasks', 'pendingTasks', 'doneTasks']),
+  },
   methods: {
-    ...mapActions(TasksStore, ['_getSingleTask']),
+    ...mapActions(TasksStore, ['_getSingleTask', '_getDoneTasks']),
 
     _setInfo(info){
       this.title = info.title;
@@ -47,7 +49,17 @@ export default {
       this.date = info.date;
       this.flag = info.flag;
       this.favourites = info.favourites;
-    }    
+    },
+    _markTaskDone(){ // --> Crear en store?
+      if(this.status === 'Pending'){
+        // Update local status
+        this.status = 'Done'
+        // Update tasks from store
+        this.tasks[0].status = 'Done';
+        // this._getDoneTasks();
+        // console.log(this.tasks[0]);
+      }
+    }
   },
   created(){
     this._setInfo(this._getSingleTask(this.$route.params.taskTitle));

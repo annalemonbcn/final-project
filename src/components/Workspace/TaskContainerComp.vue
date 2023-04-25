@@ -30,7 +30,7 @@ export default {
     ...mapState(TasksStore, ['pendingTasks', 'doneTasks']),
   },
   methods: {
-    ...mapActions(TasksStore, ['_getPendingTasks', '_getDoneTasks']),
+    ...mapActions(TasksStore, ['_getTasksBy','_getPendingTasks', '_getDoneTasks']),
 
     onRemoveTask(taskTitle){
       this.tasksFiltered = this.tasksFiltered.filter(task => task.title !== taskTitle);
@@ -38,13 +38,11 @@ export default {
   },
   created(){
     if(this.status === 'Pending'){
-      this._getPendingTasks();
+      this._getTasksBy(this.status);
       this.tasksFiltered = this.pendingTasks;
-      console.log(this.tasksFiltered);
     } else if (this.status === 'Done'){
-      this._getDoneTasks();
+      this._getTasksBy(this.status);
       this.tasksFiltered = this.doneTasks;
-      console.log(this.tasksFiltered);
     }
   },
   props: {

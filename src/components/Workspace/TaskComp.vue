@@ -12,6 +12,9 @@ import UserLogo from '../Account/UserLogoComp.vue';
 
 export default {
   name: 'SingleTask',
+  components: {
+    UserLogo,
+  },
   data() {
     return{
     }
@@ -35,7 +38,6 @@ export default {
     }
   },
   methods: {
-    // ...mapActions(TasksStore, ['_removeTask']),
     _removeTask(){
       this.$emit('remove-task', this.title)
     }
