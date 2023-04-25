@@ -54,13 +54,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions(TasksStore, ['_addTask']),
+    ...mapActions(TasksStore, ['_addTask', '_getPendingTasks']),
 
-    _createNewTask(){
+    _createNewTask() {
       // Add task
       this._addTask(this.task);
       // Reset fields
       this._reset();
+      this._getPendingTasks();
       console.log(this.tasks);
     },
     _reset(){

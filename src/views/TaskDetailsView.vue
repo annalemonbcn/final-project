@@ -1,19 +1,19 @@
 <template>
   <div class="info-right" id="task-details">
     <div class="task-row">
-      <h2>{{ task.title }}</h2>
-      <p id="task-status">{{ task.status }}</p>
+      <h2>{{ title }}</h2>
+      <p id="task-status">{{ status }}</p>
     </div>
     <div>
-      <p id="task-user">{{ task.user }}</p>
-      <p id="task-date">{{ task.date }}</p>
+      <p id="task-user">{{ user }}</p>
+      <p id="task-date">{{ date }}</p>
     </div>
     <div>
       Description: description
     </div>
     <div>
-      <p id="task-flag">{{ task.flag }}</p>
-      <p id="task-favourites">{{ task.favourites }}</p>
+      <p id="task-flag">{{ flag }}</p>
+      <p id="task-favourites">{{ favourites }}</p>
     </div>
   </div>
 </template>
@@ -26,37 +26,38 @@ export default {
   name: 'TaskDetails',
   data() {
     return {
-      task: {
-        title: '',
+      // task: {
+        title: 'Title',
         status: '',
         user: '',
         date: '',
         description: '',
         flag: null,
         favourites: null
-      }
+      // }
     }
   },
   methods: {
     ...mapActions(TasksStore, ['_getSingleTask']),
 
     _setInfo(info){
-      this.task.title = info.title;
-      this.task.status = info.status;
-      this.task.user = info.user;
-      this.task.date = info.date;
-      this.task.flag = info.flag;
-      this.task.favourites = info.favourites;
+      this.title = info.title;
+      this.status = info.status;
+      this.user = info.user;
+      this.date = info.date;
+      this.flag = info.flag;
+      this.favourites = info.favourites;
     }    
   },
   created(){
-    this._setInfo(this._getSingleTask(this.$route.params.taskTitle)[0]);
+    this._setInfo(this._getSingleTask(this.$route.params.taskTitle));
 
     this.$watch(
       () => this.$route.params,
       (newParams) => {
-        console.log(this._getSingleTask(newParams.taskTitle));
-        this._setInfo(this._getSingleTask(newParams.taskTitle));
+        if(this.$route.params.taskTitle){
+          this._setInfo(this._getSingleTask(newParams.taskTitle));
+        }
       }
     )
   }

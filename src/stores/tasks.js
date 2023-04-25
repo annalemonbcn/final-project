@@ -65,19 +65,23 @@ export default defineStore('tasks', {
           url: 'task_num_6'
         }
       ],
+      pendingTasks: [],
+      doneTasks: []
     }
   },
   actions: {
     _addTask(newTask){
       this.tasks.push(newTask);
     },
-    _getSingleTask(taskUrl){
-      return this.tasks.filter(task => task.url === taskUrl);
+    _getSingleTask(taskUrl) {
+      return this.tasks.filter(task => task.url === taskUrl)[0];
     },
     _getPendingTasks(){
+      this.pendingTasks = this.tasks.filter(task => task.status === 'Pending');
       return this.tasks.filter(task => task.status === 'Pending');
     },
     _getDoneTasks(){
+      this.doneTasks = this.tasks.filter(task => task.status === 'Done');
       return this.tasks.filter(task => task.status === 'Done');
     },
     _getfavouritesTasks(){
