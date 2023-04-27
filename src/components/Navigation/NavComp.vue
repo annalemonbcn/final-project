@@ -11,23 +11,7 @@
           <router-link to="/" class="active">
             <fa icon="fa-circle-dot" />
           </router-link>
-          <router-link to="/task/favourites">
-            <fa icon="fa-regular fa-star" />
-          </router-link>
-          <router-link to="/task/flag">
-            <fa icon="fa-regular fa-flag" />
-          </router-link>
         </div>
-        <div>
-          <router-link to="/logout">
-            <fa icon="arrow-right-from-bracket" />
-          </router-link>
-        </div>
-      </div>
-      <div class="nav-border-top">
-        <router-link to="/my-account">
-          <UserLogo />
-        </router-link>
       </div>
     </nav>
   </header>
