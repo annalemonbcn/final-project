@@ -1,8 +1,8 @@
 <template>
   <div class="task-container">
-    <p>{{ title }}</p>
+    <p>My tasks</p>
     <TaskComp
-      v-for="(task, index) in tasksFiltered"
+      v-for="(task, index) in tasks"
       :key="index"
       :title="task.title"
       :status="task.status"
@@ -15,54 +15,29 @@
 
 <script>
 import { mapActions, mapState } from 'pinia'
-import TasksStore from '../../stores/tasks'
+import TasksStore from '@/stores/tasks'
 
 import TaskComp from './TaskComp.vue'
 
 export default {
   name: 'TaskStatus',
-  data(){
-    return {
-      tasksFiltered: []
-    }
+  components: {
+    TaskComp
   },
   computed: {
-    ...mapState(TasksStore, ['pendingTasks', 'doneTasks']),
+    ...mapState(TasksStore, ['tasks'])
   },
   methods: {
-    ...mapActions(TasksStore, ['_getTasksBy','_getPendingTasks', '_getDoneTasks']),
-
     onRemoveTask(taskTitle){
       this.tasksFiltered = this.tasksFiltered.filter(task => task.title !== taskTitle);
     }
   },
-  created(){
-    if(this.status === 'Pending'){
-      this._getTasksBy(this.status);
-      this.tasksFiltered = this.pendingTasks;
-    } else if (this.status === 'Done'){
-      this._getTasksBy(this.status);
-      this.tasksFiltered = this.doneTasks;
-    }
-  },
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    status: {
-      type: String,
-      required: true
-    }
-  },
-  components: {
-    TaskComp
-  }
 }
 </script>
 
 <style scoped>
 .task-container {
+  width: 50%;
   margin-top: 30px;
 }
 </style>

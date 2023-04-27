@@ -20,26 +20,21 @@ const router = createRouter({
         },
       ],
     },
-    {
-      path: "/task/flag",
-      name: "flagged-tasks",
-      component: () => import('../views/FlagsView.vue'),
-    },
-    {
-      path: "/task/favourites",
-      name: "favourites-tasks",
-      component: () => import('../views/FavouritesView.vue'),
-    },
-    {
-      path: '/my-account',
-      name: 'my-account',
-      component: () => import('../views/AccountView.vue')
-    },
-    {
-      path: '/logout',
-      name: 'logout',
-      component: () => import('../views/LogoutView.vue')
-    }
+    // {
+    //   path: "/task/flag",
+    //   name: "flagged-tasks",
+    //   component: () => import('../views/FlagsView.vue'),
+    // },
+    // {
+    //   path: "/task/favourites",
+    //   name: "favourites-tasks",
+    //   component: () => import('../views/FavouritesView.vue'),
+    // },
+    // {
+    //   path: '/my-account',
+    //   name: 'my-account',
+    //   component: () => import('../views/AccountView.vue')
+    // }
   ]
 })
 

@@ -65,8 +65,6 @@ export default defineStore('tasks', {
           url: 'task_num_6'
         }
       ],
-      pendingTasks: [],
-      doneTasks: []
     }
   },
   actions: {
@@ -83,37 +81,6 @@ export default defineStore('tasks', {
       if(property === 'Done'){
         this.doneTasks = this.tasks.filter(task => task.status === 'Done');
       }
-    },
-    // _getPendingTasks(){
-    //   this.pendingTasks = this.tasks.filter(task => task.status === 'Pending');
-    //   // return this.tasks.filter(task => task.status === 'Pending');
-    // },
-    // _getDoneTasks(){
-    //   this.doneTasks = this.tasks.filter(task => task.status === 'Done');
-    //   // return this.tasks.filter(task => task.status === 'Done');
-    // },
-    _getfavouritesTasks(){
-      return this.tasks.filter(task => task.favourite === true);
-    },
-    _getFlaggedTasks(){
-      return this.tasks.filter(task => task.flag === true);
-    },
-    _getTotalTasksCount(){
-      return this.tasks.length;
-    },
-    _getPendingTasksCount(){
-      this._getTasksBy('Pending');
-      return this.pendingTasks.length;
-    },
-    _getDoneTasksCount(){
-      this._getTasksBy('Done');
-      return this.doneTasks.length;
-    },
-    _getFavouritesTasksCount(){
-      return this._getfavouritesTasks().length;
-    },
-    _getFlaggedTasksCount(){
-      return this._getFlaggedTasks().length;
     }
   }
 })
