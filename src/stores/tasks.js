@@ -1,86 +1,45 @@
 import { defineStore } from 'pinia'
+import supabase from '../supabase/index'
 
 export default defineStore('tasks', {
   state() {
     return {
-      tasks: [
-        {
-          title: 'Task num 1',
-          status: 'Pending',
-          description: '',
-          user: 'AA',
-          date: '20/04/2023',
-          flag: true,
-          favourite: true,
-          url: 'task_num_1'
-        },
-        {
-          title: 'Task num 2',
-          status: 'Done',
-          description: '',
-          user: 'AB',
-          date: '23/04/2023',
-          flag: false,
-          favourite: true,
-          url: 'task_num_2'
-        },
-        {
-          title: 'Task num 3',
-          status: 'Pending',
-          description: '',
-          user: 'AC',
-          date: '28/04/2023',
-          flag: false,
-          favourite: false,
-          url: 'task_num_3'
-        },
-        {
-          title: 'Task num 4',
-          status: 'Done',
-          description: '',
-          user: 'AD',
-          date: '22/04/2023',
-          flag: false,
-          favourite: true,
-          url: 'task_num_4'
-        },
-        {
-          title: 'Task num 5',
-          status: 'Done',
-          description: '',
-          user: 'AE',
-          date: '26/04/2023',
-          flag: false,
-          favourite: false,
-          url: 'task_num_5'
-        },
-        {
-          title: 'Task num 6',
-          status: 'Done',
-          description: '',
-          user: 'AE',
-          date: '26/04/2023',
-          flag: false,
-          favourite: true,
-          url: 'task_num_6'
-        }
-      ],
+      tasks: []
     }
   },
   actions: {
-    _addTask(newTask){
-      this.tasks.push(newTask);
-    },
-    _getSingleTask(taskUrl) {
-      return this.tasks.filter(task => task.url === taskUrl)[0];
-    },
-    _getTasksBy(property) { // --> TIENE QUE REEMPLAZAR LOS GET PENDING TASKS Y GET DONE TASKS
-      if(property === 'Pending'){
-        this.pendingTasks = this.tasks.filter(task => task.status === property);
+    async _fetchTasks() {
+      const { data, error } = await supabase.from('tasks').select()
+
+      if (error) {
+        console.error(error)
+        return
       }
-      if(property === 'Done'){
-        this.doneTasks = this.tasks.filter(task => task.status === 'Done');
+
+      console.log('all tasks from supabase -->', data)
+      this.tasks = data
+    },
+    async _addNewTask(newTask) {
+      const { data, error } = await supabase
+        .from('tasks')
+        .insert({
+          title: newTask.title,
+          user_id: newTask.user_id,
+          is_complete: newTask.is_complete,
+          url: newTask.url,
+          limit_date: newTask.limit_date,
+          description: newTask.description,
+          is_flagged: newTask.is_flagged,
+          is_favourite: newTask.is_favourite
+        })
+        .select()
+
+      if (error) {
+        console.error(error)
+        return
       }
+
+      this.tasks.push(data[0])
     }
   }
 })

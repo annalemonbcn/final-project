@@ -1,5 +1,7 @@
 <template>
+  <NavComp />
   <main id="board">
+
     <ProjectTitle />
     <ActionButtons />
 
@@ -12,6 +14,7 @@
 </template>
 
 <script>
+import NavComp from '@/components/Navigation/NavComp.vue';
 import ProjectTitle from '@/components/Workspace/ProjectTitleComp.vue';
 import ActionButtons from '@/components/Workspace/ActionButtonsComp.vue';
 import TasksContainer from '@/components/Workspace/TaskContainerComp.vue';
@@ -19,10 +22,11 @@ import TasksContainer from '@/components/Workspace/TaskContainerComp.vue';
 export default {
   name: 'HomeView',
   components: {
+    NavComp,
     ProjectTitle,
     ActionButtons,
     TasksContainer
-  }
+  },
 }
 </script>
 

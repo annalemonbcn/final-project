@@ -4,8 +4,6 @@
 
 <script>
 export default{
-  name: 'App',
+  name: 'AuthView',
 }
 </script>
-
-<style></style>
