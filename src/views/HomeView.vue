@@ -26,7 +26,7 @@ export default {
     ProjectTitle,
     ActionButtons,
     TasksContainer
-  },
+  }
 }
 </script>
 

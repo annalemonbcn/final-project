@@ -11,6 +11,8 @@
           <router-link to="/" class="active">
             <fa icon="fa-circle-dot" />
           </router-link>
+
+          <button @click="handleSignOut">Log out</button>
         </div>
       </div>
     </nav>
@@ -18,16 +20,28 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia';
+import UserStore from '@/stores/user';
+
 import UserLogo from '../Account/UserLogoComp.vue';
 
 export default {
   name: 'HeaderComp',
-  data() {
-    return {};
-  },
   components: {
     UserLogo,
   },
+  methods: {
+    ...mapActions(UserStore, ['signOut']),
+
+    async handleSignOut(){
+      try{
+        await this.signOut();
+        this.$router.push({ name: 'sign-in' })
+      } catch(error){
+        console.error(error);
+      }
+    }
+  }
 }
 </script>
 
