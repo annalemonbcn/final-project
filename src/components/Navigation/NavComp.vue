@@ -37,8 +37,8 @@ export default {
       try{
         await this.signOut();
         this.$router.push({ name: 'sign-in' })
-      } catch(error){
-        console.error(error);
+      } catch(e){
+        console.error(e);
       }
     }
   }
