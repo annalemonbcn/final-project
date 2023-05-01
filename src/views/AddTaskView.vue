@@ -30,7 +30,7 @@
           <option value="true">Yes</option>
           <option value="false">No</option>
         </select>
-        <select id="task-add-favourite" name="favourite" v-model="task.if_favourite">
+        <select id="task-add-favourite" name="favourite" v-model="task.is_favourite">
           <option disabled value="favourite">Favourite</option>
           <option value="true">Yes</option>
           <option value="false">No</option>
@@ -52,14 +52,12 @@ export default {
     return {
       task: {
         title: 'Testttt',
-        // user_id: '15d3bf96-2fbb-403b-bb0f-900cfc725c1a',
-        // user_id: '15d3bf96-2fbb-403b-bb0f-900cfc725c1a',
         is_complete: false,
         url: '',
         limit_date: null,
         description: 'agagadghn',
         is_flagged: false,
-        if_favourite: false
+        is_favourite: false
       }
     }
   },
@@ -96,7 +94,7 @@ export default {
         limit_date: '',
         description: '',
         is_flagged: false,
-        if_favourite: false
+        is_favourite: false
       }
     }
   },
@@ -104,37 +102,9 @@ export default {
     ...mapState(TasksStore, ['tasks']),
     ...mapState(UserStore, ['user'])
   },
-  created(){
-    console.log(this.user.id)
-  }
 }
 </script>
 
 <style scoped>
-#task-add {
-  display: flex;
-  flex-flow: column nowrap;
-  gap: 30px;
-}
-input,
-textarea {
-  background-color: transparent;
-  border: 0;
-  border-bottom: 2px solid var(--tertiary-color);
 
-  font-size: 16px;
-  font-family: Roboto;
-}
-input#task-add-name {
-  font-size: 30px;
-  width: 100%;
-}
-textarea {
-  resize: none;
-  height: 60px;
-}
-select#task-add-status,
-select#task-add-favourite {
-  margin-left: 30px;
-}
 </style>

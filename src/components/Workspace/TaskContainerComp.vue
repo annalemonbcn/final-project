@@ -15,6 +15,8 @@
       v-for="(task, index) in tasks"
       :key="index"
       :title="task.title"
+      :url="task.url"
+      :status="task.is_complete"
     />
   </div>
 </template>
@@ -67,4 +69,5 @@ export default {
   width: 50%;
   margin-top: 30px;
 }
+
 </style>

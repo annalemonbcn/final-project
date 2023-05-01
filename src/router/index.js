@@ -1,10 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import UserStore from '@/stores/user';
 
-import AuthView from '@/views/AuthView.vue';
-import SignUp from '@/views/SignUp.vue';
-import SignIn from '@/views/SignIn.vue';
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -12,19 +8,16 @@ const router = createRouter({
       path: '/auth',
       name: 'auth',
       component: () => import('@/views/AuthView.vue'),
-      // component: AuthView,
       children: [
         {
           path: 'sign-in',
           name: 'sign-in',
-          component: () => import('@/views/SignIn.vue'),
-          // component: SignIn
+          component: () => import('@/views/SignIn.vue')
         },
         {
           path: 'sign-up',
           name: 'sign-up',
-          component: () => import('@/views/SignUp.vue'),
-          // component: SignUp
+          component: () => import('@/views/SignUp.vue')
         }
       ]
     },
@@ -35,7 +28,7 @@ const router = createRouter({
       meta: {requiresAuth: true },
       children: [
         {
-          path: "task/:taskTitle",
+          path: "task/:taskUrl",
           name: "task details",
           component: () => import('@/views/TaskDetailsView.vue'),
         },
@@ -57,7 +50,7 @@ router.beforeEach(async (to) => {
     await store.fetchUser();
   }
 
-  console.log(store.user)
+  // console.log(store.user)
   
   // If user NULL && try to access to a page that requires auth --> redirect to sign-in
   if (to.meta.requiresAuth && store.user === null) {

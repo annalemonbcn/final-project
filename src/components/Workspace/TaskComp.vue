@@ -1,48 +1,56 @@
 <template>
-  <!-- <router-link :to="`/task/${url}`" class="task"> -->
+  <router-link :to="`/task/${url}`" class="task" :class="statusClass">
     <p class="task-title">{{ title }}</p>
-    <!-- <p class="task-status">{{ status }}</p> -->
+    <fa class="task-status" icon="fa-circle-xmark" v-if="status === false"/>
+    <fa class="task-status" icon="fa-solid fa-circle-check" v-else />
     <!-- <p class="task-date">{{ date }}</p> -->
-    <!-- <button @click="_removeTask()">Remove</button>
-  </router-link> -->
+    <!-- <button @click="_removeTask()">Remove</button> -->
+  </router-link> 
 </template>
 
 <script>
-import UserLogo from '../Account/UserLogoComp.vue'
-
 export default {
   name: 'SingleTask',
-  components: {
-    UserLogo
-  },
   data() {
-    return {}
+    return {
+      statusClass: ''
+    }
   },
   props: {
     title: {
       type: String,
       required: true
     },
-    // status: {
-    //   type: String,
-    //   required: true
-    // },
+    status: {
+      type: Boolean,
+      required: true
+    },
     // date: {
     //   type: String,
     //   required: true
     // },
-    // url: {
-    //   type: String,
-    //   required: true
-    // }
-  },
-  methods: {
-    _removeTask() {
-      this.$emit('remove-task', this.title)
+    url: {
+      type: String,
+      required: true
     }
   },
-  components: {
-    UserLogo
+  methods: {
+    // _removeTask() {
+    //   this.$emit('remove-task', this.title)
+    // }
+    _setStatus(){
+      
+      if(this.status === false){
+        this.statusClass = 'pending'
+        // this.statusCheck = `<fa icon="fa-circle-check" />
+      } else {
+        this.statusClass = 'done'
+      }      
+    }
+  },
+  created(){
+    this._setStatus();
+    
   }
 }
 </script>
@@ -60,13 +68,22 @@ export default {
   justify-content: space-between;
   gap: 2rem;
   color: var(--tertiary-accent);
+
+  transition: all .2s ease-in-out;
+}
+
+.task:hover{
+  transform: scale(1.1);
 }
 
 /* .task > *{
     flex-grow: 1;
   } */
-
-.task .task-status.pending {
+.task.pending{
   background-color: orange;
+}
+.task.done{
+  background-color: lightgreen;
+  text-decoration: line-through;
 }
 </style>

@@ -39,7 +39,33 @@ export default defineStore('tasks', {
         return
       }
 
+      // Update local state
       this.tasks.push(data[0])
+    },
+    _getSingleTask(url) {
+      return this.tasks.filter((task) => task.url === url)[0]
+    },
+    async _markTaskDone(task_id) {
+      const { data, error } = await supabase
+        .from('tasks')
+        .update(
+          { is_complete: true }
+          )
+        .eq('id', task_id)
+        .select()
+
+      if (error) {
+        console.error(error)
+        return
+      }
+
+      // console.log(data[0])
+        
+      // Update local state
+      const taskToUpdate = this.tasks.find(task => task.id === task_id);
+      this.tasks = this.tasks.filter(task => task.id !== taskToUpdate.id);
+      this.tasks.push(data[0]);
+      console.log(this.tasks)
     }
   }
 })

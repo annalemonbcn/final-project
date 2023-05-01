@@ -1,26 +1,35 @@
 <template>
   <div class="info-right" id="task-details">
     <div class="task-row">
-      <h2>{{ title }}</h2>
-      <p id="task-status">{{ status }}</p>
+      <input type="text" name="title" v-model="title" readonly>
+      <div class="task-status">
+        <p class="pending" v-if="status === false">Pending</p>
+        <p class="done" v-else>Done</p>
+      </div>
+    </div> 
+    <div>
+      <p id="task-date">{{ limit_date }}</p>
     </div>
     <div>
-      <p id="task-user">{{ user }}</p>
-      <p id="task-date">{{ date }}</p>
+      <textarea name="description" v-model="description" readonly></textarea>
     </div>
     <div>
-      Description: description
+      <fa class="task-favourite" icon="fa-solid fa-star" v-if="favourite === true"/>
+      <fa class="task-flagged" icon="fa-regular fa-flag" v-if="flag === true"/>
     </div>
-    <div>
-      <p id="task-flag">{{ flag }}</p>
-      <p id="task-favourites">{{ favourites }}</p>
-    </div>
-    <button @click="_markTaskDone">Mark as done</button>
+    <button @click="_editTask">Edit task</button>
+    <button @click="_markTaskDone(task_id)">Mark as done</button>
   </div>
+    <!-- <div class="task-row"> HERE
+        <form id="task-details" action="" @submit.prevent>
+          <input id="task-name" type="text" name="title" v-model="title">
+        </form>
+    </div> 
+  </div> -->
 </template>
 
 <script>
-import TasksStore from '../stores/tasks';
+import TasksStore from '@/stores/tasks';
 import { mapActions, mapState } from 'pinia';
 
 export default {
@@ -28,47 +37,38 @@ export default {
   data() {
     return {
       title: '',
-      status: '',
-      user: '',
-      date: '',
+      status: null,
+      limit_date: '',
       description: '',
       flag: null,
-      favourites: null
+      favourite: null,
+      task_id: null
     }
   },
   computed: {
-    ...mapState(TasksStore, ['tasks', 'pendingTasks', 'doneTasks']),
+    ...mapState(TasksStore, ['tasks']),
   },
   methods: {
-    ...mapActions(TasksStore, ['_getSingleTask', '_getDoneTasks']),
+    ...mapActions(TasksStore, ['_getSingleTask','_markTaskDone']),
 
     _setInfo(info){
       this.title = info.title;
-      this.status = info.status;
-      this.user = info.user;
-      this.date = info.date;
-      this.flag = info.flag;
-      this.favourites = info.favourites;
+      this.status = info.is_complete;
+      this.limit_date = info.limit_date;
+      this.description = info.description;
+      this.flag = info.is_flagged;
+      this.favourite = info.is_favourite;
+      this.task_id = info.id;
     },
-    _markTaskDone(){ // --> Crear en store?
-      if(this.status === 'Pending'){
-        // Update local status
-        this.status = 'Done'
-        // Update tasks from store
-        this.tasks[0].status = 'Done';
-        // this._getDoneTasks();
-        // console.log(this.tasks[0]);
-      }
-    }
   },
   created(){
-    this._setInfo(this._getSingleTask(this.$route.params.taskTitle));
+    this._setInfo(this._getSingleTask(this.$route.params.taskUrl));
 
     this.$watch(
       () => this.$route.params,
       (newParams) => {
-        if(this.$route.params.taskTitle){
-          this._setInfo(this._getSingleTask(newParams.taskTitle));
+        if(this.$route.params.taskUrl){
+          this._setInfo(this._getSingleTask(newParams.taskUrl));
         }
       }
     )
@@ -91,5 +91,12 @@ export default {
   }
   #task-details .task-row{
     justify-content: space-between;
+  }
+
+  .task-status .pending{
+    background-color: orange;
+  }
+  .task-status .done{
+    background-color: lightgreen;
   }
 </style>
