@@ -1,74 +1,74 @@
 <template>
   <div class="info-right" id="task-details">
     <div class="task-row">
-      <input type="text" name="title" v-model="title" readonly>
-      <div class="task-status">
-        <p class="pending" v-if="status === false">Pending</p>
-        <p class="done" v-else>Done</p>
-      </div>
-    </div> 
-    <div>
-      <p id="task-date">{{ limit_date }}</p>
+      <form id="task-details" action="" @submit.prevent>
+        <input class="task-view-name" type="text" name="title" v-model="task.title" @input="formHasChanged = true"/>
+        <textarea name="description" class="task-view-description" v-model="task.description"
+        @input="formHasChanged = true"></textarea>
+        <div>
+          <input name="date" type="date" v-model="task.limit_date" @input="formHasChanged = true" />
+          <div class="task-status">
+            <p class="pending" v-if="task.is_complete === false">Pending</p>
+            <p class="done" v-else>Done</p>
+          </div>
+        </div>
+        <div class="task-flag">
+          <fa icon="fa-regular fa-flag" @click="_markAsFlag(task.id)" />
+        </div>
+        <button :disabled="!formHasChanged" @click="_updateTask(task)">Update task</button>
+        <button @click="_markAsDone(task.id)">Mark as done</button>
+      </form>
     </div>
-    <div>
-      <textarea name="description" v-model="description" readonly></textarea>
-    </div>
-    <div>
-      <fa class="task-favourite" icon="fa-solid fa-star" v-if="favourite === true"/>
-      <fa class="task-flagged" icon="fa-regular fa-flag" v-if="flag === true"/>
-    </div>
-    <button @click="_editTask">Edit task</button>
-    <button @click="_markTaskDone(task_id)">Mark as done</button>
   </div>
-    <!-- <div class="task-row"> HERE
-        <form id="task-details" action="" @submit.prevent>
-          <input id="task-name" type="text" name="title" v-model="title">
-        </form>
-    </div> 
-  </div> -->
 </template>
 
 <script>
-import TasksStore from '@/stores/tasks';
-import { mapActions, mapState } from 'pinia';
+import TasksStore from '@/stores/tasks'
+import { mapActions, mapState } from 'pinia'
 
 export default {
   name: 'TaskDetails',
   data() {
     return {
-      title: '',
-      status: null,
-      limit_date: '',
-      description: '',
-      flag: null,
-      favourite: null,
-      task_id: null
+      task: {
+        title: '',
+        user_id: '',
+        is_complete: null,
+        url: '',
+        limit_date: '',
+        description: '',
+        is_flagged: null,
+        id: null        
+      },
+      formHasChanged: false,
     }
   },
   computed: {
     ...mapState(TasksStore, ['tasks']),
   },
   methods: {
-    ...mapActions(TasksStore, ['_getSingleTask','_markTaskDone']),
+    ...mapActions(TasksStore, ['_getSingleTask', '_markAsDone', '_markAsFlag','_updateTask']),
 
-    _setInfo(info){
-      this.title = info.title;
-      this.status = info.is_complete;
-      this.limit_date = info.limit_date;
-      this.description = info.description;
-      this.flag = info.is_flagged;
-      this.favourite = info.is_favourite;
-      this.task_id = info.id;
-    },
+    _setInfo(info) {
+      this.task.title = info.title
+      this.task.user_id = info.user_id
+      this.task.is_complete = info.is_complete
+      this.task.url = info.url
+      this.task.limit_date = info.limit_date
+      this.task.description = info.description
+      this.task.is_flagged = info.is_flagged
+      this.task.favourite = info.is_favourite
+      this.task.id = info.id
+    }
   },
-  created(){
+  created() {
     this._setInfo(this._getSingleTask(this.$route.params.taskUrl));
 
     this.$watch(
       () => this.$route.params,
       (newParams) => {
-        if(this.$route.params.taskUrl){
-          this._setInfo(this._getSingleTask(newParams.taskUrl));
+        if (this.$route.params.taskUrl) {
+          this._setInfo(this._getSingleTask(newParams.taskUrl))
         }
       }
     )
@@ -77,26 +77,47 @@ export default {
 </script>
 
 <style scoped>
-  #task-details{
-    display: flex;
-    flex-flow: column nowrap;
-    /* justify-content: space-between; */
-    gap: 30px;
-  }
-  #task-details > *{
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 30px;
-    align-items: center;
-  }
-  #task-details .task-row{
-    justify-content: space-between;
-  }
+#task-details {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 30px;
+}
+#task-details > * {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 30px;
+  align-items: center;
+}
+#task-details .task-row {
+  justify-content: space-between;
+}
+.task-flag{
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
 
-  .task-status .pending{
-    background-color: orange;
-  }
-  .task-status .done{
-    background-color: lightgreen;
-  }
+  border-radius: 25px;
+  border: 1px dotted black;
+
+  cursor: pointer;
+}
+.task-flag svg{
+  position: relative;
+  left: 7px;
+  color: transparent;
+  
+  transition: all .2s ease-in-out;
+}
+.task-flag:hover svg {
+  color: black;
+}
+
+.task-status .pending {
+  background-color: orange;
+}
+.task-status .done {
+  background-color: lightgreen;
+}
+
 </style>

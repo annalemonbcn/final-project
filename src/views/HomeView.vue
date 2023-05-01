@@ -64,7 +64,7 @@ textarea {
   font-size: 16px;
   font-family: Roboto;
 }
-input#task-add-name {
+input.task-view-name {
   font-size: 30px;
   width: 100%;
 }

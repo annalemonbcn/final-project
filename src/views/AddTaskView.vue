@@ -3,7 +3,7 @@
     <form id="task-add" action="" @submit.prevent>
       <div>
         <input
-          id="task-add-name"
+          class="task-view-name"
           type="text"
           name="title"
           placeholder="Task name"
@@ -12,7 +12,7 @@
       </div>
       <textarea
         name="description"
-        id=""
+        class="task-view-description"
         placeholder="Write something"
         v-model="task.description"
       ></textarea>
@@ -27,11 +27,6 @@
       <div>
         <select name="flag" v-model="task.is_flagged">
           <option disabled value="flag">Impediment</option>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
-        <select id="task-add-favourite" name="favourite" v-model="task.is_favourite">
-          <option disabled value="favourite">Favourite</option>
           <option value="true">Yes</option>
           <option value="false">No</option>
         </select>
@@ -57,7 +52,6 @@ export default {
         limit_date: null,
         description: 'agagadghn',
         is_flagged: false,
-        is_favourite: false
       }
     }
   },
