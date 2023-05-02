@@ -4,7 +4,7 @@ import supabase from '../supabase/index'
 export default defineStore('tasks', {
   state() {
     return {
-      tasks: []
+      tasks: [],
     }
   },
   actions: {
@@ -41,13 +41,10 @@ export default defineStore('tasks', {
       // Update local state
       this.tasks.push(data[0])
     },
-    _getSingleTask(url) {
-      return this.tasks.filter((task) => task.url === url)[0]
-    },
-    async _markAsDone(task_id) {
+    async _alternateDone(task_id, is_complete){
       const { data, error } = await supabase
         .from('tasks')
-        .update({ is_complete: true })
+        .update({ is_complete: !is_complete })
         .eq('id', task_id)
         .select()
 
@@ -60,14 +57,14 @@ export default defineStore('tasks', {
       const taskToUpdate = this.tasks.find((task) => task.id === task_id)
       this.tasks = this.tasks.filter((task) => task.id !== taskToUpdate.id)
       this.tasks.push(data[0])
-      console.log(this.tasks)
+      console.log(`id --> ${task_id}, is_complete --> ${!is_complete}`);
     },
-    async _markAsFlag(task_id) {
+    async _alternateFlag(task_id, is_flagged){
       const { data, error } = await supabase
         .from('tasks')
-        .update({ is_flagged: true })
+        .update({ is_flagged: !is_flagged })
         .eq('id', task_id)
-        .select()
+        .select();
 
       if (error) {
         console.error(error)
@@ -77,11 +74,10 @@ export default defineStore('tasks', {
       // Update local state
       const taskToUpdate = this.tasks.find((task) => task.id === task_id)
       this.tasks = this.tasks.filter((task) => task.id !== taskToUpdate.id)
-      this.tasks.push(data[0])
-      console.log(this.tasks)
+      this.tasks.push(data[0]);
+      console.log(`id --> ${task_id}, is_flagged --> ${!is_flagged}`);
     },
     async _updateTask(task) {
-      console.log(task);
       const { data, error } = await supabase
         .from('tasks')
         .update({
@@ -105,6 +101,26 @@ export default defineStore('tasks', {
       const taskToUpdate = this.tasks.find((task) => task.id === task.id)
       this.tasks = this.tasks.filter((task) => task.id !== taskToUpdate.id)
       this.tasks.push(data[0])
-    }
+    },
+    async _deleteTask(task_id){
+      console.log(task_id);
+      const { error } = await supabase
+      .from('tasks')
+      .delete()
+      .eq('id', task_id)
+
+      if(error){
+        console.error(error)
+        return
+      }
+
+      // Update local state
+      const taskToDelete = this.tasks.find((task) => task.id === task.id);
+      this.tasks = this.tasks.filter(task => task.id !== taskToDelete.id);
+      console.log(this.tasks);
+    },
+    _getSingleTask(url) {
+      return this.tasks.filter((task) => task.url === url)[0]
+    },
   }
 })

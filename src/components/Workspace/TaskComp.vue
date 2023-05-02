@@ -1,21 +1,17 @@
 <template>
-  <router-link :to="`/task/${url}`" class="task" :class="statusClass">
+  <router-link :to="`/task/${url}`" class="task" :class="status === false ? 'pending' : 'done'">
     <p class="task-title">{{ title }}</p>
-    <fa class="task-status" icon="fa-circle-xmark" v-if="status === false"/>
-    <fa class="task-status" icon="fa-solid fa-circle-check" v-else />
-    <!-- <p class="task-date">{{ date }}</p> -->
-    <!-- <button @click="_removeTask()">Remove</button> -->
+    <p class="task-date">{{ limitDate }}</p>
+    <div>
+      <fa class="task-status" icon="fa-circle-xmark" v-if="status === false"/>
+      <fa class="task-status" icon="fa-solid fa-circle-check" v-else />
+    </div>
   </router-link> 
 </template>
 
 <script>
 export default {
   name: 'SingleTask',
-  data() {
-    return {
-      statusClass: ''
-    }
-  },
   props: {
     title: {
       type: String,
@@ -25,32 +21,17 @@ export default {
       type: Boolean,
       required: true
     },
-    // date: {
-    //   type: String,
-    //   required: true
-    // },
+    limitDate: {
+      type: String,
+      required: true
+    },
     url: {
       type: String,
       required: true
+    },
+    created(){
+      console.log(this.task_id);
     }
-  },
-  methods: {
-    // _removeTask() {
-    //   this.$emit('remove-task', this.title)
-    // }
-    _setStatus(){
-      
-      if(this.status === false){
-        this.statusClass = 'pending'
-        // this.statusCheck = `<fa icon="fa-circle-check" />
-      } else {
-        this.statusClass = 'done'
-      }      
-    }
-  },
-  created(){
-    this._setStatus();
-    
   }
 }
 </script>
@@ -66,7 +47,6 @@ export default {
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
   color: var(--tertiary-accent);
 
   transition: all .2s ease-in-out;
@@ -76,9 +56,10 @@ export default {
   transform: scale(1.05);
 }
 
-/* .task > *{
-    flex-grow: 1;
-  } */
+.task .task-date{
+  padding-right: 20px;
+}
+
 .task.pending{
   background-color: orange;
 }

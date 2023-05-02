@@ -13,10 +13,12 @@
           </div>
         </div>
         <div class="task-flag">
-          <fa icon="fa-regular fa-flag" @click="_markAsFlag(task.id)" />
+          <fa icon="fa-regular fa-flag" @click="_alternateFlag(task.id, task.is_flagged)" v-if="task.is_flagged" class="is_flagged" />
+          <fa icon="fa-regular fa-flag" @click="_alternateFlag(task.id, task.is_flagged)" v-else class="is_not_flagged" />
         </div>
         <button :disabled="!formHasChanged" @click="_updateTask(task)">Update task</button>
-        <button @click="_markAsDone(task.id)">Mark as done</button>
+        <button @click="_alternateDone(task.id, task.is_complete)">Mark as done/undone</button>
+        <button @click="_deleteTask(task.id)">Delete</button>
       </form>
     </div>
   </div>
@@ -47,7 +49,7 @@ export default {
     ...mapState(TasksStore, ['tasks']),
   },
   methods: {
-    ...mapActions(TasksStore, ['_getSingleTask', '_markAsDone', '_markAsFlag','_updateTask']),
+    ...mapActions(TasksStore, ['_getSingleTask', '_alternateDone', '_alternateFlag','_updateTask',['_deleteTask']]),
 
     _setInfo(info) {
       this.task.title = info.title
@@ -105,11 +107,19 @@ export default {
 .task-flag svg{
   position: relative;
   left: 7px;
-  color: transparent;
   
-  transition: all .2s ease-in-out;
+  transition: all .1s ease-in-out;
 }
-.task-flag:hover svg {
+.task-flag svg.is_flagged{
+  color: black;
+}
+.task-flag svg.is_not_flagged{
+  color: transparent;
+}
+.task-flag svg.is_flagged:hover {
+  color: transparent;
+}
+.task-flag svg.is_not_flagged:hover {
   color: black;
 }
 

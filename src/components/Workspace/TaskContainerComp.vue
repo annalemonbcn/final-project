@@ -2,19 +2,11 @@
   <div v-if="loading">Loading tasks...</div>
   <div class="task-container" v-if="!loading && tasks">
     <p>My tasks</p>
-    <!-- <TaskComp 
-      v-for="(task, index) in tasks"
-      :key="index"
-      :title="task.title"
-      :status="task.status"
-      :date="task.date"
-      :url="task.url"
-      @remove-task="onRemoveTask"
-    /> -->
     <TaskComp 
       v-for="(task, index) in tasks"
       :key="index"
       :title="task.title"
+      :limitDate="task.limit_date"
       :url="task.url"
       :status="task.is_complete"
     />
@@ -43,13 +35,6 @@ export default {
   },
   methods: {
     ...mapActions(TasksStore, ['_fetchTasks']),
-
-    _titleToUrl(){
-      this.url = this.task.str.split(' ').join('_');
-    }
-    // onRemoveTask(taskTitle){
-    //   this.tasksFiltered = this.tasksFiltered.filter(task => task.title !== taskTitle);
-    // }
   },
   async mounted(){
     try{

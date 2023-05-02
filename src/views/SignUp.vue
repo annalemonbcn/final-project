@@ -8,7 +8,7 @@
     <div>
       <label for="password">Password:</label>
       <input type="password" name="password" placeholder="****" v-model="password"><br>
-      <label for="confirmPassword">Password:</label>
+      <label for="confirmPassword">Confirm password:</label>
       <input type="password" name="confirmPassword" placeholder="****" v-model="confirmPassword">
 
     </div>
