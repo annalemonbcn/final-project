@@ -8,8 +8,7 @@
         <div>
           <input name="date" type="date" v-model="task.limit_date" @input="formHasChanged = true" />
           <div class="task-status">
-            <p class="pending" v-if="task.is_complete === false">Pending</p>
-            <p class="done" v-else>Done</p>
+            <p :class="task.is_complete === true ? 'done' : 'pending'">{{ task.is_complete === true ? 'Done' : 'Pending' }}</p>
           </div>
         </div>
         <div class="task-flag">
@@ -49,7 +48,7 @@ export default {
     ...mapState(TasksStore, ['tasks']),
   },
   methods: {
-    ...mapActions(TasksStore, ['_getSingleTask', '_alternateDone', '_alternateFlag','_updateTask',['_deleteTask']]),
+    ...mapActions(TasksStore, ['_getSingleTask', '_alternateDone', '_alternateFlag','_updateTask','_deleteTask']),
 
     _setInfo(info) {
       this.task.title = info.title
@@ -61,7 +60,7 @@ export default {
       this.task.is_flagged = info.is_flagged
       this.task.favourite = info.is_favourite
       this.task.id = info.id
-    }
+    },
   },
   created() {
     this._setInfo(this._getSingleTask(this.$route.params.taskUrl));
@@ -74,7 +73,7 @@ export default {
         }
       }
     )
-  }
+  },
 }
 </script>
 
