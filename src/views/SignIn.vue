@@ -1,17 +1,20 @@
 <template>
-  <h1>Sign-in</h1>
-  <form action="" @submit.prevent>
-    <div>
-      <label for="email">Email: </label>
-      <input type="text" name="email" placeholder="example@example.com" v-model="email">
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" name="password" placeholder="****" v-model="password">
-    </div>
-    <button type="button" @click="_handleSignIn">Sign In</button>
-  </form>
-  <router-link to="/auth/sign-up">Sign Up</router-link>
+  <div class="container">
+    <h1>Sign in</h1>
+    <p>Sign in and start managing your tasks today!</p>
+    <form action="" @submit.prevent>
+      <div>
+        <label for="email">Email: </label>
+        <input type="text" name="email" placeholder="example@example.com" v-model="email">
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" placeholder="****" v-model="password">
+      </div>
+      <button type="button" @click="_handleSignIn">Sign In</button>
+    </form>
+    <router-link to="/auth/sign-up">Sign Up</router-link>
+  </div>
 </template>
 
 <script>
@@ -43,3 +46,19 @@ export default{
   }
 }
 </script>
+
+<style scoped>
+  .container{
+    background-image: url('@/img/bg_login.jpg');
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
