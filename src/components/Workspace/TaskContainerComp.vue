@@ -1,9 +1,20 @@
 <template>
   <div v-if="loading">Loading tasks...</div>
-  <div class="task-container" v-if="!loading && tasks">
-    <p>My tasks</p>
+  <div class="task-container" v-if="!loading && pendingTasks">
+    <p>Pending tasks</p>
     <TaskComp 
-      v-for="(task, index) in tasks"
+      v-for="(task, index) in pendingTasks"
+      :key="index"
+      :title="task.title"
+      :limitDate="task.limit_date"
+      :url="task.url"
+      :status="task.is_complete"
+    />
+  </div>
+  <div class="task-container" v-if="!loading && completedTasks">
+    <p>Done tasks</p>
+    <TaskComp 
+      v-for="(task, index) in completedTasks"
       :key="index"
       :title="task.title"
       :limitDate="task.limit_date"
@@ -31,7 +42,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(TasksStore, ['tasks']),
+    ...mapState(TasksStore, ['tasks','completedTasks', 'pendingTasks']),
   },
   methods: {
     ...mapActions(TasksStore, ['_fetchTasks']),

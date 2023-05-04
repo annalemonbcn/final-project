@@ -7,6 +7,17 @@ export default defineStore('tasks', {
       tasks: [],
     }
   },
+  getters: {
+    getTaskById: (state) => {
+      return (taskUrl) => state.tasks.filter((task) => task.url === taskUrl)[0];
+    },
+    completedTasks: (state) => {
+      return state.tasks.filter((task) => task.is_complete);
+    },
+    pendingTasks: (state) => {
+      return state.tasks.filter((task) => !task.is_complete);
+    },
+  },
   actions: {
     async _fetchTasks() {
       const { data, error } = await supabase.from('tasks').select()
@@ -17,7 +28,7 @@ export default defineStore('tasks', {
       }
 
       console.log('all tasks from supabase -->', data)
-      this.tasks = data
+      this.tasks = data;
     },
     async _addNewTask(newTask) {
       const { data, error } = await supabase
@@ -118,9 +129,6 @@ export default defineStore('tasks', {
       const taskToDelete = this.tasks.find((task) => task.id === task.id);
       this.tasks = this.tasks.filter(task => task.id !== taskToDelete.id);
       console.log(this.tasks);
-    },
-    _getSingleTask(url) {
-      return this.tasks.filter((task) => task.url === url)[0]
     },
   }
 })

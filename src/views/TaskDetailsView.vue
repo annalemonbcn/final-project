@@ -2,22 +2,22 @@
   <div class="info-right" id="task-details">
     <div class="task-row">
       <form id="task-details" action="" @submit.prevent>
-        <input class="task-view-name" type="text" name="title" v-model="task.title" @input="formHasChanged = true"/>
-        <textarea name="description" class="task-view-description" v-model="task.description"
+        <input class="task-view-name" type="text" name="title" v-model="taskDetail.title" @input="formHasChanged = true"/>
+        <textarea name="description" class="task-view-description" v-model="taskDetail.description"
         @input="formHasChanged = true"></textarea>
         <div>
-          <input name="date" type="date" v-model="task.limit_date" @input="formHasChanged = true" />
+          <input name="date" type="date" v-model="taskDetail.limit_date" @input="formHasChanged = true" />
           <div class="task-status">
-            <p :class="task.is_complete === true ? 'done' : 'pending'">{{ task.is_complete === true ? 'Done' : 'Pending' }}</p>
+            <p :class="taskDetail.is_complete === true ? 'done' : 'pending'">{{ taskDetail.is_complete === true ? 'Done' : 'Pending' }}</p>
           </div>
         </div>
         <div class="task-flag">
-          <fa icon="fa-regular fa-flag" @click="_alternateFlag(task.id, task.is_flagged)" v-if="task.is_flagged" class="is_flagged" />
-          <fa icon="fa-regular fa-flag" @click="_alternateFlag(task.id, task.is_flagged)" v-else class="is_not_flagged" />
+          <fa icon="fa-regular fa-flag" @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)" v-if="taskDetail.is_flagged" class="is_flagged" />
+          <fa icon="fa-regular fa-flag" @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)" v-else class="is_not_flagged" />
         </div>
         <button :disabled="!formHasChanged" @click="_updateTask(task)">Update task</button>
-        <button @click="_alternateDone(task.id, task.is_complete)">Mark as done/undone</button>
-        <button @click="_deleteTask(task.id)">Delete</button>
+        <button @click="_alternateDone(taskDetail.id, taskDetail.is_complete)">Mark as done/undone</button>
+        <button @click="_deleteTask(taskDetail.id)">Delete</button>
       </form>
     </div>
   </div>
@@ -31,45 +31,29 @@ export default {
   name: 'TaskDetails',
   data() {
     return {
-      task: {
-        title: '',
-        user_id: '',
-        is_complete: null,
-        url: '',
-        limit_date: '',
-        description: '',
-        is_flagged: null,
-        id: null        
-      },
       formHasChanged: false,
+      taskUrl: ''
     }
   },
   computed: {
-    ...mapState(TasksStore, ['tasks']),
+    ...mapState(TasksStore, ['tasks', 'getTaskById']),
+
+    taskDetail(){
+      return this.getTaskById(this.taskUrl);
+    }
   },
   methods: {
-    ...mapActions(TasksStore, ['_getSingleTask', '_alternateDone', '_alternateFlag','_updateTask','_deleteTask']),
-
-    _setInfo(info) {
-      this.task.title = info.title
-      this.task.user_id = info.user_id
-      this.task.is_complete = info.is_complete
-      this.task.url = info.url
-      this.task.limit_date = info.limit_date
-      this.task.description = info.description
-      this.task.is_flagged = info.is_flagged
-      this.task.favourite = info.is_favourite
-      this.task.id = info.id
-    },
+    ...mapActions(TasksStore, ['_alternateDone', '_alternateFlag','_updateTask','_deleteTask']),
   },
   created() {
-    this._setInfo(this._getSingleTask(this.$route.params.taskUrl));
+    this.taskUrl = this.$route.params.taskUrl;
+    // this._setInfo(this._getSingleTask(this.$route.params.taskUrl));
 
     this.$watch(
       () => this.$route.params,
       (newParams) => {
         if (this.$route.params.taskUrl) {
-          this._setInfo(this._getSingleTask(newParams.taskUrl))
+          this.taskUrl = this.$route.params.taskUrl;
         }
       }
     )
