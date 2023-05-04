@@ -36,6 +36,9 @@ p.subtitle{
   text-align: center;
 }
 
+form.connect .container-input{
+  margin-bottom: 30px;
+}
 form.connect input{
   color: white;
   background-color: var(--primary-accent);
@@ -47,7 +50,6 @@ form.connect input{
   width: 300px;
   height: 45px;
   padding: 12px 20px;
-  margin-bottom: 30px;
 }
 form.connect input::placeholder{
   color: white;

@@ -42,6 +42,18 @@ export default defineStore('userStore', {
         throw error;
       }
       this.user = null;
+    },
+    async _resetPassword(email){
+      console.log(email);
+      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://www.google.es/',
+      })
+
+      if (error) {
+        console.error(error);
+        return error;
+      }
+      return true;
     }
   }
 })

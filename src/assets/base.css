@@ -109,3 +109,37 @@ body a{
   color: white;
   background-color: var(--green-accent);
 }
+
+/* INPUT ERROR */
+form.connect input.error,
+textarea.error{
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 2px solid rgba(255, 0, 0, 0.3);
+  color: #FF0000;
+}
+.warn{
+  display: none;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 18px;
+  animation: shake 300ms;
+}
+.warn.textError{
+  color: rgba(255, 0, 0, 0.8);
+}
+@keyframes shake{
+  25%{
+    transform: translateX(4px);
+  }
+  50%{
+    transform: translateX(-4px);
+  }
+  75%{
+    transform: translateX(4px);
+  }
+}
+
+/* TEXT SUCCESS */
+.warn.textSuccess{
+  color: var(--green-accent);
+}
