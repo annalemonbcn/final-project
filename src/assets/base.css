@@ -1,13 +1,15 @@
 /* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;300;400;700&family=Roboto:wght@100;300;400;700');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;300;400;700&family=Roboto+Mono:wght@100;300;400;700&family=Roboto:wght@100;300;400;700&display=swap');
 
 /* Colors */
 :root{
-  --primary-color: fff;
-  --secondary-color: fff;
-  --tertiary-color: #babfcc;
-  --tertiary-accent: #464952;
-  --background-color: #F2F3F3;
+  --primary-color: #1D3543;
+  --primary-accent: #224957;
+  --secondary-color: #9BAEBC;
+  --tertiary-color: #705A68;
+  --tertiary-accent: #5a374e;
+  --blue-accent: #3658C7;
+  --green-accent: #20DF7F;
 }
 
 /* Global styles */
@@ -27,12 +29,12 @@ html, body{
 }
 
 body {
-  font-family: Roboto, Roboto Mono, 'Helvetica Neue', sans-serif;
+  font-family:  'Lexend Deca', sans-serif;
   font-size: 20px;
   position: relative;
 
   background-color: var(--background-color);
-  color: #08143c;
+  color: white;
 }
 
 body a{
@@ -42,4 +44,68 @@ body a{
 
 body a.active{
   color: var(--tertiary-accent);
+}
+
+/* HEADINGS */
+h1{
+  font-size: 44px;
+  line-height: 48px;
+  font-weight: 400;
+}
+  h2{
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 36px;
+}
+  h3{
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 32px;
+}
+  h4{
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+}
+body p{
+  font-size: 20px;
+  line-height: 30px;
+}
+body a{
+  text-decoration: none;
+}
+@media screen and (min-width: 768px){
+  h1{
+    font-size: 64px;
+    line-height: 80px;
+  }
+    h2{
+    font-size: 50px;
+    line-height: 52px;
+  }
+    h3{
+    font-size: 40px;
+    line-height: 42px;
+  }
+    h4{
+    font-size: 24px;
+    line-height: 24px;
+  }
+}
+
+/* BTN */
+.btn{
+  cursor: pointer;
+
+  height: 45px;
+  padding: 15px 125px;
+  text-align: center;
+
+  border: 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+.btn-primary{
+  color: white;
+  background-color: var(--green-accent);
 }

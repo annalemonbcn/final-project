@@ -1,19 +1,24 @@
 <template>
   <div class="container">
-    <h1>Sign in</h1>
-    <p>Sign in and start managing your tasks today!</p>
-    <form action="" @submit.prevent>
-      <div>
-        <label for="email">Email: </label>
-        <input type="text" name="email" placeholder="example@example.com" v-model="email">
+    <div id="main-info">
+      <h1 class="title">Sign in</h1>
+      <p class="subtitle">Sign in and start managing your tasks!</p>
+      <form action="" @submit.prevent class="connect">
+        <div>
+          <input type="text" name="email" placeholder="Email" v-model="email">
+        </div>
+        <div>
+          <input type="password" name="password" placeholder="Password" v-model="password">
+        </div>
+        <div id="connect-forgot">
+          <a href="#">Forgot password?</a>
+        </div>
+        <button class="btn btn-primary" type="button" @click="_handleSignIn">Login</button>
+      </form>
+      <div class="connect-change">
+        <router-link to="/auth/sign-up"><fa icon="fa-solid fa-circle-arrow-right" /> New user? Click here to <u>Sign Up</u></router-link>
       </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" placeholder="****" v-model="password">
-      </div>
-      <button type="button" @click="_handleSignIn">Sign In</button>
-    </form>
-    <router-link to="/auth/sign-up">Sign Up</router-link>
+    </div>
   </div>
 </template>
 
@@ -49,16 +54,15 @@ export default{
 
 <style scoped>
   .container{
-    background-image: url('@/img/bg_login.jpg');
-    width: 100%;
-    height: 100vh;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
+  background-image: url('@/img/bg_login.jpg');
+  }
+
+  #connect-forgot{
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  #connect-forgot a{
+    color: var(--green-accent);
+    font-size: 14px;
   }
 </style>

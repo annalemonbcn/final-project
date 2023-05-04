@@ -8,7 +8,7 @@
         <div>
           <input name="date" type="date" v-model="task.limit_date" @input="formHasChanged = true" />
           <div class="task-status">
-            <p :class="task.is_complete === true ? 'done' : 'pending'">{{ task.is_complete === true ? 'Done' : 'Pending' }}</p>
+            <p :class="statusClass">{{ statusClass }}</p>
           </div>
         </div>
         <div class="task-flag">
@@ -46,6 +46,13 @@ export default {
   },
   computed: {
     ...mapState(TasksStore, ['tasks']),
+
+    statusClass(){
+      if(this.task.is_complete === false){
+        return 'pending'
+      }
+      return 'done'
+    },
   },
   methods: {
     ...mapActions(TasksStore, ['_getSingleTask', '_alternateDone', '_alternateFlag','_updateTask','_deleteTask']),

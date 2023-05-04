@@ -4,3 +4,59 @@
   display: flex;
   flex-flow: row nowrap;
 }
+
+/* SIGNIN/SIGNUP */
+.container{
+  background-image: url('@/img/bg_login.jpg');
+  width: 100%;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  padding: 3rem;
+}
+
+#main-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  
+  margin-top: -100px;
+}
+
+p.subtitle{
+  margin: 40px 0 35px;
+  text-align: center;
+}
+
+form.connect input{
+  color: white;
+  background-color: var(--primary-accent);
+  border-radius: 10px;
+  border: 0;
+  outline: 0;
+
+  box-sizing: border-box;
+  width: 300px;
+  height: 45px;
+  padding: 12px 20px;
+  margin-bottom: 30px;
+}
+form.connect input::placeholder{
+  color: white;
+}
+
+.connect-change{
+  margin-top: 25px;
+}
+.connect-change a{
+  font-size: 14px;
+  color: var(--secondary-color);
+}

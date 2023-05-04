@@ -1,21 +1,23 @@
 <template>
-  <h1>Sign-up</h1>
-  <form action="">
-    <div>
-      <label for="email">Email: </label>
-      <input type="text" name="email" placeholder="example@example.com" v-model="email">
+  <div class="container">
+    <div id="main-info">
+      <h1 class="title">Sign up</h1>
+      <p class="subtitle">Sign up and start managing your tasks</p>
+      <form action="" @submit.prevent class="connect">
+        <div>
+          <input type="text" name="email" placeholder="Email" v-model="email">
+        </div>
+        <div>
+          <input type="password" name="password" placeholder="Password" v-model="password"><br>
+          <input type="password" name="confirmPassword" placeholder="Confirm password" v-model="confirmPassword">
+        </div>
+        <button class="btn btn-primary" type="button" @click="_handleSignUp">Sign Up</button>
+      </form>
+      <div class="connect-change">
+        <router-link to="/auth/sign-in">Already a user? Click here to <u>Login</u></router-link>
+      </div>
     </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" name="password" placeholder="****" v-model="password"><br>
-      <label for="confirmPassword">Confirm password:</label>
-      <input type="password" name="confirmPassword" placeholder="****" v-model="confirmPassword">
-
-    </div>
-    <button type="button" @click="_handleSignUp">Sign Up</button>
-  </form>
-  
-  <router-link to="/auth/sign-in">Sign In</router-link>
+  </div>
 </template>
 
 <script>
