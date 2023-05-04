@@ -43,10 +43,23 @@ export default defineStore('userStore', {
       }
       this.user = null;
     },
+    async _updateuser(password){
+      const { data, error } = await supabase.auth.updateUser({
+        password,
+      })
+
+      console.log(data);
+
+      if (error) {
+        console.error(error);
+        return error;
+      }
+      return true;
+    },
     async _resetPassword(email){
       console.log(email);
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://www.google.es/',
+        redirectTo: 'http://localhost:5173/recovery-password/',
       })
 
       if (error) {

@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <div class="container user">
     <div id="main-info">
       <h1 class="title">Sign up</h1>
-      <p class="subtitle">Sign up and start managing your tasks</p>
+      <p class="subtitle">Sign up and start managing your tasks!</p>
       <form action="" @submit.prevent class="connect">
         <div class="container-input">
           <input type="text" name="email" placeholder="Email" v-model="email">
@@ -54,11 +54,13 @@ export default{
           } catch (error){
             console.error(error); // --> handle error
           }
-        } else {
+        } 
+        else {
           this.textError = 'Passwords do not match!'
           document.querySelector('.textError').style.display = 'block';
         }
-      } else {
+      }
+      else {
         this.textError = 'Password must be at least 6 characters long';
         document.querySelector('.textError').style.display = 'block';
       }
@@ -71,5 +73,8 @@ export default{
 <style scoped>
 .warn.textError{
   margin-bottom: 30px;
+}
+div.container-input:nth-child(2){
+  margin-bottom: 15px;
 }
 </style>
