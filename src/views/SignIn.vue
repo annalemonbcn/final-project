@@ -1,17 +1,28 @@
 <template>
-  <h1>Sign-in</h1>
-  <form action="" @submit.prevent>
-    <div>
-      <label for="email">Email: </label>
-      <input type="text" name="email" placeholder="example@example.com" v-model="email">
+  <!-- https://www.figma.com/file/d1OI5eCagifyaeVTS70YaW/Login-Page-design-(Community)?node-id=0-1&t=NYn4fDM90f6ZRCYm-0 -->
+  <div class="container user">
+    <div id="main-info">
+      <h1 class="title">Sign in</h1>
+      <p class="subtitle">Sign in and start managing your tasks!</p>
+      <form action="" @submit.prevent class="connect">
+        <div class="container-input">
+          <input type="text" id="input-email" name="email" placeholder="Email" v-model="email">
+          <p class="warn textError">{{ textError }}</p>
+        </div>
+        <div class="container-input">
+          <input type="password" id="input-password" name="password" placeholder="Password" v-model="password">
+        </div>
+        <div id="connect-forgot">
+          <router-link to="/auth/forgot-password">Forgot password?</router-link>
+          
+        </div>
+        <button class="btn btn-primary" type="button" @click="_handleSignIn">Login</button>
+      </form>
+      <div class="connect-change">
+        <router-link to="/auth/sign-up"><fa icon="fa-solid fa-circle-arrow-right" /> New user? Click here to <u>Sign Up</u></router-link>
+      </div>
     </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" name="password" placeholder="****" v-model="password">
-    </div>
-    <button type="button" @click="_handleSignIn">Sign In</button>
-  </form>
-  <router-link to="/auth/sign-up">Sign Up</router-link>
+  </div>
 </template>
 
 <script>
@@ -23,7 +34,9 @@ export default{
   data(){
     return{
       email: '',
-      password: ''
+      password: '',
+      textError: '',
+      textSuccess: 'Email sent!'
     }
   },
   computed: {
@@ -43,3 +56,17 @@ export default{
   }
 }
 </script>
+
+<style scoped>
+  
+
+  #connect-forgot{
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  #connect-forgot a{
+    color: var(--green-accent);
+    font-size: 14px;
+    cursor: pointer;
+  }
+</style>

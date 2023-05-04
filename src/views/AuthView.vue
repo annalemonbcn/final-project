@@ -3,7 +3,11 @@
 </template>
 
 <script>
-export default{
-  name: 'AuthView',
+export default {
+  name: 'AuthView'
 }
 </script>
+
+<style>
+
+</style>

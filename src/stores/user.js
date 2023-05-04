@@ -42,6 +42,31 @@ export default defineStore('userStore', {
         throw error;
       }
       this.user = null;
+    },
+    async _updateuser(password){
+      const { data, error } = await supabase.auth.updateUser({
+        password,
+      })
+
+      console.log(data);
+
+      if (error) {
+        console.error(error);
+        return error;
+      }
+      return true;
+    },
+    async _resetPassword(email){
+      console.log(email);
+      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'http://localhost:5173/recovery-password/',
+      })
+
+      if (error) {
+        console.error(error);
+        return error;
+      }
+      return true;
     }
   }
 })

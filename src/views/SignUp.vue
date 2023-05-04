@@ -1,21 +1,26 @@
 <template>
-  <h1>Sign-up</h1>
-  <form action="">
-    <div>
-      <label for="email">Email: </label>
-      <input type="text" name="email" placeholder="example@example.com" v-model="email">
+  <div class="container user">
+    <div id="main-info">
+      <h1 class="title">Sign up</h1>
+      <p class="subtitle">Sign up and start managing your tasks!</p>
+      <form action="" @submit.prevent class="connect">
+        <div class="container-input">
+          <input type="text" name="email" placeholder="Email" v-model="email">
+        </div>
+        <div class="container-input">
+          <input type="password" name="password" placeholder="Password" v-model="password"><br>
+        </div>
+        <div class="container-input">
+          <input type="password" name="confirmPassword" placeholder="Confirm password" v-model="confirmPassword">
+        </div>
+        <p class="warn textError">{{ textError }}</p>
+        <button class="btn btn-primary" type="button" @click="_handleSignUp">Sign Up</button>
+      </form>
+      <div class="connect-change">
+        <router-link to="/auth/sign-in">Already a user? Click here to <u>Login</u></router-link>
+      </div>
     </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" name="password" placeholder="****" v-model="password"><br>
-      <label for="confirmPassword">Confirm password:</label>
-      <input type="password" name="confirmPassword" placeholder="****" v-model="confirmPassword">
-
-    </div>
-    <button type="button" @click="_handleSignUp">Sign Up</button>
-  </form>
-  
-  <router-link to="/auth/sign-in">Sign In</router-link>
+  </div>
 </template>
 
 <script>
@@ -28,7 +33,9 @@ export default{
     return{
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      textError: '',
+      textSuccess: ''
     }
   },
   computed: {
@@ -38,18 +45,36 @@ export default{
     ...mapActions(UserStore, ['signUp']),
     async _handleSignUp(){
 
-      if(this.password === this.confirmPassword){
-        const userData = { email: this.email, password: this.password };
-        try{
-          await this.signUp(userData);
-          this.$router.push({ name: 'home' });
-        } catch (error){
-          console.error(error); // --> handle error
+      if(this.password.length >= 6){
+        if(this.password === this.confirmPassword){
+          const userData = { email: this.email, password: this.password };
+          try{
+            await this.signUp(userData);
+            this.$router.push({ name: 'home' });
+          } catch (error){
+            console.error(error); // --> handle error
+          }
+        } 
+        else {
+          this.textError = 'Passwords do not match!'
+          document.querySelector('.textError').style.display = 'block';
         }
-      } else {
-        console.log("Passwords don't match. Try again!") // --> handle error
       }
+      else {
+        this.textError = 'Password must be at least 6 characters long';
+        document.querySelector('.textError').style.display = 'block';
+      }
+      
     }
   }
 }
 </script>
+
+<style scoped>
+.warn.textError{
+  margin-bottom: 30px;
+}
+div.container-input:nth-child(2){
+  margin-bottom: 15px;
+}
+</style>
