@@ -11,7 +11,7 @@
           <input type="password" name="password" placeholder="Password" v-model="password">
         </div>
         <div id="connect-forgot">
-          <a href="#">Forgot password?</a>
+          <p @click="">Forgot password?</p>
         </div>
         <button class="btn btn-primary" type="button" @click="_handleSignIn">Login</button>
       </form>
@@ -61,7 +61,7 @@ export default{
     text-align: center;
     margin-bottom: 25px;
   }
-  #connect-forgot a{
+  #connect-forgot p{
     color: var(--green-accent);
     font-size: 14px;
   }
