@@ -6,9 +6,8 @@
       <form action="" @submit.prevent class="connect">
         <div class="container-input">
           <input type="text" id="input-email" name="email" placeholder="Email" v-model="email">
-          <p class="warn textError">{{ textError }}</p>
-          <p class="warn textSuccess">{{ textSuccess }}</p>
         </div>
+        <p class="warn"></p>
         <button class="btn btn-primary" type="button" @click="_handleResetPassword">Send recovery link</button>
       </form>
       <div class="connect-change">
@@ -32,49 +31,38 @@ export default{
     }
   },
   methods: {
-    ...mapActions(UserStore, ['_resetPassword']),
+    ...mapActions(UserStore, ['_validateEmail','_showError','_showSuccess','_removeError','_resetPassword']),
 
-    _handleResetPassword(){
-      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      let continueFlag = false;
+    async _handleResetPassword(){
+      // Reset errors and fields
+      this._removeError()
+      document.querySelector('input#input-email').classList.remove('error')
 
-      // Email validation
-      if(regex.test(this.email)){
-        
-        // Reset ERROR in html fields
-        document.querySelector('#input-email').classList.remove('error');
-        this.textError = '';
-        document.querySelector('.textError').style.display = 'none';
-
-        // Update flag
-        continueFlag = true;
-      }
-      else {
-        // Set ERROR in html fields
-        document.querySelector('#input-email').classList.add('error');
-        this.textError = 'Enter a valid email!';
-        document.querySelector('.textError').style.display = 'block';
+      // Validate email
+      if(!this._validateEmail(this.email)) {
+        this._showError('Enter a valid email!');
+        document.querySelector('input#input-email').classList.add('error');
+        return;
       }
 
-      if(continueFlag){
-        // Call method to reset password
-        if(this._resetPassword(this.email)){
-          // Text success
-          document.querySelector('input#input-email').style.display = 'none';
-          document.querySelector('.textSuccess').style.display = 'block';
-          document.querySelector('.btn').disabled = true;
-
-        } 
-        else {
-          this.textError = 'There has been an error sending the request.<br>Please try again.'
-          document.querySelector('.textError').style.display = 'block';
-        }
+      // If valid, continue reset password
+      try{
+        await this._resetPassword(this.email);
+        // Hide input && show success message
+        document.querySelector('input#input-email').style.display = 'none';
+        document.querySelector('.btn').disabled = true;
+        this._showSuccess('E-mail sent! Check your inbox :)')
       }
-      
+      catch (error) {
+        this._showError(error.message);
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+.warn{
+  margin-bottom: 30px;
+}
 </style>

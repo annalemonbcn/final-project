@@ -6,20 +6,28 @@
       <p class="subtitle">Sign in and start managing your tasks!</p>
       <form action="" @submit.prevent class="connect">
         <div class="container-input">
-          <input type="text" id="input-email" name="email" placeholder="Email" v-model="email">
-          <p class="warn textError">{{ textError }}</p>
+          <input type="text" id="input-email" name="email" placeholder="Email" v-model="email" />
         </div>
         <div class="container-input">
-          <input type="password" id="input-password" name="password" placeholder="Password" v-model="password">
+          <input
+            type="password"
+            id="input-password"
+            name="password"
+            placeholder="Password"
+            v-model="password"
+          />
         </div>
+        <p class="warn"></p>
         <div id="connect-forgot">
           <router-link to="/auth/forgot-password">Forgot password?</router-link>
-          
         </div>
         <button class="btn btn-primary" type="button" @click="_handleSignIn">Login</button>
       </form>
       <div class="connect-change">
-        <router-link to="/auth/sign-up"><fa icon="fa-solid fa-circle-arrow-right" /> New user? Click here to <u>Sign Up</u></router-link>
+        <router-link to="/auth/sign-up"
+          ><fa icon="fa-solid fa-circle-arrow-right" /> New user? Click here to
+          <u>Sign Up</u></router-link
+        >
       </div>
     </div>
   </div>
@@ -29,28 +37,57 @@
 import { mapState, mapActions } from 'pinia'
 import UserStore from '@/stores/user.js'
 
-export default{
+export default {
   name: 'SignIn',
-  data(){
-    return{
+  data() {
+    return {
       email: '',
-      password: '',
-      textError: '',
-      textSuccess: 'Email sent!'
+      password: ''
     }
   },
   computed: {
-    ...mapState(UserStore, ['user']),
+    ...mapState(UserStore, ['user'])
   },
   methods: {
-    ...mapActions(UserStore, ['signIn']),
-    async _handleSignIn(){
+    ...mapActions(UserStore, [
+      '_validateEmail',
+      '_validatePassword',
+      '_showError',
+      '_removeError',
+      '_showSuccess',
+      'signIn'
+    ]),
+
+    async _handleSignIn() {
+
+      // Reset errors and fields
+      this._removeError();
+      document.querySelector('input#input-email').classList.remove('error');
+      document.querySelector('input#input-password').classList.remove('error');
+
+      // Validate email
+      if (!this._validateEmail(this.email)) {
+        this._showError('Enter a valid email!');
+        document.querySelector('input#input-email').classList.add('error');
+        return
+      }
+      // Validate password
+      if (!this._validatePassword(this.password)) {
+        this._showError('Password must be at least 6 characters long.');
+        document.querySelector('input#input-password').classList.add('error');
+        return
+      }
+
+      // If valid, continue login
       const userData = { email: this.email, password: this.password }
-      try{
+      try {
         await this.signIn(userData)
-        this.$router.push({ name: 'home' })
-      } catch (error){
-        console.error(error) // --> handle error
+        this._showSuccess('Valid credentials! Welcome back :)')
+        setTimeout(() => {
+          this.$router.push({ name: 'home' })
+        }, 2000)
+      } catch (error) {
+        this._showError(error.message)
       }
     }
   }
@@ -58,15 +95,13 @@ export default{
 </script>
 
 <style scoped>
-  
-
-  #connect-forgot{
-    text-align: center;
-    margin-bottom: 25px;
-  }
-  #connect-forgot a{
-    color: var(--green-accent);
-    font-size: 14px;
-    cursor: pointer;
-  }
+#connect-forgot {
+  text-align: center;
+  margin-bottom: 25px;
+}
+#connect-forgot a {
+  color: var(--green-accent);
+  font-size: 14px;
+  cursor: pointer;
+}
 </style>

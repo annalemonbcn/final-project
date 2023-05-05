@@ -1,72 +1,101 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 import supabase from '../supabase/index.js'
 
 export default defineStore('userStore', {
-  state(){
-    return{
-      user: undefined,
+  state() {
+    return {
+      user: undefined
     }
   },
   actions: {
-    async fetchUser(){
-      const { data: { user } } = await supabase.auth.getUser();
-
-      this.user = user;
+    async fetchUser() {
+      const {
+        data: { user }
+      } = await supabase.auth.getUser()
+      this.user = user
     },
-    async signUp({ email, password }){
-      const { data: { user }, error } = await supabase.auth.signUp({
-        email, 
+    async signUp({ email, password }) {
+      const {
+        data: { user },
+        error
+      } = await supabase.auth.signUp({
+        email,
         password
-      });
+      })
 
-      if(error){
-        throw error;
+      if (error) {
+        throw error
       }
-      if(user){
-        this.user = user;
+      if (user) {
+        this.user = user
       }
     },
-    async signIn({ email, password }){
-      const { data: { user }, error } = await supabase.auth.signInWithPassword({
-        email, password
-      });
+    async signIn({ email, password }) {
+      const {
+        data: { user },
+        error
+      } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      })
 
-      if(error){
-        throw error;
+      if (error) {
+        throw error
       }
-      this.user = user;
+      this.user = user
     },
-    async signOut(){
-      const { error } = await supabase.auth.signOut();
-      if(error){
-        throw error;
+    async signOut() {
+      const { error } = await supabase.auth.signOut()
+      if (error) {
+        throw error
       }
-      this.user = null;
+      this.user = null
     },
-    async _updateuser(password){
+    async _updateuser(password) {
       const { data, error } = await supabase.auth.updateUser({
-        password,
+        password
       })
 
-      console.log(data);
+      console.log(data)
 
       if (error) {
-        console.error(error);
-        return error;
+        console.error(error)
+        return error
       }
-      return true;
+      return true
     },
-    async _resetPassword(email){
-      console.log(email);
+    async _resetPassword(email) {
+      console.log(email)
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'http://localhost:5173/recovery-password/',
+        redirectTo: 'http://localhost:5173/recovery-password/'
       })
 
       if (error) {
-        console.error(error);
-        return error;
+        throw error
       }
-      return true;
+    },
+    _validateEmail(email) {
+      const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+      return regexEmail.test(email)
+    },
+    _validatePassword(password) {
+      return password.length >= 6
+    },
+
+    _showError(msgError) {
+      document.querySelector('.warn').classList.add('textError');
+      document.querySelector('.warn').style.display = 'block';
+      document.querySelector('.warn').innerHTML = msgError;
+    },
+    _removeError(){
+      document.querySelector('.warn').classList.remove('textError');
+      document.querySelector('.warn').style.display = 'none';
+      document.querySelector('.warn').innerHTML = '';
+    },
+    _showSuccess(msgSuccess) {
+      document.querySelector('.warn').classList.add('textSuccess');
+      document.querySelector('.warn').style.display = 'block';
+      document.querySelector('.warn').innerHTML = msgSuccess;
     }
   }
 })

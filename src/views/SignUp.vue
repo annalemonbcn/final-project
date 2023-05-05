@@ -5,15 +5,27 @@
       <p class="subtitle">Sign up and start managing your tasks!</p>
       <form action="" @submit.prevent class="connect">
         <div class="container-input">
-          <input type="text" name="email" placeholder="Email" v-model="email">
+          <input type="text" id="input-email" name="email" placeholder="Email" v-model="email" />
         </div>
         <div class="container-input">
-          <input type="password" name="password" placeholder="Password" v-model="password"><br>
+          <input
+            type="password"
+            id="input-password"
+            name="password"
+            placeholder="Password"
+            v-model="password"
+          /><br />
         </div>
         <div class="container-input">
-          <input type="password" name="confirmPassword" placeholder="Confirm password" v-model="confirmPassword">
+          <input
+            type="password"
+            id="input-confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm password"
+            v-model="confirmPassword"
+          />
         </div>
-        <p class="warn textError">{{ textError }}</p>
+        <p class="warn"></p>
         <button class="btn btn-primary" type="button" @click="_handleSignUp">Sign Up</button>
       </form>
       <div class="connect-change">
@@ -26,55 +38,73 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import UserStore from '@/stores/user.js'
- 
-export default{
+
+export default {
   name: 'SignIn',
-  data(){
-    return{
+  data() {
+    return {
       email: '',
       password: '',
-      confirmPassword: '',
-      textError: '',
-      textSuccess: ''
+      confirmPassword: ''
     }
   },
   computed: {
-    ...mapState(UserStore, ['user']),
+    ...mapState(UserStore, ['user'])
   },
   methods: {
-    ...mapActions(UserStore, ['signUp']),
-    async _handleSignUp(){
+    ...mapActions(UserStore, [
+      '_validateEmail',
+      '_validatePassword',
+      '_showError',
+      '_removeError',
+      'signUp'
+    ]),
 
-      if(this.password.length >= 6){
-        if(this.password === this.confirmPassword){
-          const userData = { email: this.email, password: this.password };
-          try{
-            await this.signUp(userData);
-            this.$router.push({ name: 'home' });
-          } catch (error){
-            console.error(error); // --> handle error
-          }
-        } 
-        else {
-          this.textError = 'Passwords do not match!'
-          document.querySelector('.textError').style.display = 'block';
-        }
+    async _handleSignUp() {
+      // Reset errors and fields
+      this._removeError()
+      document.querySelector('input#input-email').classList.remove('error')
+      document.querySelector('input#input-password').classList.remove('error')
+      document.querySelector('input#input-confirmPassword').classList.remove('error')
+
+      // Validate email
+      if (!this._validateEmail(this.email)) {
+        this._showError('Enter a valid email!')
+        document.querySelector('input#input-email').classList.add('error')
+        return
       }
-      else {
-        this.textError = 'Password must be at least 6 characters long';
-        document.querySelector('.textError').style.display = 'block';
+      // Validate password
+      if (!this._validatePassword(this.password) || !this._validatePassword(this.confirmPassword)) {
+        this._showError('Password must be at least 6 characters long.')
+        document.querySelector('input#input-password').classList.add('error')
+        document.querySelector('input#input-confirmPassword').classList.add('error')
+        return
       }
-      
+      if (this.password !== this.confirmPassword) {
+        this._showError('Passwords do not match!')
+        document.querySelector('input#input-password').classList.add('error')
+        document.querySelector('input#input-confirmPassword').classList.add('error')
+        return
+      }
+
+      // If valid, continue signup
+      const userData = { email: this.email, password: this.password }
+      try {
+        await this.signUp(userData)
+        this.$router.push({ name: 'home' })
+      } catch (error) {
+        this._showError(error.message)
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-.warn.textError{
+.warn.textError {
   margin-bottom: 30px;
 }
-div.container-input:nth-child(2){
+div.container-input:nth-child(2) {
   margin-bottom: 15px;
 }
 </style>
