@@ -1,72 +1,49 @@
 <template>
-  <!-- <header>
-    <nav>
-
-      <div class="nav-border-bottom">
-        <router-link to="/">
-          <img src="@/img/a_faire.png" alt="logo" class="logo" />
-        </router-link>
-      </div>
-
-      <div id="nav-main">
-        <p class="hide">Welcome, {{ user.email }}!</p>
-        <div id="mainNavigation">
-          <router-link to="/" class="active">
-            <fa icon="fa-circle-dot" />
-          </router-link>
-
-          <button @click="handleSignOut">Log out</button>
-        </div>
-      </div>
-
-    </nav>
-  </header> -->
   <header>
-    <div>
-      <router-link to="/">
-        <!-- <img src="@/img/logo.png" alt="logo" class="logo smallLogo" />
-        <img src="@/img/a_faire.png" alt="logo" class="logo hide" /> -->
-        <div>Welcome, {{ user.email }}</div>
-      </router-link>
+    <div id="nav-user">
+      <fa icon="fa-regular fa-user" /> <span class="hide">{{ user.email }}</span>
     </div>
-    <nav>
-      <ul>
-        <li>
-          <router-link to="/" class="active">
-            <fa icon="fa-solid fa-code" /> <span class="hide">Tasks</span>
-          </router-link>
-        </li>
-        <li>
-          <a href="#">
-            <fa icon="fa-solid fa-font-awesome" /> <span class="hide">Flagged tasks</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <fa icon="fa-regular fa-bell" /> <span class="hide">Notifications</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <fa icon="fa-solid fa-chart-line" /> <span class="hide">Analytics</span>
-          </a>
-        </li>
-      </ul>
+    <nav id="nav-main">
+      <div>
+        <ul>
+          <li class="nav-item active">
+            <router-link to="/">
+              <fa icon="fa-solid fa-code" /> <span class="hide">Tasks</span>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <a href="#">
+              <fa icon="fa-solid fa-font-awesome" /> <span class="hide">Flagged tasks</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#">
+              <fa icon="fa-regular fa-bell" /> <span class="hide">Notifications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#">
+              <fa icon="fa-solid fa-chart-line" /> <span class="hide">Analytics</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div id="nav-settings">
+        <ul>
+          <li class="nav-item" @click="handleSignOut">
+            <a href="#">
+              <fa icon="fa-solid fa-arrow-right-from-bracket" /> <span class="hide">Log out</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#">
+              <fa icon="fa-solid fa-gear" /> <span class="hide">Settings</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </nav>
-    <div>
-      <ul>
-        <li>
-          <a @click="handleSignOut">
-            <fa icon="fa-solid fa-code" /> <span class="hide">Log out</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <fa icon="fa-solid fa-gear" /> <span class="hide">Settings</span>
-          </a>
-        </li>
-      </ul>
-    </div>
   </header>
 </template>
 
@@ -95,26 +72,9 @@ export default {
 </script>
 
 <style scoped>
-header {
-  box-sizing: border-box;
-  padding: 25px;
-
-  background-color: blue;
-
-  height: 100vh;
-  width: 90px;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  transition: all 0.3s ease;
-}
-
 /** HOVER **/
 header:hover {
-  background-color: red;
-  width: 320px;
+  width: 270px;
 }
 header:hover .hide {
   display: block;
@@ -123,76 +83,61 @@ header:hover .logo.smallLogo{
   display: none;
 }
 /*************/
-.hide {
-  display: none;
-}
-header .logo{
-  width: 100%;
-}
-header .logo.hide{
-  width: 30%;
+
+header {
+  box-sizing: border-box;
+  padding: 25px;
+
+  background-color: white;
+
+  height: 100vh;
+  width: 90px;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  transition: all 0.3s ease;
+  z-index: 99999;
 }
 
-header nav{
-  margin-top: 30px;
+header #nav-user{
+  margin-bottom: 30px;
+  height: 55px;
+  text-align: center;
+}
+
+header #nav-user span{
+  font-size: 16px;
 }
 
 header ul{
   list-style-type: none;
 }
-/* 
-header nav {
-  height: 100%;
 
+header li{
+  box-sizing: border-box;
+  height: 40px;
+  padding: 15px 10px;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
   align-items: center;
+
+  border-radius: 8px;
 }
 
-header svg {
-  height: 30px;
-}
-
-header nav img.logo {
-  max-width: 70px;
-}
-
-header nav #nav-main {
-  height: 70%;
-
+header .nav-item a{
+  width: 100%;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
   align-items: center;
+  gap: 8px;
+}
+header .nav-item.active{
+  background-color: var(--secondary-color);
 }
 
-header nav #nav-main #mainNavigation {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
+header #nav-settings{
+  position: absolute;
+  bottom: 20px;
 }
-
-.nav-border-bottom{
-  border-bottom: 2px solid var(--tertiary-color);
-  padding-bottom: 15px;
-  width: 80%;
-}
-
-.nav-border-top{
-  border-top: 2px solid var(--tertiary-color);
-  padding-top: 15px;
-  width: 80%;
-}
-
-.nav-border-top a{
-  display: block;
-  width: 45px;
-  margin: 0 auto;
-
-  color: var(--tertiary-accent);
-  font-weight: 700;
-} */
 </style>

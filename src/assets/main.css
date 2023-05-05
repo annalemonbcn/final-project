@@ -1,9 +1,5 @@
 @import './base.css';
 
-#app {
-  display: flex;
-  flex-flow: row nowrap;
-}
 /* SIGNIN/SIGNUP/FORGOT/RECOVERY */
 .container.user {
   background-image: url('@/img/bg_login.jpg');
@@ -20,6 +16,8 @@
 
   padding: 3rem;
   padding-top: 0;
+
+  color: white;
 }
 
 .container.user #main-info {

@@ -83,6 +83,10 @@ export default {
       try {
         await this.signIn(userData)
         this._showSuccess('Welcome back :)')
+        // Hide elements
+        document.querySelector('#connect-forgot').style.display = 'none';
+        document.querySelector('.btn.btn-primary').disabled = true;
+        // Redirect to home
         setTimeout(() => {
           this.$router.push({ name: 'home' })
         }, 2000)

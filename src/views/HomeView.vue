@@ -1,7 +1,7 @@
 <template>
   <NavComp />
   <main id="board">
-    <ProjectTitle />
+    <!-- <ProjectTitle /> -->
     <ActionButtons />
 
     <div id="task-info">
@@ -30,14 +30,20 @@ export default {
 
 <style>
 #board {
-  width: 100%;
-  padding: 70px 100px 70px 200px;
+  width: calc(100% - 90px);
+  min-height: 100vh;
+  
+  padding: 80px;
+  box-sizing: border-box;
+  position: relative;
+  left: 90px;
+  background-color: var(--secondary-color);
 }
 
 #task-info {
   display: flex;
   flex-flow: row nowrap;
-  gap: 100px;
+  gap: 70px;
   margin-top: 50px;
 }
 

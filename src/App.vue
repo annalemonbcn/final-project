@@ -8,4 +8,8 @@ export default{
 }
 </script>
 
-<style></style>
+<style>
+#app{
+  min-width: 100%;
+}
+</style>

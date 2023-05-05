@@ -3,12 +3,12 @@
 
 /* Colors */
 :root {
-  --primary-color: #1d3543;
+  --active-text: #1D2939;
+  --primary-text: #667085;
   --primary-accent: #224957;
-  --secondary-color: #9baebc;
+  --secondary-color: #F2F4F7;
   --tertiary-color: #705a68;
   --tertiary-accent: #5a374e;
-  --blue-accent: #3658c7;
   --green-accent: #20df7f;
 }
 
@@ -37,16 +37,21 @@ body {
   position: relative;
 
   background-color: var(--background-color);
-  color: white;
+  color: var(--primary-text);
 }
 
 body a {
   text-decoration: none;
-  color: var(--tertiary-color);
+  color: var(--primary-text);
 }
 
-body a.active {
-  color: var(--tertiary-accent);
+.nav-item a span{
+  color: var(--primary-text);
+  font-size: 18px;
+}
+
+.nav-item.active a, .nav-item.active a span{
+  color: var(--active-text);
 }
 
 /* HEADINGS */
@@ -73,9 +78,6 @@ h4 {
 body p {
   font-size: 20px;
   line-height: 30px;
-}
-body a {
-  text-decoration: none;
 }
 @media screen and (min-width: 768px) {
   h1 {
@@ -118,6 +120,11 @@ body a {
 .btn-primary {
   color: white;
   background-color: var(--green-accent);
+}
+
+/* DISPLAY */
+.hide {
+  display: none;
 }
 
 /* INPUT ERROR */
