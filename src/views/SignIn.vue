@@ -82,7 +82,7 @@ export default {
       const userData = { email: this.email, password: this.password }
       try {
         await this.signIn(userData)
-        this._showSuccess('Valid credentials! Welcome back :)')
+        this._showSuccess('Welcome back :)')
         setTimeout(() => {
           this.$router.push({ name: 'home' })
         }, 2000)
@@ -95,6 +95,9 @@ export default {
 </script>
 
 <style scoped>
+body{
+  overflow-y: hidden !important;
+}
 #connect-forgot {
   text-align: center;
   margin-bottom: 25px;

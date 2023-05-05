@@ -53,7 +53,7 @@ header {
   background-color: #ebeded;
 
   height: 100vh;
-  max-width: 100px;
+  width: 90px;
 
   position: fixed;
   top: 0;
@@ -67,6 +67,11 @@ header nav {
   flex-flow: column nowrap;
   justify-content: space-between;
   align-items: center;
+}
+
+header:hover{
+  background-color: red;
+  width: 320px;
 }
 
 header nav > div {

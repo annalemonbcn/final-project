@@ -2,14 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;300;400;700&family=Roboto+Mono:wght@100;300;400;700&family=Roboto:wght@100;300;400;700&display=swap');
 
 /* Colors */
-:root{
-  --primary-color: #1D3543;
+:root {
+  --primary-color: #1d3543;
   --primary-accent: #224957;
-  --secondary-color: #9BAEBC;
-  --tertiary-color: #705A68;
+  --secondary-color: #9baebc;
+  --tertiary-color: #705a68;
   --tertiary-accent: #5a374e;
-  --blue-accent: #3658C7;
-  --green-accent: #20DF7F;
+  --blue-accent: #3658c7;
+  --green-accent: #20df7f;
 }
 
 /* Global styles */
@@ -20,16 +20,19 @@
   padding: 0;
 }
 
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
-html, body{
-  overflow-x: hidden !important;
-}
-
 body {
-  font-family:  'Lexend Deca', sans-serif;
+  font-family: 'Lexend Deca', sans-serif;
   font-size: 20px;
   position: relative;
 
@@ -37,64 +40,64 @@ body {
   color: white;
 }
 
-body a{
+body a {
   text-decoration: none;
-  color: var(--tertiary-color); 
+  color: var(--tertiary-color);
 }
 
-body a.active{
+body a.active {
   color: var(--tertiary-accent);
 }
 
 /* HEADINGS */
-h1{
+h1 {
   font-size: 44px;
   line-height: 48px;
   font-weight: 400;
 }
-  h2{
+h2 {
   font-size: 32px;
   font-weight: 700;
   line-height: 36px;
 }
-  h3{
+h3 {
   font-size: 28px;
   font-weight: 700;
   line-height: 32px;
 }
-  h4{
+h4 {
   font-size: 24px;
   line-height: 28px;
   font-weight: 700;
 }
-body p{
+body p {
   font-size: 20px;
   line-height: 30px;
 }
-body a{
+body a {
   text-decoration: none;
 }
-@media screen and (min-width: 768px){
-  h1{
+@media screen and (min-width: 768px) {
+  h1 {
     font-size: 64px;
     line-height: 80px;
   }
-    h2{
+  h2 {
     font-size: 50px;
     line-height: 52px;
   }
-    h3{
+  h3 {
     font-size: 40px;
     line-height: 42px;
   }
-    h4{
+  h4 {
     font-size: 24px;
     line-height: 24px;
   }
 }
 
 /* BTN */
-.btn{
+.btn {
   cursor: pointer;
 
   max-width: 300px;
@@ -107,25 +110,24 @@ body a{
   border-radius: 10px;
 }
 
-.btn[disabled]{
+.btn[disabled] {
   cursor: default;
   opacity: 0.2;
 }
 
-.btn-primary{
+.btn-primary {
   color: white;
   background-color: var(--green-accent);
 }
 
-
 /* INPUT ERROR */
 input.error,
-textarea.error{
+textarea.error {
   background-color: rgba(255, 0, 0, 0.1) !important;
   border: 2px solid rgba(255, 0, 0, 0.3) !important;
-  color: #FF0000 !important;
+  color: #ff0000 !important;
 }
-.warn{
+.warn {
   display: none;
   margin-bottom: 20px;
   font-size: 14px;
@@ -133,22 +135,22 @@ textarea.error{
   text-align: center;
   animation: shake 300ms;
 }
-.warn.textError{
+.warn.textError {
   color: #ff0000;
 }
-@keyframes shake{
-  25%{
+@keyframes shake {
+  25% {
     transform: translateX(4px);
   }
-  50%{
+  50% {
     transform: translateX(-4px);
   }
-  75%{
+  75% {
     transform: translateX(4px);
   }
 }
 
 /* TEXT SUCCESS */
-.warn.textSuccess{
+.warn.textSuccess {
   color: var(--green-accent);
 }
