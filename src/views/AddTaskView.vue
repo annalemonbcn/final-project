@@ -1,5 +1,6 @@
 <template>
   <div class="info-right">
+    <fa icon="fa-solid fa-arrow-left" class="arrow-back" />
     <form id="task-add" action="" @submit.prevent>
       <div>
         <input

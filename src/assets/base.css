@@ -8,8 +8,6 @@
   --primary-accent: #224957;
   --secondary-color: #F2F4F7;
   --secondary-text: #dcdcdc;
-  --tertiary-color: #705a68;
-  --tertiary-accent: #5a374e;
   --green-accent: #20df7f;
 }
 
@@ -92,7 +90,7 @@ h4 {
   font-weight: 700;
 }
 body p {
-  font-size: 16px;
+  font-size: 20px;
   line-height: 20px;
 }
 @media screen and (min-width: 768px) {
@@ -137,6 +135,10 @@ body p {
 .btn-primary {
   color: white;
   background-color: var(--green-accent);
+}
+
+.arrow-back{
+  color: var(--active-text);
 }
 
 /* DISPLAY */

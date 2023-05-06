@@ -72,9 +72,8 @@ export default {
 .info-right {
   background-color: #ebeded;
   box-sizing: border-box;
-  padding: 30px 50px;
+  padding: 30px 0;
   min-width: 40%;
-  border-radius: 25px;
 }
 
 #task-add {
@@ -87,7 +86,6 @@ textarea {
   background-color: transparent;
   outline: none;
   border: 0;
-  border-bottom: 2px solid var(--tertiary-color);
 
   font-size: 16px;
   font-family: Roboto;
@@ -97,11 +95,31 @@ input.task-view-name {
   width: 100%;
 }
 textarea {
+  width: 100%;
   resize: none;
-  height: 60px;
+  min-height: 50px;
+  margin-top: 10px;
+  font-size: 18px;
 }
 select#task-add-status,
 select#task-add-favourite {
   margin-left: 30px;
+}
+
+@media (max-width:1023px){
+  .info-right{
+    min-height: 100vh;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    left: 0;
+    z-index: 1000;
+  }
+}
+
+.modal-back{
+  position: relative;
+  left: 30px;
 }
 </style>
