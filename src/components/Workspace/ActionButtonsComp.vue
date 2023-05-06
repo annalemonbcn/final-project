@@ -29,6 +29,6 @@ export default {
     margin-top: 30px;
   }
   button.btn{
-    font-size: 18px;
+    font-size: 20px;
   }
 </style>

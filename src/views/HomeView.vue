@@ -64,13 +64,16 @@ export default {
   #task-info{
     flex-flow: row nowrap;
   }
+  #task-info > div{
+    padding: 30px 50px;
+  }
 }
 
 .info-right {
   background-color: #ebeded;
   box-sizing: border-box;
   padding: 30px 50px;
-  min-width: 50%;
+  min-width: 40%;
   border-radius: 25px;
 }
 

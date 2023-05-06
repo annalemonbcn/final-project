@@ -43,7 +43,7 @@ body {
   font-size: 20px;
   position: relative;
 
-  background-color: var(--background-color);
+  background-color: var(--secondary-color);
   color: var(--secondary-text);
 }
 @media(min-width: 768px){
@@ -120,8 +120,9 @@ body p {
 
   max-width: 300px;
   height: 45px;
-  padding: 15px 35px;
+  padding: 10px 35px;
   text-align: center;
+  font-size: 18px;
 
   border: 0;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);

@@ -65,7 +65,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  min-width: 45%;
+  min-width: 40%;
 }
 .task-container {
   display: flex;
