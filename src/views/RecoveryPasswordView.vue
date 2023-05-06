@@ -24,7 +24,7 @@
           />
         </div>
         <p class="warn"></p>
-        <button class="btn btn-primary" type="button" @click="_handleUpdatePassword">
+        <button class="btn btn-primary" type="button" @click="_handleUpdatePassword" @keyup.enter="_handleUpdatePassword">
           Reset password
         </button>
       </form>

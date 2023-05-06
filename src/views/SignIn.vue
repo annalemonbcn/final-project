@@ -4,7 +4,7 @@
     <div id="main-info">
       <h1 class="title">Sign in</h1>
       <p class="subtitle">Sign in and start managing your tasks!</p>
-      <form action="" @submit.prevent class="connect">
+      <form action="" @submit.prevent @keyup.enter="_handleSignIn" class="connect">
         <div class="container-input">
           <input type="text" id="input-email" name="email" placeholder="Email" v-model="email" />
         </div>

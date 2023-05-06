@@ -1,5 +1,9 @@
 <template>
-  <header>
+  <div id="nav-mobile" class="mobile" @click="toggleHeader">
+    <fa icon="fa-solid fa-bars" />
+  </div>
+
+  <header v-show="showHeader">
     <div id="nav-user">
       <fa icon="fa-regular fa-user" /> <span class="hide">{{ user.email }}</span>
     </div>
@@ -37,9 +41,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#">
-              <fa icon="fa-solid fa-gear" /> <span class="hide">Settings</span>
-            </a>
+            <a href="#"> <fa icon="fa-solid fa-gear" /> <span class="hide">Settings</span> </a>
           </li>
         </ul>
       </div>
@@ -53,6 +55,11 @@ import UserStore from '@/stores/user'
 
 export default {
   name: 'HeaderComp',
+  data() {
+    return {
+      showHeader: false
+    }
+  },
   computed: {
     ...mapState(UserStore, ['user'])
   },
@@ -66,55 +73,80 @@ export default {
       } catch (e) {
         console.error(e)
       }
+    },
+    toggleHeader() {
+      this.showHeader = !this.showHeader;
+    }
+  },
+  created(){
+    if (window.innerWidth > 1023){
+      this.showHeader = true;
     }
   }
+  
 }
 </script>
 
 <style scoped>
 /** HOVER **/
-header:hover {
-  width: 270px;
+@media(min-width: 1024px){
+  header:hover {
+    width: 270px;
+  }
+  header:hover .hide {
+    display: block;
+  }
+  header:hover .logo.smallLogo {
+    display: none;
+  }
 }
-header:hover .hide {
-  display: block;
-}
-header:hover .logo.smallLogo{
-  display: none;
-}
+
 /*************/
 
 header {
   box-sizing: border-box;
-  padding: 25px;
+  padding: 20px;
 
   background-color: white;
 
   height: 100vh;
-  width: 90px;
+  width: 220px;
   position: fixed;
   top: 0;
   left: 0;
 
   transition: all 0.3s ease;
   z-index: 99999;
+
+  font-family: 'Lexend Deca', sans-serif;
+}
+@media (min-width: 768px) {
+  header {
+    padding: 25px;
+  }
+}
+@media(min-width: 1024px){
+  header {
+    width: 90px;
+  }
 }
 
-header #nav-user{
+header #nav-user {
   margin-bottom: 30px;
   height: 55px;
   text-align: center;
+  color: var(--primary-text);
 }
 
-header #nav-user span{
+header #nav-user span {
   font-size: 16px;
 }
 
-header ul{
+header ul {
   list-style-type: none;
 }
 
-header li{
+header li {
   box-sizing: border-box;
   height: 40px;
   padding: 15px 10px;
@@ -124,7 +156,7 @@ header li{
   border-radius: 8px;
 }
 
-header .nav-item a{
+header .nav-item a {
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
@@ -132,12 +164,28 @@ header .nav-item a{
   align-items: center;
   gap: 8px;
 }
-header .nav-item.active{
+header .nav-item.active {
   background-color: var(--secondary-color);
 }
 
-header #nav-settings{
+header #nav-settings {
   position: absolute;
   bottom: 20px;
+}
+
+/* Responsive */
+#nav-mobile {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 80;
+  padding: 20px;
+  padding-left: 30px;
+}
+
+@media (min-width: 1024px) {
+  #nav-mobile,
+  .mobile {
+    display: none;
+  }
 }
 </style>

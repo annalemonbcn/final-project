@@ -26,7 +26,7 @@
           />
         </div>
         <p class="warn"></p>
-        <button class="btn btn-primary" type="button" @click="_handleSignUp">Sign Up</button>
+        <button class="btn btn-primary" type="button" @click="_handleSignUp" @keyup.enter="_handleSignUp">Sign Up</button>
       </form>
       <div class="connect-change">
         <router-link to="/auth/sign-in">Already a user? Click here to <u>Login</u></router-link>

@@ -1,6 +1,6 @@
 <template>
-  <NavComp />
-  <main id="board">
+  <NavComp ref="navComp" />
+  <main id="board" @click="hideHeader">
     <!-- <ProjectTitle /> -->
     <ActionButtons />
 
@@ -24,27 +24,46 @@ export default {
     ProjectTitle,
     ActionButtons,
     TasksContainer
+  },
+  methods: {
+    hideHeader() {
+      if (window.innerWidth < 1024){
+        this.$refs.navComp.showHeader = false;
+      }
+    }
   }
 }
 </script>
 
 <style>
 #board {
-  width: calc(100% - 90px);
+  width: 100%;
   min-height: 100vh;
-  
-  padding: 80px;
+  padding: 30px;
   box-sizing: border-box;
   position: relative;
-  left: 90px;
-  background-color: var(--secondary-color);
+  
+  background-color: var(--active-text);
 }
+@media (min-width: 1024px) {
+  #board{
+    width: calc(100% - 90px);
+    padding: 80px;
+    left: 90px;
 
+    background-color: var(--secondary-color);
+  }
+}
 #task-info {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   gap: 70px;
   margin-top: 50px;
+}
+@media(min-width: 1024px) {
+  #task-info{
+    flex-flow: row nowrap;
+  }
 }
 
 .info-right {

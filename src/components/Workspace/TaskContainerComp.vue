@@ -2,23 +2,21 @@
   <div v-if="loading">Loading tasks...</div>
   <div class="task-container-grouper">
     <div class="task-container" v-if="!loading && pendingTasks">
-      <p>Pending tasks</p>
+      <p class="task-container-title"><fa icon="fa-regular fa-clipboard" /> To-Do</p>
       <TaskComp 
         v-for="(task, index) in pendingTasks"
         :key="index"
         :title="task.title"
-        :limitDate="task.limit_date"
         :url="task.url"
         :status="task.is_complete"
       />
     </div>
     <div class="task-container" v-if="!loading && completedTasks">
-      <p>Done tasks</p>
+      <p class="task-container-title"><fa icon="fa-solid fa-clipboard-check" /> Done</p>
       <TaskComp 
         v-for="(task, index) in completedTasks"
         :key="index"
         :title="task.title"
-        :limitDate="task.limit_date"
         :url="task.url"
         :status="task.is_complete"
       />
@@ -69,5 +67,19 @@ export default {
   gap: 40px;
   min-width: 45%;
 }
+.task-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
+.task-container-title{
+  font-size: 20px;
+  font-weight: 700;
+}
+@media(min-width: 768px){
+  .task-container-title{
+    font-size: 22px;
+  }
+}
 </style>

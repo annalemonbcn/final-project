@@ -1,12 +1,13 @@
 /* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;300;400;700&family=Roboto+Mono:wght@100;300;400;700&family=Roboto:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;300;400;700&family=Roboto:wght@100;300;400;700&display=swap');
 
 /* Colors */
 :root {
-  --active-text: #1D2939;
+  --active-text: #0a3545;
   --primary-text: #667085;
   --primary-accent: #224957;
   --secondary-color: #F2F4F7;
+  --secondary-text: #dcdcdc;
   --tertiary-color: #705a68;
   --tertiary-accent: #5a374e;
   --green-accent: #20df7f;
@@ -24,7 +25,13 @@ html,
 body {
   margin: 0;
   height: 100%;
-  overflow: hidden !important;
+  overflow-x: hidden !important;
+}
+@media (min-width: 1024px){
+  html,
+  body {
+    overflow-y: auto !important;
+  }
 }
 
 html {
@@ -32,14 +39,18 @@ html {
 }
 
 body {
-  font-family: 'Lexend Deca', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 20px;
   position: relative;
 
   background-color: var(--background-color);
-  color: var(--primary-text);
+  color: var(--secondary-text);
 }
-
+@media(min-width: 768px){
+  body{
+    color: var(--primary-text);
+  }
+}
 body a {
   text-decoration: none;
   color: var(--primary-text);
@@ -47,7 +58,12 @@ body a {
 
 .nav-item a span{
   color: var(--primary-text);
-  font-size: 18px;
+  font-size: 16px;
+}
+@media(min-width: 768px){
+  .nav-item a span{
+    font-size: 18px;
+  }
 }
 
 .nav-item.active a, .nav-item.active a span{
@@ -76,8 +92,8 @@ h4 {
   font-weight: 700;
 }
 body p {
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 16px;
+  line-height: 20px;
 }
 @media screen and (min-width: 768px) {
   h1 {
@@ -123,8 +139,10 @@ body p {
 }
 
 /* DISPLAY */
-.hide {
-  display: none;
+@media(min-width: 1024px){
+  .hide {
+    display: none;
+  }
 }
 
 /* INPUT ERROR */
