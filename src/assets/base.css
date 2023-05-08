@@ -6,7 +6,7 @@
   --active-text: #0a3545;
   --primary-text: #667085;
   --primary-accent: #224957;
-  --secondary-color: #F2F4F7;
+  --secondary-color: #f2f4f7;
   --secondary-text: white;
   --green-accent: #20df7f;
   --green-light: #e1f1e6;
@@ -26,7 +26,7 @@ body {
   height: 100%;
   overflow-x: hidden !important;
 }
-@media (min-width: 1024px){
+@media (min-width: 1024px) {
   html,
   body {
     overflow-y: auto !important;
@@ -76,8 +76,8 @@ body p {
   font-size: 20px;
   line-height: 24px;
 }
-@media(min-width: 1024px){
-  body p{
+@media (min-width: 1024px) {
+  body p {
     font-size: 16px;
     line-height: 20px;
   }
@@ -116,8 +116,8 @@ body p {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
-@media (min-width: 1024px){
-  .btn{
+@media (min-width: 1024px) {
+  .btn {
     font-size: 16px;
     padding: 10px 25px;
   }
@@ -133,13 +133,13 @@ body p {
   background-color: var(--green-accent);
 }
 
-.arrow-back{
+.arrow-back {
   color: var(--green-accent);
   height: 25px;
 }
 
 /* DISPLAY */
-@media(min-width: 1024px){
+@media (min-width: 1024px) {
   .hide {
     display: none;
   }
@@ -154,6 +154,12 @@ textarea {
 
   font-size: 20px;
   font-family: Roboto;
+}
+@media (min-width: 1024px) {
+  input,
+  textarea {
+    font-size: 16px;
+  }
 }
 
 textarea {
@@ -200,4 +206,39 @@ textarea.error {
 /* TEXT SUCCESS */
 .warn.textSuccess {
   color: var(--green-accent);
+}
+
+/* Tooltip */
+.tooltip {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+
+  padding: 10px;
+  background-color: var(--active-text);
+  color: white !important;
+  min-width: 150px;
+  max-width: 180px;
+  border-radius: 5px;
+  text-align: center;
+  filter: drop-shadow(0 3px 5px #ccc);
+
+  line-height: 1.5;
+  font-size: 12px;
+
+  position: absolute;
+}
+.tooltip:after {
+  content: '';
+  position: absolute;
+
+  width: 10px;
+  height: 10px;
+  background-color: var(--active-text);
+  transform: rotate(45deg);
+}
+
+@media (max-width: 1023px) {
+  .tooltip {
+    display: none;
+  }
 }
