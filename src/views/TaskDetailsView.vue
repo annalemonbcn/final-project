@@ -13,8 +13,11 @@
           @input="formHasChanged = true"
         />
 
-        <div class="specs-container">
-          <div class="task-status specs" @click="_alternateDone(taskDetail.id, taskDetail.is_complete)">
+        <div class="specs-container" :class="colorClass">
+          <div
+            class="task-status specs"
+            @click="_alternateDone(taskDetail.id, taskDetail.is_complete)"
+          >
             <p>Status</p>
             <p>
               {{ taskDetail.is_complete === true ? 'Done' : 'Pending' }}
@@ -35,11 +38,11 @@
             @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)"
           >
             <p>Priority</p>
-            <p>{{ taskDetail.is_flagged ? 'Non-priority' : 'Urgent' }}</p>
+            <p>{{ taskDetail.is_flagged ? 'Urgent' : 'Non-priority' }}</p>
           </div>
           <p class="tooltip tt-priority">Click to change the priority</p>
         </div>
-        <div>
+        <div class="task-description">
           <p>Description:</p>
           <textarea
             name="description"
@@ -76,6 +79,7 @@
 
 <script>
 import TasksStore from '@/stores/tasks'
+import { faGreaterThanEqual } from '@fortawesome/free-solid-svg-icons'
 import { mapActions, mapState } from 'pinia'
 
 export default {
@@ -91,10 +95,26 @@ export default {
 
     taskDetail() {
       return this.getTaskById(this.taskUrl)
+    },
+    colorClass() {
+      if (this.taskDetail.is_complete) {
+        return 'bg_green'
+      } else if (!this.taskDetail.is_complete && !this.taskDetail.is_flagged) {
+        return 'bg_grey'
+      } else if (!this.taskDetail.is_complete && this.taskDetail.is_flagged) {
+        return 'bg_red'
+      }
     }
   },
   methods: {
-    ...mapActions(TasksStore, ['_alternateDone', '_alternateFlag', '_updateTask', '_deleteTask'])
+    ...mapActions(TasksStore, ['_alternateDone', '_alternateFlag', '_updateTask', '_deleteTask']),
+
+    // _handleDeleteClass() {
+    //   _deleteTask(taskDetail.id)
+    //   setTimeout(() => {
+    //     this.$router.push({ name: 'home' })
+    //   }, 2000)
+    // }
   },
   created() {
     this.taskUrl = this.$route.params.taskUrl
@@ -117,42 +137,42 @@ export default {
   flex-direction: column;
   gap: 20px;
 }
-@media (min-width: 1024px){
+@media (min-width: 1024px) {
   #task-details form .form-actions {
     flex-direction: row;
   }
 }
 
-#task-details form .specs-container{
+#task-details form .specs-container {
   position: relative;
 }
 
-#task-details form .task-status, #task-details form .task-flag {
+#task-details form .task-status,
+#task-details form .task-flag {
   position: relative;
   cursor: pointer;
 }
 
-
-.tooltip.tt-priority{
+.tooltip.tt-priority {
   right: 10px;
   bottom: -35px;
 }
 .task-flag:hover + .tooltip.tt-priority {
   opacity: 1;
 }
-.tooltip.tt-priority:after{
+.tooltip.tt-priority:after {
   top: -5px;
   right: 20px;
 }
 
-.tooltip.tt-status{
+.tooltip.tt-status {
   top: -35px;
   right: 10px;
 }
 .task-status:hover + .tooltip.tt-status {
   opacity: 1;
 }
-.tooltip.tt-status:after{
+.tooltip.tt-status:after {
   bottom: -5px;
   right: 20px;
 }

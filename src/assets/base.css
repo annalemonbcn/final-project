@@ -10,6 +10,8 @@
   --secondary-text: white;
   --green-accent: #20df7f;
   --green-light: #e1f1e6;
+  --red-light: rgba(255, 0, 0, 0.1) !important;
+  --grey-light: rgba(10, 53, 69, 0.1) !important;
 }
 
 /* Global styles */
@@ -137,6 +139,17 @@ body p {
   height: 25px;
 }
 
+/* BACKGROUNDS */
+.bg_green{
+  background-color: var(--green-light) !important;
+}
+.bg_red{
+  background-color: var(--red-light) !important;
+}
+.bg_grey{
+  background-color: var(--grey-light) !important;
+}
+
 /* DISPLAY */
 @media (min-width: 1024px) {
   .hide {
@@ -175,7 +188,7 @@ textarea {
 
 input.error,
 textarea.error {
-  background-color: rgba(255, 0, 0, 0.1) !important;
+  background-color: var(--red-light);
   border: 2px solid rgba(255, 0, 0, 0.3) !important;
   color: #ff0000 !important;
 }

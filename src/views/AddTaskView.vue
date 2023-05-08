@@ -5,13 +5,16 @@
     </router-link>
     <div class="task-row">
       <form action="" @submit.prevent>
-        <input
-          class="task-view-title"
-          type="text"
-          name="title"
-          placeholder="Task name"
-          v-model="task.title"
-        />
+        <div>
+          <input
+            class="task-view-title"
+            type="text"
+            name="title"
+            placeholder="Task name"
+            v-model="task.title"
+          />
+          <p class="warn textError">Title can't be empty!</p>
+        </div>
         <div class="specs-container">
           <div class="task-status specs">
             <p>Status</p>
@@ -32,7 +35,7 @@
             </select>
           </div>
         </div>
-        <div>
+        <div class="task-description">
           <p>Description:</p>
           <textarea
             name="description"
@@ -69,11 +72,19 @@ export default {
     }
   },
   methods: {
-    ...mapActions(TasksStore, ['_addNewTask']),
+    ...mapActions(TasksStore, ['_generateUrl', '_addNewTask']),
 
     _createNewTask() {
+      // Check if title is empty
+      if(this.task.title.length === 0){
+        document.querySelector('.warn.textError').style.display = 'block'; // --> show toast?
+        document.querySelector('.task-view-title').focus();
+        document.querySelector('.task-view-title').style.cssText = 'background-color: rgba(255, 0, 0, 0.1) !important; border-bottom: 2px solid rgba(255, 0, 0, 0.3) !important;';
+        return;
+      }
+      
       // Set url && user_id
-      this._setUrl()
+      this.task.url = this._generateUrl(this.task.title)
       this._setUser()
 
       // Add task
@@ -81,13 +92,6 @@ export default {
 
       // Reset fields
       this._resetFields()
-    },
-    _setUrl() {
-      this.task.url = this.task.title.toLowerCase()
-
-      if (this.task.url.includes(' ')) {
-        this.task.url = this.task.url.split(' ').join('_')
-      }
     },
     _setUser() {
       this.task.user_id = this.user.id
@@ -113,27 +117,35 @@ export default {
 </script>
 
 <style scoped>
-#task-add select{
+#task-add form{
+  position: relative;
+}
+#task-add select {
   border: 0;
   background-color: transparent;
   font-size: 20px;
   line-height: 24px;
 }
-@media(min-width: 1024px){
-  #task-add select{
+@media (min-width: 1024px) {
+  #task-add select {
     font-size: 16px;
     line-height: 20px;
   }
 }
-.add-task-button{
+.add-task-button {
   text-align: center;
 }
-.add-task-button button{
+.add-task-button button {
   width: 100%;
 }
-@media(min-width: 768px){
-  .add-task-button button{
+@media (min-width: 768px) {
+  .add-task-button button {
     width: auto;
   }
+}
+.warn.textError{
+  text-align: left;
+  position: absolute;
+  top: 42px;
 }
 </style>

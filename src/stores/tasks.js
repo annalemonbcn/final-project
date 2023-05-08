@@ -87,13 +87,15 @@ export default defineStore('tasks', {
       this.tasks.push(data[0]);
     },
     async _updateTask(task) {
+      let newUrl = this._generateUrl(task.url)
+      console.log(newUrl);
       const { data, error } = await supabase
         .from('tasks')
         .update({
           title: task.title,
           user_id: task.user_id,
           is_complete: task.is_complete,
-          url: task.url,
+          url: newUrl,
           limit_date: task.limit_date,
           description: task.description,
           is_flagged: task.is_flagged,
@@ -128,5 +130,17 @@ export default defineStore('tasks', {
       this.tasks = this.tasks.filter(task => task.id !== taskToDelete.id);
       console.log(this.tasks);
     },
+    _generateUrl(title){
+      console.log(`title --> ${title}`)
+      let url = title.toLowerCase();
+
+      console.log(`url --> ${url}`)
+
+      if (url.includes(' ')) {
+        url = url.split(' ').join('_')
+      }
+
+      return url;
+    }
   }
 })

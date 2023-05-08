@@ -92,7 +92,7 @@ export default {
     /* background-color: var(--secondary-text); */
     padding: 30px 0;
     width: auto;
-    min-width: 42%;
+    width: 45%;
     min-height: auto;
     position: static;
     transform: none;
@@ -119,7 +119,7 @@ export default {
 
 .task-row form .specs-container {
   padding: 0 15px;
-  background-color: var(--green-light);
+  background-color: var(--grey-light);
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -133,7 +133,7 @@ export default {
   height: 60px;
   border-bottom: 1px solid rgba(10, 53, 69, 0.2);
 }
-.task-row form .specs:last-child {
+.task-row form .specs.task-flag {
   border: 0;
 }
 @media (max-width: 1023px) {
