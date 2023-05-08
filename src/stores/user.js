@@ -67,7 +67,7 @@ export default defineStore('userStore', {
     async _resetPassword(email) {
       console.log(email)
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'http://localhost:5173/recovery-password/'
+        redirectTo: 'https://comforting-kangaroo-be4400.netlify.app/recovery-password/'
       })
 
       if (error) {
