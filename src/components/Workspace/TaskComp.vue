@@ -3,7 +3,7 @@
     <p class="task-title">{{ title }}</p>
     <div>
       <fa class="task-status" icon="fa-circle-xmark" v-if="status === false"/>
-      <fa class="task-status" icon="fa-solid fa-circle-check" v-else />
+      <fa class="task-status task-done" icon="fa-solid fa-circle-check" v-else />
     </div>
   </router-link> 
 </template>
@@ -60,5 +60,8 @@ export default {
 }
 .task .svg-inline--fa{
   height: 1.4rem;
+}
+.task .task-status.task-done{
+  color: var(--green-accent);
 }
 </style>

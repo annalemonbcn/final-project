@@ -65,7 +65,11 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  min-width: 40%;
+}
+@media(min-width: 1024px){
+  .task-container-grouper{
+    min-width: 30%;
+  }
 }
 .task-container {
   display: flex;

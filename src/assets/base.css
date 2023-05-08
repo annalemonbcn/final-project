@@ -7,8 +7,9 @@
   --primary-text: #667085;
   --primary-accent: #224957;
   --secondary-color: #F2F4F7;
-  --secondary-text: #dcdcdc;
+  --secondary-text: white;
   --green-accent: #20df7f;
+  --green-light: #e1f1e6;
 }
 
 /* Global styles */
@@ -44,28 +45,10 @@ body {
   background-color: var(--secondary-color);
   color: var(--secondary-text);
 }
-@media(min-width: 768px){
-  body{
-    color: var(--primary-text);
-  }
-}
+
 body a {
   text-decoration: none;
   color: var(--primary-text);
-}
-
-.nav-item a span{
-  color: var(--primary-text);
-  font-size: 16px;
-}
-@media(min-width: 768px){
-  .nav-item a span{
-    font-size: 18px;
-  }
-}
-
-.nav-item.active a, .nav-item.active a span{
-  color: var(--active-text);
 }
 
 /* HEADINGS */
@@ -91,7 +74,7 @@ h4 {
 }
 body p {
   font-size: 20px;
-  line-height: 20px;
+  line-height: 24px;
 }
 @media screen and (min-width: 768px) {
   h1 {
@@ -116,7 +99,8 @@ body p {
 .btn {
   cursor: pointer;
 
-  max-width: 300px;
+  box-sizing: border-box;
+  /* width: 300px; */
   height: 45px;
   padding: 10px 35px;
   text-align: center;
@@ -138,7 +122,8 @@ body p {
 }
 
 .arrow-back{
-  color: var(--active-text);
+  color: var(--green-accent);
+  height: 25px;
 }
 
 /* DISPLAY */
@@ -148,7 +133,29 @@ body p {
   }
 }
 
-/* INPUT ERROR */
+/* INPUTS */
+input,
+textarea {
+  background-color: transparent;
+  outline: none;
+  border: 0;
+
+  font-size: 20px;
+  font-family: Roboto;
+}
+
+textarea {
+  width: 100%;
+  resize: none;
+  min-height: 50px;
+  margin-top: 10px;
+  font-size: 18px;
+  background-color: var(--secondary-text);
+  border-radius: 15px;
+  padding: 10px;
+  max-width: 94%;
+}
+
 input.error,
 textarea.error {
   background-color: rgba(255, 0, 0, 0.1) !important;

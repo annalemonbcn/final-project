@@ -5,8 +5,10 @@
 
   <header v-show="showHeader">
     <div id="nav-user">
-      <fa icon="fa-regular fa-user" /> <span class="hide">{{ user.email }}</span>
-    </div>
+      <router-link to="/">
+        <fa icon="fa-regular fa-user" /> <span class="hide">{{ user.email }}</span>
+      </router-link>
+      </div>
     <nav id="nav-main">
       <div>
         <ul>
@@ -150,6 +152,8 @@ header li {
   box-sizing: border-box;
   height: 40px;
   padding: 15px 10px;
+  margin-top: 10px;
+
   display: flex;
   align-items: center;
 
@@ -178,14 +182,27 @@ header #nav-settings {
   box-sizing: border-box;
   position: absolute;
   z-index: 80;
-  padding: 20px;
-  padding-left: 30px;
+  padding: 30px;
+  height: 25px;
 }
-
 @media (min-width: 1024px) {
   #nav-mobile,
   .mobile {
     display: none;
   }
+}
+
+.nav-item a span{
+  color: var(--primary-text);
+  font-size: 16px;
+}
+@media(min-width: 768px){
+  .nav-item a span{
+    font-size: 18px;
+  }
+}
+
+.nav-item.active a, .nav-item.active a span{
+  color: var(--green-accent);
 }
 </style>

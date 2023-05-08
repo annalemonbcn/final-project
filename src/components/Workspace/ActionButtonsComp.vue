@@ -26,7 +26,13 @@ export default {
 
 <style scoped>
   #actionButtons{
-    margin-top: 30px;
+    margin-top: 70px;
+  }
+  @media(min-width: 1024px){
+    #actionButtons{
+    margin-top: 0;
+  }
+
   }
   button.btn{
     font-size: 20px;

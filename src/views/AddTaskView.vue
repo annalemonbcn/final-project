@@ -1,39 +1,50 @@
 <template>
-  <div class="info-right">
-    <fa icon="fa-solid fa-arrow-left" class="arrow-back" />
-    <form id="task-add" action="" @submit.prevent>
-      <div>
+  <div class="info-right" id="task-add">
+    <router-link to="/" class="modal-back">
+      <fa icon="fa-solid fa-arrow-left" class="arrow-back" />
+    </router-link>
+    <div class="task-row">
+      <form action="" @submit.prevent>
         <input
-          class="task-view-name"
+          class="task-view-title"
           type="text"
           name="title"
           placeholder="Task name"
           v-model="task.title"
         />
-      </div>
-      <textarea
-        name="description"
-        class="task-view-description"
-        placeholder="Write something"
-        v-model="task.description"
-      ></textarea>
-      <div>
-        <input name="date" type="date" v-model="task.limit_date" />
-        <select id="task-add-status" name="status" v-model="task.is_complete">
-          <option disabled value="Status">Is complete</option>
-          <option value="false">False</option>
-          <option value="true">True</option>
-        </select>
-      </div>
-      <div>
-        <select name="flag" v-model="task.is_flagged">
-          <option disabled value="flag">Impediment</option>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
-      </div>
-      <button @click="_createNewTask">Add task</button>
-    </form>
+        <div class="specs-container">
+          <div class="task-status specs">
+            <p>Status</p>
+            <select id="task-add-status" name="status" v-model="task.is_complete">
+              <option value="false">Pending</option>
+              <option value="true">Done</option>
+            </select>
+          </div>
+          <div class="specs spec-date">
+            <p>Date</p>
+            <input name="date" type="date" v-model="task.limit_date" />
+          </div>
+          <div class="task-flag specs">
+            <p>Priority</p>
+            <select name="flag" v-model="task.is_flagged">
+              <option value="false">Non-priority</option>
+              <option value="true">Urgent</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <p>Description:</p>
+          <textarea
+            name="description"
+            class="task-view-description"
+            placeholder="Write something"
+            v-model="task.description"
+          ></textarea>
+        </div>
+        
+        <button class="btn btn-primary" @click="_createNewTask">Add task</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -47,38 +58,38 @@ export default {
   data() {
     return {
       task: {
-        title: 'Testttt',
+        title: '',
         is_complete: false,
         url: '',
         limit_date: null,
-        description: 'agagadghn',
-        is_flagged: false,
+        description: '',
+        is_flagged: false
       }
     }
   },
   methods: {
     ...mapActions(TasksStore, ['_addNewTask']),
-    
+
     _createNewTask() {
       // Set url && user_id
-      this._setUrl();
-      this._setUser();
+      this._setUrl()
+      this._setUser()
 
       // Add task
-      this._addNewTask(this.task);
+      this._addNewTask(this.task)
 
       // Reset fields
-      this._resetFields();
+      this._resetFields()
     },
     _setUrl() {
-      this.task.url = this.task.title.toLowerCase();
+      this.task.url = this.task.title.toLowerCase()
 
       if (this.task.url.includes(' ')) {
-        this.task.url = this.task.url.split(' ').join('_');
+        this.task.url = this.task.url.split(' ').join('_')
       }
     },
-    _setUser(){
-      this.task.user_id = this.user.id;
+    _setUser() {
+      this.task.user_id = this.user.id
     },
     _resetFields() {
       this.task = {
@@ -96,10 +107,15 @@ export default {
   computed: {
     ...mapState(TasksStore, ['tasks']),
     ...mapState(UserStore, ['user'])
-  },
+  }
 }
 </script>
 
 <style scoped>
-
+#task-add select{
+  border: 0;
+  background-color: transparent;
+  font-size: 20px;
+  line-height: 24px;
+}
 </style>
