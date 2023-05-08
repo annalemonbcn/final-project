@@ -1,3 +1,18 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;300;400;700&family=Roboto+Mono:wght@100;300;400;700&family=Roboto:wght@100;300;400;700&display=swap');
+
+/* Colors */
+:root {
+  --primary-color: #1d3543;
+  --primary-accent: #224957;
+  --secondary-color: #9baebc;
+  --tertiary-color: #705a68;
+  --tertiary-accent: #5a374e;
+  --blue-accent: #3658c7;
+  --green-accent: #20df7f;
+}
+
+/* Global styles */
 *,
 *::before,
 *::after {
@@ -5,7 +20,137 @@
   padding: 0;
 }
 
+html,
 body {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  height: 100%;
+  overflow: hidden !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: 20px;
+  position: relative;
+
+  background-color: var(--background-color);
+  color: white;
+}
+
+body a {
+  text-decoration: none;
+  color: var(--tertiary-color);
+}
+
+body a.active {
+  color: var(--tertiary-accent);
+}
+
+/* HEADINGS */
+h1 {
+  font-size: 44px;
+  line-height: 48px;
+  font-weight: 400;
+}
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 36px;
+}
+h3 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 32px;
+}
+h4 {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+}
+body p {
+  font-size: 20px;
+  line-height: 30px;
+}
+body a {
+  text-decoration: none;
+}
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 64px;
+    line-height: 80px;
+  }
+  h2 {
+    font-size: 50px;
+    line-height: 52px;
+  }
+  h3 {
+    font-size: 40px;
+    line-height: 42px;
+  }
+  h4 {
+    font-size: 24px;
+    line-height: 24px;
+  }
+}
+
+/* BTN */
+.btn {
+  cursor: pointer;
+
+  max-width: 300px;
+  height: 45px;
+  padding: 15px 35px;
+  text-align: center;
+
+  border: 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.btn[disabled] {
+  cursor: default;
+  opacity: 0.2;
+}
+
+.btn-primary {
+  color: white;
+  background-color: var(--green-accent);
+}
+
+/* INPUT ERROR */
+input.error,
+textarea.error {
+  background-color: rgba(255, 0, 0, 0.1) !important;
+  border: 2px solid rgba(255, 0, 0, 0.3) !important;
+  color: #ff0000 !important;
+}
+.warn {
+  display: none;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  animation: shake 300ms;
+}
+.warn.textError {
+  color: #ff0000;
+}
+@keyframes shake {
+  25% {
+    transform: translateX(4px);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+/* TEXT SUCCESS */
+.warn.textSuccess {
+  color: var(--green-accent);
 }

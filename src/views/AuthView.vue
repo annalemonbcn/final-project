@@ -3,9 +3,11 @@
 </template>
 
 <script>
-export default{
-  name: 'App',
+export default {
+  name: 'AuthView'
 }
 </script>
 
-<style></style>
+<style>
+
+</style>
