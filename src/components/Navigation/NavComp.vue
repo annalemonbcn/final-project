@@ -19,7 +19,7 @@
           </li>
           <li class="nav-item">
             <a href="#">
-              <fa icon="fa-solid fa-font-awesome" /> <span class="hide">Flagged tasks</span>
+              <fa icon="fa-solid fa-font-awesome" /> <span class="hide">Urgent tasks</span>
             </a>
           </li>
           <li class="nav-item">
@@ -184,6 +184,7 @@ header #nav-settings {
   z-index: 80;
   padding: 30px;
   height: 25px;
+  color: var(--green-accent);
 }
 @media (min-width: 1024px) {
   #nav-mobile,

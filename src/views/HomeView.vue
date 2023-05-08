@@ -48,7 +48,7 @@ export default {
 @media (min-width: 1024px) {
   #board {
     width: calc(100% - 90px);
-    padding: 80px;
+    padding: 40px;
     left: 90px;
   }
 }
@@ -92,7 +92,7 @@ export default {
     /* background-color: var(--secondary-text); */
     padding: 30px 0;
     width: auto;
-    min-width: 50%;
+    min-width: 42%;
     min-height: auto;
     position: static;
     transform: none;
