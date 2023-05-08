@@ -3,7 +3,7 @@
     <div id="main-info">
       <h1 class="title">Sign up</h1>
       <p class="subtitle">Sign up and start managing your tasks!</p>
-      <form action="" @submit.prevent class="connect">
+      <form action="" @submit.prevent @keyup.enter="_handleSignUp" class="connect">
         <div class="container-input">
           <input type="text" id="input-email" name="email" placeholder="Email" v-model="email" />
         </div>
@@ -56,6 +56,7 @@ export default {
       '_validateEmail',
       '_validatePassword',
       '_showError',
+      '_showSuccess',
       '_removeError',
       'signUp'
     ]),
@@ -91,7 +92,11 @@ export default {
       const userData = { email: this.email, password: this.password }
       try {
         await this.signUp(userData)
-        this.$router.push({ name: 'home' })
+        // Show message ok
+        document.querySelector('.container-input').style.display = "none";
+        document.querySelector('.btn.btn-primary').disabled = true;
+        this._showSuccess('Done! Check your inbox and confirm your email to continue :)')
+        // this.$router.push({ name: 'home' })
       } catch (error) {
         this._showError(error.message)
       }

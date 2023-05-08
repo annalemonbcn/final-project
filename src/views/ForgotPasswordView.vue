@@ -3,7 +3,7 @@
     <div id="main-info">
       <h1 class="title">Forgot password?</h1>
       <p class="subtitle">Enter your email and you will receive a link to set a new password.</p>
-      <form action="" @submit.prevent class="connect">
+      <form action="" @submit.prevent @keyup.enter="_handleResetPassword" class="connect">
         <div class="container-input">
           <input type="text" id="input-email" name="email" placeholder="Email" v-model="email">
         </div>

@@ -4,7 +4,7 @@
       <h1 class="title">Password recovery</h1>
       <p class="subtitle">Enter your new password below:</p>
 
-      <form action="" @submit.prevent class="connect">
+      <form action="" @submit.prevent @keyup.enter="_handleUpdatePassword" class="connect">
         <div class="container-input">
           <input
             id="input-password"
