@@ -91,6 +91,6 @@ export default {
 
 <style scoped>
 .container {
-  background-image: url('@/img/bg_RECOVERY.jpg');
+  background-image: url('@/img/bg_recovery.jpg');
 }
 </style>
