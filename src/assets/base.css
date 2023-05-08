@@ -201,3 +201,38 @@ textarea.error {
 .warn.textSuccess {
   color: var(--green-accent);
 }
+
+/* Tooltip */
+.tooltip {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+
+  padding: 10px;
+  background-color: var(--active-text);
+  color: white !important;
+  min-width: 150px;
+  max-width: 180px;
+  border-radius: 5px;
+  text-align: center;
+  filter: drop-shadow(0 3px 5px #ccc);
+
+  line-height: 1.5;
+  font-size: 12px;
+  
+  position: absolute;
+}
+.tooltip:after {
+  content: '';
+  position: absolute;
+  
+  width: 10px;
+  height: 10px;
+  background-color: var(--active-text);
+  transform: rotate(45deg);
+}
+
+@media(max-width: 1023px){
+  .tooltip{
+    display: none;
+  }
+}

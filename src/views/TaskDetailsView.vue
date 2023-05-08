@@ -20,8 +20,9 @@
               {{ taskDetail.is_complete === true ? 'Done' : 'Pending' }}
             </p>
           </div>
+          <p class="tooltip tt-status">Click to change the status</p>
           <div class="specs spec-date">
-            <p>Date</p>
+            <p>Limit date</p>
             <input
               name="date"
               type="date"
@@ -35,8 +36,8 @@
           >
             <p>Priority</p>
             <p>{{ taskDetail.is_flagged ? 'Non-priority' : 'Urgent' }}</p>
-            <p class="tooltip">Tap to change the priority</p>
           </div>
+          <p class="tooltip tt-priority">Click to change the priority</p>
         </div>
         <div>
           <p>Description:</p>
@@ -121,37 +122,38 @@ export default {
     flex-direction: row;
   }
 }
+
+#task-details form .specs-container{
+  position: relative;
+}
+
 #task-details form .task-status, #task-details form .task-flag {
   position: relative;
   cursor: pointer;
 }
-#task-details form .task-flag .tooltip {
-  display: none;
+
+
+.tooltip.tt-priority{
+  right: 10px;
+  bottom: -35px;
 }
-#task-details form .task-flag:hover + .tooltip {
-  display: block;
+.task-flag:hover + .tooltip.tt-priority {
+  opacity: 1;
+}
+.tooltip.tt-priority:after{
+  top: -5px;
+  right: 20px;
 }
 
-.tooltip {
-  padding: 18px 32px;
-  background: #fff;
-  position: relative;
-  min-width: 150px;
-  max-width: 180px;
-  border-radius: 5px;
-  text-align: center;
-  filter: drop-shadow(0 3px 5px #ccc);
-  line-height: 1.5;
+.tooltip.tt-status{
+  top: -35px;
+  right: 10px;
 }
-.tooltip:after {
-  content: '';
-  position: absolute;
-  bottom: -9px;
-  left: 50%;
-  margin-left: -9px;
-  width: 18px;
-  height: 18px;
-  background: white;
-  transform: rotate(45deg);
+.task-status:hover + .tooltip.tt-status {
+  opacity: 1;
+}
+.tooltip.tt-status:after{
+  bottom: -5px;
+  right: 20px;
 }
 </style>
