@@ -1,26 +1,26 @@
 <template>
   <div v-if="loading">Loading tasks...</div>
-  <div class="task-container" v-if="!loading && pendingTasks">
-    <p>Pending tasks</p>
-    <TaskComp 
-      v-for="(task, index) in pendingTasks"
-      :key="index"
-      :title="task.title"
-      :limitDate="task.limit_date"
-      :url="task.url"
-      :status="task.is_complete"
-    />
-  </div>
-  <div class="task-container" v-if="!loading && completedTasks">
-    <p>Done tasks</p>
-    <TaskComp 
-      v-for="(task, index) in completedTasks"
-      :key="index"
-      :title="task.title"
-      :limitDate="task.limit_date"
-      :url="task.url"
-      :status="task.is_complete"
-    />
+  <div class="task-container-grouper">
+    <div class="task-container" v-if="!loading && pendingTasks">
+      <p class="task-container-title"><fa icon="fa-regular fa-clipboard" /> To-Do</p>
+      <TaskComp 
+        v-for="(task, index) in pendingTasks"
+        :key="index"
+        :title="task.title"
+        :url="task.url"
+        :status="task.is_complete"
+      />
+    </div>
+    <div class="task-container" v-if="!loading && completedTasks">
+      <p class="task-container-title"><fa icon="fa-solid fa-clipboard-check" /> Done</p>
+      <TaskComp 
+        v-for="(task, index) in completedTasks"
+        :key="index"
+        :title="task.title"
+        :url="task.url"
+        :status="task.is_complete"
+      />
+    </div>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ import TasksStore from '@/stores/tasks'
 import TaskComp from './TaskComp.vue'
 
 export default {
-  name: 'TaskStatus',
+  name: 'TaskContainerComp',
   components: {
     TaskComp
   },
@@ -61,9 +61,29 @@ export default {
 </script>
 
 <style scoped>
+.task-container-grouper{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+@media(min-width: 1024px){
+  .task-container-grouper{
+    min-width: 30%;
+  }
+}
 .task-container {
-  width: 50%;
-  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
+.task-container-title{
+  font-size: 20px;
+  font-weight: 700;
+}
+@media(min-width: 768px){
+  .task-container-title{
+    font-size: 22px;
+  }
+}
 </style>

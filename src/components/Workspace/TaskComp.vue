@@ -1,10 +1,9 @@
 <template>
   <router-link :to="`/task/${url}`" class="task" :class="status === false ? 'pending' : 'done'">
     <p class="task-title">{{ title }}</p>
-    <p class="task-date">{{ limitDate }}</p>
     <div>
       <fa class="task-status" icon="fa-circle-xmark" v-if="status === false"/>
-      <fa class="task-status" icon="fa-solid fa-circle-check" v-else />
+      <fa class="task-status task-done" icon="fa-solid fa-circle-check" v-else />
     </div>
   </router-link> 
 </template>
@@ -21,10 +20,6 @@ export default {
       type: Boolean,
       required: true
     },
-    limitDate: {
-      type: String,
-      required: true
-    },
     url: {
       type: String,
       required: true
@@ -38,33 +33,35 @@ export default {
 
 <style scoped>
 .task {
-  font-size: 14px;
-
-  padding: 10px 20px;
-  border-bottom: 1px solid var(--tertiary-color);
+  color: var(--active-text);
+  background-color: var(--secondary-text);
+  border-radius: 12px;
+  padding: 15px;
 
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-  color: var(--tertiary-accent);
 
   transition: all .2s ease-in-out;
+}
+@media(min-width: 768px){
+  .task{
+    padding: 25px;
+  }
 }
 
 .task:hover{
   transform: scale(1.05);
 }
 
-.task .task-date{
-  padding-right: 20px;
+.task p.task-title{
+  font-size: 18px;
 }
-
-.task.pending{
-  background-color: orange;
+.task .svg-inline--fa{
+  height: 1.4rem;
 }
-.task.done{
-  background-color: lightgreen;
-  text-decoration: line-through;
+.task .task-status.task-done{
+  color: var(--green-accent);
 }
 </style>

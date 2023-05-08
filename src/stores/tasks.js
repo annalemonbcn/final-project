@@ -68,7 +68,6 @@ export default defineStore('tasks', {
       const taskToUpdate = this.tasks.find((task) => task.id === task_id)
       this.tasks = this.tasks.filter((task) => task.id !== taskToUpdate.id)
       this.tasks.push(data[0])
-      console.log(`id --> ${task_id}, is_complete --> ${!is_complete}`);
     },
     async _alternateFlag(task_id, is_flagged){
       const { data, error } = await supabase
@@ -86,7 +85,6 @@ export default defineStore('tasks', {
       const taskToUpdate = this.tasks.find((task) => task.id === task_id)
       this.tasks = this.tasks.filter((task) => task.id !== taskToUpdate.id)
       this.tasks.push(data[0]);
-      console.log(`id --> ${task_id}, is_flagged --> ${!is_flagged}`);
     },
     async _updateTask(task) {
       const { data, error } = await supabase

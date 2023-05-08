@@ -8,7 +8,7 @@
           <input type="text" id="input-email" name="email" placeholder="Email" v-model="email">
         </div>
         <p class="warn"></p>
-        <button class="btn btn-primary" type="button" @click="_handleResetPassword">Send recovery link</button>
+        <button class="btn btn-primary" type="button" @click="_handleResetPassword" @keyup.enter="_handleResetPassword">Send recovery link</button>
       </form>
       <div class="connect-change">
         <router-link to="/auth/sign-up"><fa icon="fa-solid fa-circle-arrow-right" /> New user? Click here to <u>Sign Up</u></router-link>

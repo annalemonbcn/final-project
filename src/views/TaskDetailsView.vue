@@ -1,23 +1,73 @@
 <template>
   <div class="info-right" id="task-details">
+    <router-link to="/" class="modal-back">
+      <fa icon="fa-solid fa-arrow-left" class="arrow-back" />
+    </router-link>
     <div class="task-row">
-      <form id="task-details" action="" @submit.prevent>
-        <input class="task-view-name" type="text" name="title" v-model="taskDetail.title" @input="formHasChanged = true"/>
-        <textarea name="description" class="task-view-description" v-model="taskDetail.description"
-        @input="formHasChanged = true"></textarea>
-        <div>
-          <input name="date" type="date" v-model="taskDetail.limit_date" @input="formHasChanged = true" />
-          <div class="task-status">
-            <p :class="taskDetail.is_complete === true ? 'done' : 'pending'">{{ taskDetail.is_complete === true ? 'Done' : 'Pending' }}</p>
+      <form action="" @submit.prevent>
+        <input
+          class="task-view-title"
+          type="text"
+          name="title"
+          v-model="taskDetail.title"
+          @input="formHasChanged = true"
+        />
+
+        <div class="specs-container">
+          <div class="task-status specs" @click="_alternateDone(taskDetail.id, taskDetail.is_complete)">
+            <p>Status</p>
+            <p>
+              {{ taskDetail.is_complete === true ? 'Done' : 'Pending' }}
+            </p>
+          </div>
+          <div class="specs spec-date">
+            <p>Date</p>
+            <input
+              name="date"
+              type="date"
+              v-model="taskDetail.limit_date"
+              @input="formHasChanged = true"
+            />
+          </div>
+          <div
+            class="task-flag specs"
+            @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)"
+          >
+            <p>Priority</p>
+            <p>{{ taskDetail.is_flagged ? 'Non-priority' : 'Urgent' }}</p>
+            <p class="tooltip">Tap to change the priority</p>
           </div>
         </div>
-        <div class="task-flag">
-          <fa icon="fa-regular fa-flag" @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)" v-if="taskDetail.is_flagged" class="is_flagged" />
-          <fa icon="fa-regular fa-flag" @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)" v-else class="is_not_flagged" />
+        <div>
+          <p>Description:</p>
+          <textarea
+            name="description"
+            class="task-view-description"
+            v-model="taskDetail.description"
+            @input="formHasChanged = true"
+          ></textarea>
         </div>
-        <button :disabled="!formHasChanged" @click="_updateTask(task)">Update task</button>
-        <button @click="_alternateDone(taskDetail.id, taskDetail.is_complete)">Mark as done/undone</button>
-        <button @click="_deleteTask(taskDetail.id)">Delete</button>
+
+        <div class="form-actions">
+          <button v-if="formHasChanged" class="btn" @click="_updateTask(taskDetail)">
+            Update task
+          </button>
+          <button class="btn" @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)">
+            <fa icon="fa-solid fa-triangle-exclamation" />
+            Mark as {{ taskDetail.is_flagged ? 'urgent' : 'non-priority' }}
+          </button>
+          <button
+            class="btn"
+            :class="taskDetail.is_complete ? 'undone' : 'btn-primary'"
+            @click="_alternateDone(taskDetail.id, taskDetail.is_complete)"
+          >
+            <fa icon="fa-regular fa-circle-check" />
+            Mark as {{ taskDetail.is_complete ? 'undone' : 'done' }}
+          </button>
+          <button class="btn" @click="_deleteTask(taskDetail.id)">
+            <fa icon="fa-regular fa-trash-can" /> Delete task
+          </button>
+        </div>
       </form>
     </div>
   </div>
@@ -38,79 +88,66 @@ export default {
   computed: {
     ...mapState(TasksStore, ['tasks', 'getTaskById']),
 
-    taskDetail(){
-      return this.getTaskById(this.taskUrl);
+    taskDetail() {
+      return this.getTaskById(this.taskUrl)
     }
   },
   methods: {
-    ...mapActions(TasksStore, ['_alternateDone', '_alternateFlag','_updateTask','_deleteTask']),
+    ...mapActions(TasksStore, ['_alternateDone', '_alternateFlag', '_updateTask', '_deleteTask'])
   },
   created() {
-    this.taskUrl = this.$route.params.taskUrl;
-    // this._setInfo(this._getSingleTask(this.$route.params.taskUrl));
+    this.taskUrl = this.$route.params.taskUrl
 
     this.$watch(
       () => this.$route.params,
       (newParams) => {
         if (this.$route.params.taskUrl) {
-          this.taskUrl = this.$route.params.taskUrl;
+          this.taskUrl = this.$route.params.taskUrl
         }
       }
     )
-  },
+  }
 }
 </script>
 
 <style scoped>
-#task-details {
+#task-details form .form-actions {
   display: flex;
-  flex-flow: column nowrap;
-  gap: 30px;
+  flex-direction: column;
+  gap: 20px;
 }
-#task-details > * {
-  display: flex;
-  flex-flow: row nowrap;
-  gap: 30px;
-  align-items: center;
-}
-#task-details .task-row {
-  justify-content: space-between;
-}
-.task-flag{
-  box-sizing: border-box;
-  width: 40px;
-  height: 40px;
-  padding: 5px;
 
-  border-radius: 25px;
-  border: 1px dotted black;
-
+#task-details form .task-status, #task-details form .task-flag {
+  position: relative;
   cursor: pointer;
 }
-.task-flag svg{
+#task-details form .task-flag .tooltip {
+  display: none;
+}
+#task-details form .task-flag:hover + .tooltip {
+  display: block;
+}
+
+.tooltip {
+  padding: 18px 32px;
+  background: #fff;
   position: relative;
-  left: 7px;
-  
-  transition: all .1s ease-in-out;
+  min-width: 150px;
+  max-width: 180px;
+  border-radius: 5px;
+  text-align: center;
+  filter: drop-shadow(0 3px 5px #ccc);
+  line-height: 1.5;
 }
-.task-flag svg.is_flagged{
-  color: black;
+.tooltip:after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  margin-left: -9px;
+  width: 18px;
+  height: 18px;
+  background: white;
+  transform: rotate(45deg);
 }
-.task-flag svg.is_not_flagged{
-  color: transparent;
-}
-.task-flag svg.is_flagged:hover {
-  color: transparent;
-}
-.task-flag svg.is_not_flagged:hover {
-  color: black;
-}
-
-.task-status .pending {
-  background-color: orange;
-}
-.task-status .done {
-  background-color: lightgreen;
-}
-
 </style>

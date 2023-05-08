@@ -1,15 +1,15 @@
 /* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;300;400;700&family=Roboto+Mono:wght@100;300;400;700&family=Roboto:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;300;400;700&family=Roboto:wght@100;300;400;700&display=swap');
 
 /* Colors */
 :root {
-  --primary-color: #1d3543;
+  --active-text: #0a3545;
+  --primary-text: #667085;
   --primary-accent: #224957;
-  --secondary-color: #9baebc;
-  --tertiary-color: #705a68;
-  --tertiary-accent: #5a374e;
-  --blue-accent: #3658c7;
+  --secondary-color: #F2F4F7;
+  --secondary-text: white;
   --green-accent: #20df7f;
+  --green-light: #e1f1e6;
 }
 
 /* Global styles */
@@ -24,7 +24,13 @@ html,
 body {
   margin: 0;
   height: 100%;
-  overflow: hidden !important;
+  overflow-x: hidden !important;
+}
+@media (min-width: 1024px){
+  html,
+  body {
+    overflow-y: auto !important;
+  }
 }
 
 html {
@@ -32,21 +38,17 @@ html {
 }
 
 body {
-  font-family: 'Lexend Deca', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 20px;
   position: relative;
 
-  background-color: var(--background-color);
-  color: white;
+  background-color: var(--secondary-color);
+  color: var(--secondary-text);
 }
 
 body a {
   text-decoration: none;
-  color: var(--tertiary-color);
-}
-
-body a.active {
-  color: var(--tertiary-accent);
+  color: var(--primary-text);
 }
 
 /* HEADINGS */
@@ -72,10 +74,7 @@ h4 {
 }
 body p {
   font-size: 20px;
-  line-height: 30px;
-}
-body a {
-  text-decoration: none;
+  line-height: 24px;
 }
 @media screen and (min-width: 768px) {
   h1 {
@@ -100,10 +99,12 @@ body a {
 .btn {
   cursor: pointer;
 
-  max-width: 300px;
+  box-sizing: border-box;
+  /* width: 300px; */
   height: 45px;
-  padding: 15px 35px;
+  padding: 10px 35px;
   text-align: center;
+  font-size: 18px;
 
   border: 0;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
@@ -120,7 +121,41 @@ body a {
   background-color: var(--green-accent);
 }
 
-/* INPUT ERROR */
+.arrow-back{
+  color: var(--green-accent);
+  height: 25px;
+}
+
+/* DISPLAY */
+@media(min-width: 1024px){
+  .hide {
+    display: none;
+  }
+}
+
+/* INPUTS */
+input,
+textarea {
+  background-color: transparent;
+  outline: none;
+  border: 0;
+
+  font-size: 20px;
+  font-family: Roboto;
+}
+
+textarea {
+  width: 100%;
+  resize: none;
+  min-height: 50px;
+  margin-top: 10px;
+  font-size: 18px;
+  background-color: var(--secondary-text);
+  border-radius: 15px;
+  padding: 10px;
+  max-width: 94%;
+}
+
 input.error,
 textarea.error {
   background-color: rgba(255, 0, 0, 0.1) !important;

@@ -4,7 +4,7 @@
     <div id="main-info">
       <h1 class="title">Sign in</h1>
       <p class="subtitle">Sign in and start managing your tasks!</p>
-      <form action="" @submit.prevent class="connect">
+      <form action="" @submit.prevent @keyup.enter="_handleSignIn" class="connect">
         <div class="container-input">
           <input type="text" id="input-email" name="email" placeholder="Email" v-model="email" />
         </div>
@@ -83,6 +83,10 @@ export default {
       try {
         await this.signIn(userData)
         this._showSuccess('Welcome back :)')
+        // Hide elements
+        document.querySelector('#connect-forgot').style.display = 'none';
+        document.querySelector('.btn.btn-primary').disabled = true;
+        // Redirect to home
         setTimeout(() => {
           this.$router.push({ name: 'home' })
         }, 2000)

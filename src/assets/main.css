@@ -1,13 +1,11 @@
 @import './base.css';
 
-#app {
-  display: flex;
-  flex-flow: row nowrap;
-}
 /* SIGNIN/SIGNUP/FORGOT/RECOVERY */
 .container.user {
+  font-family: 'Lexend Deca', sans-serif;
+  
   background-image: url('@/img/bg_login.jpg');
-  width: 100%;
+  max-width: 100%;
   height: 100vh;
   background-repeat: no-repeat;
   background-position: center;
@@ -18,10 +16,19 @@
   align-items: center;
   justify-content: center;
 
-  padding: 3rem;
+  padding: 0 2rem;
   padding-top: 0;
+
+  color: white;
 }
 
+.container.user p{
+  font-size: 20px;
+  line-height: 30px;
+}
+.container.user input{
+  font-size: 18px;
+}
 .container.user #main-info {
   display: flex;
   flex-direction: column;
