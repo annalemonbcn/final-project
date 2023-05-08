@@ -41,8 +41,9 @@
             v-model="task.description"
           ></textarea>
         </div>
-        
-        <button class="btn btn-primary" @click="_createNewTask">Add task</button>
+        <div class="add-task-button">
+          <button class="btn btn-primary" @click="_createNewTask">Add task</button>
+        </div>
       </form>
     </div>
   </div>
@@ -117,5 +118,22 @@ export default {
   background-color: transparent;
   font-size: 20px;
   line-height: 24px;
+}
+@media(min-width: 1024px){
+  #task-add select{
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+.add-task-button{
+  text-align: center;
+}
+.add-task-button button{
+  width: 100%;
+}
+@media(min-width: 768px){
+  .add-task-button button{
+    width: auto;
+  }
 }
 </style>
