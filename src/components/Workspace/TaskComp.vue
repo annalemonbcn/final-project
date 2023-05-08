@@ -47,7 +47,7 @@ export default {
 }
 @media(min-width: 768px){
   .task{
-    padding: 25px;
+    padding: 15px 25px;
   }
 }
 
@@ -57,6 +57,11 @@ export default {
 
 .task p.task-title{
   font-size: 18px;
+}
+@media(min-width: 1024px){
+  .task p.task-title{
+    font-size: 16px;
+  }
 }
 .task .svg-inline--fa{
   height: 1.4rem;
