@@ -111,7 +111,7 @@ header {
 
   background-color: white;
 
-  height: 100%;
+  height: 100vh;
   width: 220px;
   position: fixed;
   top: 0;
@@ -174,7 +174,12 @@ header .nav-item.active {
 
 header #nav-settings {
   position: absolute;
-  bottom: 20px;
+  bottom: 70px;
+}
+@media(min-width: 1024px){
+  header #nav-settings {
+    bottom: 20px;
+  }
 }
 
 /* Responsive */
