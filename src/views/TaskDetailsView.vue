@@ -16,7 +16,7 @@
         <div class="specs-container" :class="colorClass">
           <div
             class="task-status specs"
-            @click="_alternateDone(taskDetail.id, taskDetail.is_complete)"
+            @click="_handleAlternateDone"
           >
             <p>Status</p>
             <p>
@@ -36,7 +36,7 @@
           </div>
           <div
             class="task-flag specs"
-            @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)"
+            @click="_handeAlternateFlag"
           >
             <p>Priority</p>
             <p>{{ taskDetail.is_flagged ? 'Urgent' : 'Non-priority' }}</p>
@@ -135,7 +135,6 @@ export default {
         this.$router.push({ name: 'home' })
       } catch (error) {
         this.toast.error(error.message)
-        // showError(error.message)
       }
     },
     async _handleUpdateTask(){
@@ -144,7 +143,22 @@ export default {
         this.toast.success("Task updated!");
       } catch (error) {
         this.toast.error(error.message)
-        // showError(error.message)
+      }
+    },
+    async _handeAlternateFlag(){
+      try {
+        await this._alternateFlag(taskDetail.id, taskDetail.is_flagged)
+        this.toast.success("Task updated!");
+      } catch (error) {
+        this.toast.error(error.message)
+      }
+    },
+    async _handleAlternateDone(){
+      try {
+        await this._alternateDone(taskDetail.id, taskDetail.is_complete)
+        this.toast.success("Task updated!");
+      } catch (error) {
+        this.toast.error(error.message)
       }
     }
   },

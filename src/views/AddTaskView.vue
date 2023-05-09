@@ -77,9 +77,7 @@ export default {
     async _createNewTask() {
       // Check if title is empty
       if(this.task.title.length === 0){
-        document.querySelector('.warn.textError').style.display = 'block'; // --> show toast?
-        document.querySelector('.task-view-title').focus();
-        document.querySelector('.task-view-title').style.cssText = 'background-color: rgba(255, 0, 0, 0.1) !important; border-bottom: 2px solid rgba(255, 0, 0, 0.3) !important;';
+        this.toast.error("Title can't be empty!")
         return;
       }
       
