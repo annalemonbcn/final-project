@@ -147,7 +147,7 @@ export default {
     },
     async _handeAlternateFlag(){
       try {
-        await this._alternateFlag(taskDetail.id, taskDetail.is_flagged)
+        await this._alternateFlag(this.taskDetail.id, this.taskDetail.is_flagged)
         this.toast.success("Task updated!");
       } catch (error) {
         this.toast.error(error.message)
@@ -155,7 +155,7 @@ export default {
     },
     async _handleAlternateDone(){
       try {
-        await this._alternateDone(taskDetail.id, taskDetail.is_complete)
+        await this._alternateDone(this.taskDetail.id, this.taskDetail.is_complete)
         this.toast.success("Task updated!");
       } catch (error) {
         this.toast.error(error.message)
