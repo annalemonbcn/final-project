@@ -1,11 +1,10 @@
 <template>
-
-  <div v-if="this.pendingTasks.length === 0 && this.completedTasks.length === 0" class="warn empty">
+  <div v-if="loading">Loading tasks...</div>
+  <div v-else-if="this.pendingTasks.length === 0 && this.completedTasks.length === 0" class="warn empty">
     <router-link to="/task/add-task">
       You haven't added any tasks yet! Click to add a new task and get started :)
-    </router-link></div>
-
-  <div v-else-if="loading">Loading tasks...</div>
+    </router-link>
+  </div>
   <div v-else-if="!loading" class="task-container-grouper">
     <div class="task-container" v-if="pendingTasks">
       <p class="task-container-title"><fa icon="fa-regular fa-clipboard" /> To-Do</p>
