@@ -79,8 +79,8 @@
 
 <script>
 import TasksStore from '@/stores/tasks'
-import { faGreaterThanEqual } from '@fortawesome/free-solid-svg-icons'
 import { mapActions, mapState } from 'pinia'
+import { showError, removeError, showSuccess } from '@/assets/utils.js'
 
 export default {
   name: 'TaskDetails',
@@ -109,6 +109,17 @@ export default {
   methods: {
     ...mapActions(TasksStore, ['_alternateDone', '_alternateFlag', '_updateTask', '_deleteTask']),
 
+    async _handleDeleteTask(){
+      try{
+        await this._deleteTask(taskDetail.id);
+        setTimeout(() => {
+          this.$router.push({ name: 'home' })
+        }, 1000)
+      }
+      catch(e) {
+        showError(error.message)
+      }
+    }
     // _handleDeleteClass() {
     //   _deleteTask(taskDetail.id)
     //   setTimeout(() => {

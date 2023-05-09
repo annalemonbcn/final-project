@@ -36,6 +36,7 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import UserStore from '@/stores/user.js'
+import { showError, removeError, showSuccess } from '@/assets/utils.js'
 
 export default {
   name: 'SignIn',
@@ -49,32 +50,24 @@ export default {
     ...mapState(UserStore, ['user'])
   },
   methods: {
-    ...mapActions(UserStore, [
-      '_validateEmail',
-      '_validatePassword',
-      '_showError',
-      '_removeError',
-      '_showSuccess',
-      'signIn'
-    ]),
+    ...mapActions(UserStore, ['_validateEmail', '_validatePassword', 'signIn']),
 
     async _handleSignIn() {
-
       // Reset errors and fields
-      this._removeError();
-      document.querySelector('input#input-email').classList.remove('error');
-      document.querySelector('input#input-password').classList.remove('error');
+      removeError()
+      document.querySelector('input#input-email').classList.remove('error')
+      document.querySelector('input#input-password').classList.remove('error')
 
       // Validate email
       if (!this._validateEmail(this.email)) {
-        this._showError('Enter a valid email!');
-        document.querySelector('input#input-email').classList.add('error');
+        showError('Enter a valid email!')
+        document.querySelector('input#input-email').classList.add('error')
         return
       }
       // Validate password
       if (!this._validatePassword(this.password)) {
-        this._showError('Password must be at least 6 characters long.');
-        document.querySelector('input#input-password').classList.add('error');
+        showError('Password must be at least 6 characters long.')
+        document.querySelector('input#input-password').classList.add('error')
         return
       }
 
@@ -82,16 +75,16 @@ export default {
       const userData = { email: this.email, password: this.password }
       try {
         await this.signIn(userData)
-        this._showSuccess('Welcome back :)')
+        showSuccess('Welcome back :)')
         // Hide elements
-        document.querySelector('#connect-forgot').style.display = 'none';
-        document.querySelector('.btn.btn-primary').disabled = true;
+        document.querySelector('#connect-forgot').style.display = 'none'
+        document.querySelector('.btn.btn-primary').disabled = true
         // Redirect to home
         setTimeout(() => {
           this.$router.push({ name: 'home' })
         }, 2000)
       } catch (error) {
-        this._showError(error.message)
+        showError(error.message)
       }
     }
   }
@@ -99,7 +92,7 @@ export default {
 </script>
 
 <style scoped>
-body{
+body {
   overflow-y: hidden !important;
 }
 #connect-forgot {
