@@ -45,6 +45,11 @@ export default {
 
   background-color: var(--active-text);
 }
+@media (min-width: 768px) {
+  #board {
+    padding-top: 80px;
+  }
+}
 @media (min-width: 1024px) {
   #board {
     width: calc(100% - 90px);
@@ -155,11 +160,7 @@ input.task-view-title {
   font-size: 20px;
   width: 100%;
 }
-.specs #spec-date{
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-  min-height: 1.2em; 
-}
+
 .modal-back {
   position: relative;
   left: 30px;
