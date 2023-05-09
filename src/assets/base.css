@@ -110,7 +110,9 @@ body p {
   box-sizing: border-box;
   height: 45px;
   padding: 10px 35px;
+
   text-align: center;
+  color: var(--active-text);
   font-size: 16px;
 
   border: 0;
