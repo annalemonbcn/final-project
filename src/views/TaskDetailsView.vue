@@ -147,11 +147,11 @@ export default {
   flex-direction: column;
   gap: 20px;
 }
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   #task-details form .form-actions {
-    /* justify-content: center; */
+     justify-content: center; 
   }
-}
+} */
 
 #task-details form .specs-container {
   position: relative;

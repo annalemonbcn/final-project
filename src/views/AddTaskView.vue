@@ -123,15 +123,10 @@ export default {
 #task-add select {
   border: 0;
   background-color: transparent;
-  font-size: 20px;
-  line-height: 24px;
-}
-@media (min-width: 1024px) {
-  #task-add select {
-    font-size: 16px;
+  font-size: 16px;
     line-height: 20px;
-  }
 }
+
 .add-task-button {
   text-align: center;
 }
