@@ -53,9 +53,7 @@
           ></textarea>
         </div>
 
-        <div class="messageError">
-          <p class="warn"></p>
-        </div>
+        <p class="warn"></p>
 
         <div class="form-actions">
           <button v-if="formHasChanged" class="btn" @click="_updateTask(taskDetail)">

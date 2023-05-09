@@ -142,7 +142,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  height: 60px;
+  height: 50px;
   border-bottom: 1px solid rgba(10, 53, 69, 0.2);
 }
 .task-row form .specs.task-flag {
