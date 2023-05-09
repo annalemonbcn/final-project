@@ -4,19 +4,19 @@ import supabase from '../supabase/index'
 export default defineStore('tasks', {
   state() {
     return {
-      tasks: [],
+      tasks: []
     }
   },
   getters: {
     getTaskById: (state) => {
-      return (taskUrl) => state.tasks.filter((task) => task.url === taskUrl)[0];
+      return (taskUrl) => state.tasks.filter((task) => task.url === taskUrl)[0]
     },
     completedTasks: (state) => {
-      return state.tasks.filter((task) => task.is_complete);
+      return state.tasks.filter((task) => task.is_complete)
     },
     pendingTasks: (state) => {
-      return state.tasks.filter((task) => !task.is_complete);
-    },
+      return state.tasks.filter((task) => !task.is_complete)
+    }
   },
   actions: {
     async _fetchTasks() {
@@ -28,7 +28,7 @@ export default defineStore('tasks', {
       }
 
       console.log('all tasks from supabase -->', data)
-      this.tasks = data;
+      this.tasks = data
     },
     async _addNewTask(newTask) {
       const { data, error } = await supabase
@@ -52,7 +52,7 @@ export default defineStore('tasks', {
       // Update local state
       this.tasks.push(data[0])
     },
-    async _alternateDone(task_id, is_complete){
+    async _alternateDone(task_id, is_complete) {
       const { data, error } = await supabase
         .from('tasks')
         .update({ is_complete: !is_complete })
@@ -69,12 +69,12 @@ export default defineStore('tasks', {
       this.tasks = this.tasks.filter((task) => task.id !== taskToUpdate.id)
       this.tasks.push(data[0])
     },
-    async _alternateFlag(task_id, is_flagged){
+    async _alternateFlag(task_id, is_flagged) {
       const { data, error } = await supabase
         .from('tasks')
         .update({ is_flagged: !is_flagged })
         .eq('id', task_id)
-        .select();
+        .select()
 
       if (error) {
         console.error(error)
@@ -84,11 +84,11 @@ export default defineStore('tasks', {
       // Update local state
       const taskToUpdate = this.tasks.find((task) => task.id === task_id)
       this.tasks = this.tasks.filter((task) => task.id !== taskToUpdate.id)
-      this.tasks.push(data[0]);
+      this.tasks.push(data[0])
     },
     async _updateTask(task) {
       let newUrl = this._generateUrl(task.url)
-      console.log(newUrl);
+      console.log(newUrl)
       const { data, error } = await supabase
         .from('tasks')
         .update({
@@ -98,12 +98,12 @@ export default defineStore('tasks', {
           url: newUrl,
           limit_date: task.limit_date,
           description: task.description,
-          is_flagged: task.is_flagged,
+          is_flagged: task.is_flagged
         })
         .eq('id', task.id)
         .select()
 
-      if(error){
+      if (error) {
         console.error(error)
         return
       }
@@ -113,26 +113,22 @@ export default defineStore('tasks', {
       this.tasks = this.tasks.filter((task) => task.id !== taskToUpdate.id)
       this.tasks.push(data[0])
     },
-    async _deleteTask(task_id){
-      console.log(task_id);
-      const { error } = await supabase
-      .from('tasks')
-      .delete()
-      .eq('id', task_id)
+    async _deleteTask(task_id) {
+      console.log(task_id)
+      const { error } = await supabase.from('tasks').delete().eq('id', task_id)
 
-      if(error){
-        console.error(error)
-        return
+      if (error) {
+        throw error
       }
 
       // Update local state
-      const taskToDelete = this.tasks.find((task) => task.id === task.id);
-      this.tasks = this.tasks.filter(task => task.id !== taskToDelete.id);
-      console.log(this.tasks);
+      const taskToDelete = this.tasks.find(task => task.id === task_id)
+      this.tasks = this.tasks.filter(task => task.id !== taskToDelete.id)
+      console.log(this.tasks)
     },
-    _generateUrl(title){
+    _generateUrl(title) {
       console.log(`title --> ${title}`)
-      let url = title.toLowerCase();
+      let url = title.toLowerCase()
 
       console.log(`url --> ${url}`)
 
@@ -140,7 +136,7 @@ export default defineStore('tasks', {
         url = url.split(' ').join('_')
       }
 
-      return url;
+      return url
     }
   }
 })

@@ -56,11 +56,12 @@ export default {
   display: flex;
   flex-flow: column nowrap;
   gap: 70px;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 @media (min-width: 1024px) {
   #task-info {
     flex-flow: row nowrap;
+    margin-top: 50px;
   }
   #task-info > div {
     padding: 30px;
@@ -74,7 +75,7 @@ export default {
 
   min-height: 100vh;
   position: absolute;
-  top: 50%;
+  top: 54%;
   transform: translateY(-50%);
   width: 100%;
   left: 0;
@@ -84,6 +85,17 @@ export default {
   background-color: var(--active-text);
   box-sizing: border-box;
   padding: 30px 10px;
+}
+@media(min-width: 390px){
+  .info-right{
+    top: 50%;
+    padding: 30px 20px;
+  }
+}
+@media (min-width: 768px){
+  .info-right {
+    padding: 30px;
+  }
 }
 @media (min-width: 1024px) {
   .info-right {
@@ -110,7 +122,7 @@ export default {
 .task-row form {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 .task-row form p {
@@ -140,7 +152,7 @@ export default {
 }
 
 input.task-view-title {
-  font-size: 24px;
+  font-size: 20px;
   width: 100%;
 }
 @media (min-width: 768px) {

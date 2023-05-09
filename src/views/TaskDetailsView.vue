@@ -149,7 +149,7 @@ export default {
 }
 @media (min-width: 1024px) {
   #task-details form .form-actions {
-    flex-direction: row;
+    /* justify-content: center; */
   }
 }
 
