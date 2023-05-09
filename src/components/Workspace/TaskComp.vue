@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/task/${url}`" class="task" :class="status === false ? 'pending' : 'done'">
+  <router-link :to="`/task/${id}`" class="task" :class="status === false ? 'pending' : 'done'">
     <p class="task-title">{{ title }}</p>
     <div>
       <fa class="task-status" icon="fa-circle-xmark" v-if="status === false"/>
@@ -20,12 +20,12 @@ export default {
       type: Boolean,
       required: true
     },
-    url: {
-      type: String,
+    id: {
+      type: Number,
       required: true
     },
     created(){
-      console.log(this.task_id);
+      console.log(id);
     }
   }
 }

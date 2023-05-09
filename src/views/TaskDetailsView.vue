@@ -3,13 +3,13 @@
     <router-link to="/" class="modal-back">
       <fa icon="fa-solid fa-arrow-left" class="arrow-back" />
     </router-link>
-    <div class="task-row">
+    <div class="task-row" v-if="taskDetail">
       <form action="" @submit.prevent>
         <input
           class="task-view-title"
           type="text"
           name="title"
-          v-model="taskDetail.title"
+          v-model="newTaskDetail.title"
           @input="formHasChanged = true"
         />
 
@@ -30,7 +30,7 @@
               id="limitDate"
               name="date"
               type="date"
-              v-model="taskDetail.limit_date"
+              v-model="newTaskDetail.limit_date"
               @input="formHasChanged = true"
             />
           </div>
@@ -48,7 +48,7 @@
           <textarea
             name="description"
             class="task-view-description"
-            v-model="taskDetail.description"
+            v-model="newTaskDetail.description"
             @input="formHasChanged = true"
           ></textarea>
         </div>
@@ -56,7 +56,7 @@
         <p class="warn"></p>
 
         <div class="form-actions">
-          <button v-if="formHasChanged" class="btn" @click="_updateTask(taskDetail)">
+          <button v-if="formHasChanged" class="btn" @click="_handleUpdateTask">
             Update task
           </button>
           <button class="btn" @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)">
@@ -90,16 +90,33 @@ export default {
   data() {
     return {
       formHasChanged: false,
-      taskUrl: ''
+      taskUrl: '',
+      newTaskDetail: {
+        title: '',
+        limit_date: null,
+        description: ''
+      }
     }
   },
   computed: {
     ...mapState(TasksStore, ['tasks', 'getTaskById']),
 
     taskDetail() {
-      return this.getTaskById(this.taskUrl)
+      const result = this.getTaskById(this.taskUrl);
+      console.log(result)
+      if(result){
+        this.newTaskDetail.title = result.title;
+        this.newTaskDetail.limit_date = result.limit_date;
+        this.newTaskDetail.description = result.description;
+      }
+     
+      return result;
+
     },
     colorClass() {
+      if(!this.taskDetail){
+        return ''
+      }
       if (this.taskDetail.is_complete) {
         return 'bg_green'
       } else if (!this.taskDetail.is_complete && !this.taskDetail.is_flagged) {
@@ -120,6 +137,13 @@ export default {
       try {
         await this._deleteTask(this.taskDetail.id)
         this.$router.push({ name: 'home' })
+      } catch (e) {
+        showError(error.message)
+      }
+    },
+    async _handleUpdateTask(){
+      try {
+        await this._updateTask(this.taskDetail.id, this.newTaskDetail)
       } catch (e) {
         showError(error.message)
       }
