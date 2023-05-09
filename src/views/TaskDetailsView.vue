@@ -52,6 +52,10 @@
           ></textarea>
         </div>
 
+        <div class="messageError">
+          <p class="warn"></p>
+        </div>
+
         <div class="form-actions">
           <button v-if="formHasChanged" class="btn" @click="_updateTask(taskDetail)">
             Update task
@@ -68,7 +72,7 @@
             <fa icon="fa-regular fa-circle-check" />
             Mark as {{ taskDetail.is_complete ? 'undone' : 'done' }}
           </button>
-          <button class="btn" @click="_deleteTask(taskDetail.id)">
+          <button class="btn" @click="_handleDeleteTask">
             <fa icon="fa-regular fa-trash-can" /> Delete task
           </button>
         </div>
@@ -79,8 +83,8 @@
 
 <script>
 import TasksStore from '@/stores/tasks'
-import { faGreaterThanEqual } from '@fortawesome/free-solid-svg-icons'
 import { mapActions, mapState } from 'pinia'
+import { showError, removeError, showSuccess } from '@/assets/utils.js'
 
 export default {
   name: 'TaskDetails',
@@ -109,12 +113,18 @@ export default {
   methods: {
     ...mapActions(TasksStore, ['_alternateDone', '_alternateFlag', '_updateTask', '_deleteTask']),
 
-    // _handleDeleteClass() {
-    //   _deleteTask(taskDetail.id)
-    //   setTimeout(() => {
-    //     this.$router.push({ name: 'home' })
-    //   }, 2000)
-    // }
+    async _handleDeleteTask() {
+      // Reset errors and fields
+      removeError();
+      
+      // Continue delete task
+      try {
+        await this._deleteTask(this.taskDetail.id)
+        this.$router.push({ name: 'home' })
+      } catch (e) {
+        showError(error.message)
+      }
+    }
   },
   created() {
     this.taskUrl = this.$route.params.taskUrl
@@ -175,5 +185,10 @@ export default {
 .tooltip.tt-status:after {
   bottom: -5px;
   right: 20px;
+}
+
+.messageError {
+  height: 20px;
+  max-height: 40px;
 }
 </style>

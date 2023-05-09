@@ -67,7 +67,7 @@ export default defineStore('userStore', {
     async _resetPassword(email) {
       console.log(email)
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://comforting-kangaroo-be4400.netlify.app/recovery-password/'
+        redirectTo: 'http://localhost:5173/recovery-password/'
       })
 
       if (error) {
@@ -81,21 +81,5 @@ export default defineStore('userStore', {
     _validatePassword(password) {
       return password.length >= 6
     },
-
-    _showError(msgError) {
-      document.querySelector('.warn').classList.add('textError');
-      document.querySelector('.warn').style.display = 'block';
-      document.querySelector('.warn').innerHTML = msgError;
-    },
-    _removeError(){
-      document.querySelector('.warn').classList.remove('textError');
-      document.querySelector('.warn').style.display = 'none';
-      document.querySelector('.warn').innerHTML = '';
-    },
-    _showSuccess(msgSuccess) {
-      document.querySelector('.warn').classList.add('textSuccess');
-      document.querySelector('.warn').style.display = 'block';
-      document.querySelector('.warn').innerHTML = msgSuccess;
-    }
   }
 })
