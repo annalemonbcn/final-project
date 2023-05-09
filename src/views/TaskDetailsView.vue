@@ -13,8 +13,11 @@
           @input="formHasChanged = true"
         />
 
-        <div class="specs-container">
-          <div class="task-status specs" @click="_alternateDone(taskDetail.id, taskDetail.is_complete)">
+        <div class="specs-container" :class="colorClass">
+          <div
+            class="task-status specs"
+            @click="_alternateDone(taskDetail.id, taskDetail.is_complete)"
+          >
             <p>Status</p>
             <p>
               {{ taskDetail.is_complete === true ? 'Done' : 'Pending' }}
@@ -35,11 +38,11 @@
             @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)"
           >
             <p>Priority</p>
-            <p>{{ taskDetail.is_flagged ? 'Non-priority' : 'Urgent' }}</p>
+            <p>{{ taskDetail.is_flagged ? 'Urgent' : 'Non-priority' }}</p>
           </div>
           <p class="tooltip tt-priority">Click to change the priority</p>
         </div>
-        <div>
+        <div class="task-description">
           <p>Description:</p>
           <textarea
             name="description"
@@ -47,6 +50,10 @@
             v-model="taskDetail.description"
             @input="formHasChanged = true"
           ></textarea>
+        </div>
+
+        <div class="messageError">
+          <p class="warn"></p>
         </div>
 
         <div class="form-actions">
@@ -65,7 +72,7 @@
             <fa icon="fa-regular fa-circle-check" />
             Mark as {{ taskDetail.is_complete ? 'undone' : 'done' }}
           </button>
-          <button class="btn" @click="_deleteTask(taskDetail.id)">
+          <button class="btn" @click="_handleDeleteTask">
             <fa icon="fa-regular fa-trash-can" /> Delete task
           </button>
         </div>
@@ -77,6 +84,7 @@
 <script>
 import TasksStore from '@/stores/tasks'
 import { mapActions, mapState } from 'pinia'
+import { showError, removeError, showSuccess } from '@/assets/utils.js'
 
 export default {
   name: 'TaskDetails',
@@ -91,10 +99,32 @@ export default {
 
     taskDetail() {
       return this.getTaskById(this.taskUrl)
+    },
+    colorClass() {
+      if (this.taskDetail.is_complete) {
+        return 'bg_green'
+      } else if (!this.taskDetail.is_complete && !this.taskDetail.is_flagged) {
+        return 'bg_grey'
+      } else if (!this.taskDetail.is_complete && this.taskDetail.is_flagged) {
+        return 'bg_red'
+      }
     }
   },
   methods: {
-    ...mapActions(TasksStore, ['_alternateDone', '_alternateFlag', '_updateTask', '_deleteTask'])
+    ...mapActions(TasksStore, ['_alternateDone', '_alternateFlag', '_updateTask', '_deleteTask']),
+
+    async _handleDeleteTask() {
+      // Reset errors and fields
+      removeError();
+      
+      // Continue delete task
+      try {
+        await this._deleteTask(this.taskDetail.id)
+        this.$router.push({ name: 'home' })
+      } catch (e) {
+        showError(error.message)
+      }
+    }
   },
   created() {
     this.taskUrl = this.$route.params.taskUrl
@@ -117,43 +147,48 @@ export default {
   flex-direction: column;
   gap: 20px;
 }
-@media (min-width: 1024px){
+@media (min-width: 1024px) {
   #task-details form .form-actions {
-    flex-direction: row;
+    /* justify-content: center; */
   }
 }
 
-#task-details form .specs-container{
+#task-details form .specs-container {
   position: relative;
 }
 
-#task-details form .task-status, #task-details form .task-flag {
+#task-details form .task-status,
+#task-details form .task-flag {
   position: relative;
   cursor: pointer;
 }
 
-
-.tooltip.tt-priority{
+.tooltip.tt-priority {
   right: 10px;
   bottom: -35px;
 }
 .task-flag:hover + .tooltip.tt-priority {
   opacity: 1;
 }
-.tooltip.tt-priority:after{
+.tooltip.tt-priority:after {
   top: -5px;
   right: 20px;
 }
 
-.tooltip.tt-status{
+.tooltip.tt-status {
   top: -35px;
   right: 10px;
 }
 .task-status:hover + .tooltip.tt-status {
   opacity: 1;
 }
-.tooltip.tt-status:after{
+.tooltip.tt-status:after {
   bottom: -5px;
   right: 20px;
+}
+
+.messageError {
+  height: 20px;
+  max-height: 40px;
 }
 </style>
