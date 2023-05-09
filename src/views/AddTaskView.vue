@@ -25,7 +25,7 @@
           </div>
           <div class="specs spec-date">
             <p>Limit date</p>
-            <input name="date" type="date" v-model="task.limit_date" />
+            <input id="limitDate" name="date" type="date" v-model="task.limit_date" />
           </div>
           <div class="task-flag specs">
             <p>Priority</p>
