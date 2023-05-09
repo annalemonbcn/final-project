@@ -176,7 +176,12 @@ header #nav-settings {
   position: absolute;
   bottom: 70px;
 }
-@media(min-width: 1024px){
+/* @media(min-width: 768px){
+  header #nav-settings {
+    bottom: 90px;
+  }
+} */
+@media(min-width: 1200px){
   header #nav-settings {
     bottom: 20px;
   }
