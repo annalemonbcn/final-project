@@ -111,7 +111,7 @@ header {
 
   background-color: white;
 
-  height: 100vh;
+  height: 100%;
   width: 220px;
   position: fixed;
   top: 0;
