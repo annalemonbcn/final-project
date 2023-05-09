@@ -53,8 +53,6 @@
           ></textarea>
         </div>
 
-        <p class="warn"></p>
-
         <div class="form-actions">
           <button v-if="formHasChanged" class="btn" @click="_handleUpdateTask">
             Update task
@@ -83,7 +81,7 @@
 <script>
 import TasksStore from '@/stores/tasks'
 import { mapActions, mapState } from 'pinia'
-import { showError, removeError, showSuccess } from '@/assets/utils.js'
+import { useToast } from "vue-toastification";
 
 export default {
   name: 'TaskDetails',
@@ -95,7 +93,7 @@ export default {
         title: '',
         limit_date: null,
         description: ''
-      }
+      },
     }
   },
   computed: {
@@ -103,7 +101,6 @@ export default {
 
     taskDetail() {
       const result = this.getTaskById(this.taskUrl);
-      console.log(result)
       if(result){
         this.newTaskDetail.title = result.title;
         this.newTaskDetail.limit_date = result.limit_date;
@@ -130,26 +127,30 @@ export default {
     ...mapActions(TasksStore, ['_alternateDone', '_alternateFlag', '_updateTask', '_deleteTask']),
 
     async _handleDeleteTask() {
-      // Reset errors and fields
-      removeError();
       
       // Continue delete task
       try {
         await this._deleteTask(this.taskDetail.id)
+        this.toast.success("Task deleted!");
         this.$router.push({ name: 'home' })
-      } catch (e) {
-        showError(error.message)
+      } catch (error) {
+        this.toast.error(error.message)
+        // showError(error.message)
       }
     },
     async _handleUpdateTask(){
       try {
         await this._updateTask(this.taskDetail.id, this.newTaskDetail)
-      } catch (e) {
-        showError(error.message)
+        this.toast.success("Task updated!");
+      } catch (error) {
+        this.toast.error(error.message)
+        // showError(error.message)
       }
     }
   },
   created() {
+    this.toast = useToast();
+
     this.taskUrl = this.$route.params.taskUrl
 
     this.$watch(

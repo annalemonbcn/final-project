@@ -52,7 +52,7 @@ export default {
 
   }
   button.btn{
-    font-size: 20px;
+    font-size: 18px;
   }
   #actionButtons #percentage{
     display: none;
