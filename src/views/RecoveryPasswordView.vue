@@ -4,7 +4,7 @@
       <h1 class="title">Password recovery</h1>
       <p class="subtitle">Enter your new password below:</p>
 
-      <form action="" @submit.prevent class="connect">
+      <form action="" @submit.prevent @keyup.enter="_handleUpdatePassword" class="connect">
         <div class="container-input">
           <input
             id="input-password"
@@ -24,7 +24,12 @@
           />
         </div>
         <p class="warn"></p>
-        <button class="btn btn-primary" type="button" @click="_handleUpdatePassword" @keyup.enter="_handleUpdatePassword">
+        <button
+          class="btn btn-primary"
+          type="button"
+          @click="_handleUpdatePassword"
+          @keyup.enter="_handleUpdatePassword"
+        >
           Reset password
         </button>
       </form>
@@ -35,6 +40,7 @@
 <script>
 import { mapActions } from 'pinia'
 import UserStore from '../stores/user'
+import { showError, removeError, showSuccess } from '@/assets/utils.js'
 
 export default {
   name: 'RecoveryPasswordView',
@@ -45,28 +51,22 @@ export default {
     }
   },
   methods: {
-    ...mapActions(UserStore, [
-      '_validatePassword',
-      '_showError',
-      '_showSuccess',
-      '_removeError',
-      '_updateuser'
-    ]),
+    ...mapActions(UserStore, ['_validatePassword', '_updateuser']),
 
     async _handleUpdatePassword() {
       // Reset errors and fields
-      this._removeError()
+      removeError()
       document.querySelector('input#input-password').classList.remove('error')
       document.querySelector('input#input-confirmPassword').classList.remove('error')
 
       // Validate password
       if (!this._validatePassword(this.password)) {
-        this._showError('Password must be at least 6 characters long.')
+        showError('Password must be at least 6 characters long.')
         document.querySelector('input#input-password').classList.add('error')
         return
       }
       if (this.password !== this.confirmPassword) {
-        this._showError('Passwords do not match!')
+        showError('Passwords do not match!')
         document.querySelector('input#input-password').classList.add('error')
         document.querySelector('input#input-confirmPassword').classList.add('error')
         return
@@ -75,14 +75,12 @@ export default {
       // If valid, continue update user
       try {
         await this._updateuser(this.password)
-        this._showSuccess(
-          "Password updated! You'll be redirected to your dashboard in a few seconds.)"
-        )
+        showSuccess("Password updated! You'll be redirected to your dashboard in a few seconds.)")
         setTimeout(() => {
           this.$router.push({ name: 'home' })
         }, 2000)
       } catch (error) {
-        this._showError(error.message)
+        showError(error.message)
       }
     }
   }
@@ -91,6 +89,6 @@ export default {
 
 <style scoped>
 .container {
-  background-image: url('@/img/bg_RECOVERY.jpg');
+  background-image: url('@/img/bg_recovery.jpg');
 }
 </style>

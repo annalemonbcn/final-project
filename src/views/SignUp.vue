@@ -3,7 +3,7 @@
     <div id="main-info">
       <h1 class="title">Sign up</h1>
       <p class="subtitle">Sign up and start managing your tasks!</p>
-      <form action="" @submit.prevent class="connect">
+      <form action="" @submit.prevent @keyup.enter="_handleSignUp" class="connect">
         <div class="container-input">
           <input type="text" id="input-email" name="email" placeholder="Email" v-model="email" />
         </div>
@@ -26,7 +26,14 @@
           />
         </div>
         <p class="warn"></p>
-        <button class="btn btn-primary" type="button" @click="_handleSignUp" @keyup.enter="_handleSignUp">Sign Up</button>
+        <button
+          class="btn btn-primary"
+          type="button"
+          @click="_handleSignUp"
+          @keyup.enter="_handleSignUp"
+        >
+          Sign Up
+        </button>
       </form>
       <div class="connect-change">
         <router-link to="/auth/sign-in">Already a user? Click here to <u>Login</u></router-link>
@@ -38,6 +45,7 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import UserStore from '@/stores/user.js'
+import { showError, removeError, showSuccess } from '@/assets/utils.js'
 
 export default {
   name: 'SignIn',
@@ -52,36 +60,30 @@ export default {
     ...mapState(UserStore, ['user'])
   },
   methods: {
-    ...mapActions(UserStore, [
-      '_validateEmail',
-      '_validatePassword',
-      '_showError',
-      '_removeError',
-      'signUp'
-    ]),
+    ...mapActions(UserStore, ['_validateEmail', '_validatePassword', 'signUp']),
 
     async _handleSignUp() {
       // Reset errors and fields
-      this._removeError()
+      removeError()
       document.querySelector('input#input-email').classList.remove('error')
       document.querySelector('input#input-password').classList.remove('error')
       document.querySelector('input#input-confirmPassword').classList.remove('error')
 
       // Validate email
       if (!this._validateEmail(this.email)) {
-        this._showError('Enter a valid email!')
+        showError('Enter a valid email!')
         document.querySelector('input#input-email').classList.add('error')
         return
       }
       // Validate password
       if (!this._validatePassword(this.password) || !this._validatePassword(this.confirmPassword)) {
-        this._showError('Password must be at least 6 characters long.')
+        showError('Password must be at least 6 characters long.')
         document.querySelector('input#input-password').classList.add('error')
         document.querySelector('input#input-confirmPassword').classList.add('error')
         return
       }
       if (this.password !== this.confirmPassword) {
-        this._showError('Passwords do not match!')
+        showError('Passwords do not match!')
         document.querySelector('input#input-password').classList.add('error')
         document.querySelector('input#input-confirmPassword').classList.add('error')
         return
@@ -91,9 +93,13 @@ export default {
       const userData = { email: this.email, password: this.password }
       try {
         await this.signUp(userData)
-        this.$router.push({ name: 'home' })
+        // Show message ok
+        document.querySelector('.container-input').style.display = 'none'
+        document.querySelector('.btn.btn-primary').disabled = true
+        showSuccess('Done! Check your inbox and confirm your email to continue :)')
+        // this.$router.push({ name: 'home' })
       } catch (error) {
-        this._showError(error.message)
+        showError(error.message)
       }
     }
   }
