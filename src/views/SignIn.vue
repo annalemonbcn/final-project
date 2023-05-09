@@ -76,7 +76,6 @@ export default {
       const userData = { email: this.email, password: this.password }
       try {
         await this.signIn(userData)
-        // this.toast("Welcome back :)");
         showSuccess('Welcome back :)')
         // Hide elements
         document.querySelector('#connect-forgot').style.display = 'none'

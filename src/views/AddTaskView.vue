@@ -13,7 +13,6 @@
             placeholder="Task name"
             v-model="task.title"
           />
-          <p class="warn textError">Title can't be empty!</p>
         </div>
         <div class="specs-container">
           <div class="task-status specs">
@@ -56,6 +55,7 @@
 import TasksStore from '@/stores/tasks'
 import UserStore from '@/stores/user.js'
 import { mapActions, mapState } from 'pinia'
+import { useToast } from "vue-toastification";
 
 export default {
   name: 'AddTaskView',
@@ -74,7 +74,7 @@ export default {
   methods: {
     ...mapActions(TasksStore, ['_generateUrl', '_addNewTask']),
 
-    _createNewTask() {
+    async _createNewTask() {
       // Check if title is empty
       if(this.task.title.length === 0){
         document.querySelector('.warn.textError').style.display = 'block'; // --> show toast?
@@ -88,11 +88,14 @@ export default {
       this._setUser()
 
       // Add task
-      console.log(this.task)
-      this._addNewTask(this.task)
-
-      // Reset fields
-      this._resetFields()
+      try {
+        await this._addNewTask(this.task)
+        this.toast.success("Task added successfully!");
+        // Reset fields
+        this._resetFields()
+      } catch (error) {
+        this.toast.error(error.message)
+      }      
     },
     _setUser() {
       this.task.user_id = this.user.id
@@ -112,6 +115,9 @@ export default {
   computed: {
     ...mapState(TasksStore, ['tasks']),
     ...mapState(UserStore, ['user'])
+  },
+  created(){
+    this.toast = useToast();
   }
 }
 </script>
@@ -137,10 +143,5 @@ export default {
   .add-task-button button {
     width: auto;
   }
-}
-.warn.textError{
-  text-align: left;
-  position: absolute;
-  top: 42px;
 }
 </style>
