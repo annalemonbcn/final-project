@@ -12,7 +12,7 @@
         v-for="(task, index) in pendingTasks"
         :key="index"
         :title="task.title"
-        :url="task.url"
+        :id="task.id"
         :status="task.is_complete"
       />
     </div>
@@ -22,7 +22,7 @@
         v-for="(task, index) in completedTasks"
         :key="index"
         :title="task.title"
-        :url="task.url"
+        :id="task.id"
         :status="task.is_complete"
       />
     </div>
@@ -42,8 +42,7 @@ export default {
   },
   data(){
     return{
-      loading: true,
-      url: ''
+      loading: true
     }
   },
   computed: {

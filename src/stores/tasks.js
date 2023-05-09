@@ -9,7 +9,9 @@ export default defineStore('tasks', {
   },
   getters: {
     getTaskById: (state) => {
-      return (taskUrl) => state.tasks.filter((task) => task.url === taskUrl)[0]
+      return (taskUrl) => {
+        // console.log(typeof  taskUrl)
+        return state.tasks.filter((task) => task.id === Number(taskUrl))[0]}
     },
     completedTasks: (state) => {
       return state.tasks.filter((task) => task.is_complete)
@@ -86,21 +88,18 @@ export default defineStore('tasks', {
       this.tasks = this.tasks.filter((task) => task.id !== taskToUpdate.id)
       this.tasks.push(data[0])
     },
-    async _updateTask(task) {
-      let newUrl = this._generateUrl(task.url)
+    async _updateTask(task_id, task) {
+      let newUrl = this._generateUrl(task.title)
       console.log(newUrl)
       const { data, error } = await supabase
         .from('tasks')
         .update({
           title: task.title,
-          user_id: task.user_id,
-          is_complete: task.is_complete,
           url: newUrl,
           limit_date: task.limit_date,
           description: task.description,
-          is_flagged: task.is_flagged
         })
-        .eq('id', task.id)
+        .eq('id', task_id)
         .select()
 
       if (error) {
@@ -109,9 +108,13 @@ export default defineStore('tasks', {
       }
 
       // Update local state
-      const taskToUpdate = this.tasks.find((task) => task.id === task.id)
-      this.tasks = this.tasks.filter((task) => task.id !== taskToUpdate.id)
-      this.tasks.push(data[0])
+      const taskToUpdate = this.tasks.findIndex((task) => task.id === task_id)
+      console.log(taskToUpdate)
+      this.tasks[taskToUpdate].title = task.title;
+      this.tasks[taskToUpdate].url = newUrl;
+      this.tasks[taskToUpdate].limit_date = task.limit_date;
+      this.tasks[taskToUpdate].description = task.description;
+      console.log(this.tasks)
     },
     async _deleteTask(task_id) {
       console.log(task_id)
