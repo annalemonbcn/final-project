@@ -155,6 +155,11 @@ input.task-view-title {
   font-size: 20px;
   width: 100%;
 }
+.specs #spec-date{
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  min-height: 1.2em; 
+}
 
 .modal-back {
   position: relative;

@@ -27,6 +27,7 @@
           <div class="specs spec-date">
             <p>Limit date</p>
             <input
+              id="limitDate"
               name="date"
               type="date"
               v-model="taskDetail.limit_date"
