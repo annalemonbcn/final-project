@@ -160,7 +160,6 @@ input.task-view-title {
   -moz-appearance: textfield;
   min-height: 1.2em; 
 }
-
 .modal-back {
   position: relative;
   left: 30px;
