@@ -155,11 +155,6 @@ input.task-view-title {
   font-size: 20px;
   width: 100%;
 }
-@media (min-width: 768px) {
-  input.task-view-title {
-    font-size: 30px;
-  }
-}
 
 .modal-back {
   position: relative;

@@ -112,6 +112,7 @@ body p {
   padding: 10px 35px;
 
   text-align: center;
+  font-size: 16px;
   color: var(--active-text);
   font-size: 16px;
 
@@ -165,7 +166,6 @@ textarea {
   background-color: transparent;
   outline: none;
   border: 0;
-
   font-size: 16px;
   font-family: Roboto;
 }
@@ -185,11 +185,6 @@ textarea {
   border-radius: 15px;
   padding: 10px;
   max-width: 94%;
-}
-@media (min-width: 768px){
-  textarea{
-    font-size: 14px;
-  }
 }
 
 input.error,
