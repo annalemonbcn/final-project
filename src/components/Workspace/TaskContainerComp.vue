@@ -47,7 +47,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(TasksStore, ['completedTasks', 'pendingTasks']),
+    ...mapState(TasksStore, ['completedTasks', 'pendingTasks']), // --> getters!
   },
   methods: {
     ...mapActions(TasksStore, ['_fetchTasks']),
@@ -94,7 +94,7 @@ export default {
 .task-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 @media(min-width: 1024px){
   .task-container{

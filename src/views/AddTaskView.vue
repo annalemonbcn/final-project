@@ -19,7 +19,7 @@
           <div class="task-status specs">
             <p>Status</p>
             <select id="task-add-status" name="status" v-model="task.is_complete">
-              <option value="false">Pending</option>
+              <option value="false" selected>Pending</option>
               <option value="true">Done</option>
             </select>
           </div>
@@ -88,6 +88,7 @@ export default {
       this._setUser()
 
       // Add task
+      console.log(this.task)
       this._addNewTask(this.task)
 
       // Reset fields
@@ -100,12 +101,11 @@ export default {
       this.task = {
         title: '',
         user_id: '15d3bf96-2fbb-403b-bb0f-900cfc725c1a',
-        is_complete: null,
+        is_complete: false,
         url: '',
-        limit_date: '',
+        limit_date: null,
         description: '',
-        is_flagged: false,
-        is_favourite: false
+        is_flagged: false
       }
     }
   },

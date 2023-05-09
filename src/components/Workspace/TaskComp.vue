@@ -36,7 +36,7 @@ export default {
   color: var(--active-text);
   background-color: var(--secondary-text);
   border-radius: 12px;
-  padding: 15px;
+  padding: 10px 15px;
 
   display: flex;
   flex-flow: row nowrap;
@@ -56,12 +56,7 @@ export default {
 }
 
 .task p.task-title{
-  font-size: 18px;
-}
-@media(min-width: 1024px){
-  .task p.task-title{
-    font-size: 16px;
-  }
+  font-size: 16px;
 }
 .task .svg-inline--fa{
   height: 1.4rem;
