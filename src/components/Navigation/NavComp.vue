@@ -54,6 +54,7 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import UserStore from '@/stores/user'
+import { useToast } from "vue-toastification";
 
 export default {
   name: 'HeaderComp',
@@ -71,9 +72,10 @@ export default {
     async handleSignOut() {
       try {
         await this.signOut()
+        this.toast.success("Hope to see you soon!");
         this.$router.push({ name: 'sign-in' })
-      } catch (e) {
-        console.error(e)
+      } catch (error) {
+        this.toast.error(error.message)
       }
     },
     toggleHeader() {
@@ -81,6 +83,8 @@ export default {
     }
   },
   created(){
+    this.toast = useToast();
+
     if (window.innerWidth > 1023){
       this.showHeader = true;
     }
