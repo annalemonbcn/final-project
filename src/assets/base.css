@@ -47,8 +47,8 @@ body {
   background-color: var(--secondary-color);
   color: var(--secondary-text);
 }
-@media(min-width: 1024px){
-  body{
+@media (min-width: 1024px) {
+  body {
     font-size: 16px;
   }
 }
@@ -143,13 +143,13 @@ body p {
 }
 
 /* BACKGROUNDS */
-.bg_green{
+.bg_green {
   background-color: var(--green-light) !important;
 }
-.bg_red{
+.bg_red {
   background-color: var(--red-light) !important;
 }
-.bg_grey{
+.bg_grey {
   background-color: var(--grey-light) !important;
 }
 
@@ -255,4 +255,11 @@ textarea.error {
   .tooltip {
     display: none;
   }
+}
+
+input[type='date'] {
+  display: block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  min-height: 1.2em;
 }
