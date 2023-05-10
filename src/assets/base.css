@@ -256,10 +256,3 @@ textarea.error {
     display: none;
   }
 }
-
-input[type='date'] {
-  display: block;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  min-height: 1.2em;
-}
