@@ -3,13 +3,11 @@
 </template>
 
 <script>
-export default{
-  name: 'App',
+export default {
+  name: 'AuthView'
 }
 </script>
 
 <style>
-#app{
-  min-width: 100%;
-}
+
 </style>
