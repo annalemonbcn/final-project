@@ -257,7 +257,12 @@ textarea.error {
   }
 }
 
-/* Datepicker */
+/* TOAST */
+.Vue-Toastification__toast--success{
+  background-color: var(--green-accent);
+}
+
+/* DATEPICKER */
 .dp__main{
   width: 60%;
 }
