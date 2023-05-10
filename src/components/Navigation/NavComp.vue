@@ -178,7 +178,7 @@ header .nav-item.active {
 
 header #nav-settings {
   position: absolute;
-  bottom: 70px;
+  bottom: 100px;
 }
 @media(min-width: 768px){
   header #nav-settings {
