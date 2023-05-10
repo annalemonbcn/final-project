@@ -171,11 +171,5 @@ input.task-view-title {
   }
 }
 
-.dp__main{
-  width: 60%;
-}
-.dp__input_wrap input{
-  background-color: transparent;
-  border: 0;
-}
+
 </style>

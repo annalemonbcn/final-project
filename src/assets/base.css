@@ -256,3 +256,19 @@ textarea.error {
     display: none;
   }
 }
+
+/* Datepicker */
+.dp__main{
+  width: 60%;
+}
+.dp__input_wrap input{
+  background-color: transparent;
+  border: 0;
+}
+.dp__input_icon{
+  right: 0;
+  left: auto;
+}
+.dp__clear_icon{
+  display: none;
+}

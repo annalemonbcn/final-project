@@ -26,13 +26,14 @@
           <p class="tooltip tt-status">Click to change the status</p>
           <div class="specs spec-date">
             <p>Limit date</p>
-            <input
+            <!-- <input
               id="limitDate"
               name="date"
               type="date"
               v-model="newTaskDetail.limit_date"
               @input="formHasChanged = true"
-            />
+            /> -->
+            <VueDatePicker id="limitDate" v-model="newTaskDetail.limit_date" :enable-time-picker="false" />
           </div>
           <div
             class="task-flag specs"
@@ -82,9 +83,14 @@
 import TasksStore from '@/stores/tasks'
 import { mapActions, mapState } from 'pinia'
 import { useToast } from "vue-toastification";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
   name: 'TaskDetails',
+  components: {
+    VueDatePicker
+  },
   data() {
     return {
       formHasChanged: false,
