@@ -25,7 +25,7 @@
           <div class="specs spec-date">
             <p>Limit date</p>
             <!-- <input id="limitDate" name="date" type="date" v-model="task.limit_date" /> -->
-            <VueDatePicker v-model="date"></VueDatePicker>
+            <VueDatePicker v-model="task.limit_date" :enable-time-picker="false" />
           </div>
           <div class="task-flag specs">
             <p>Priority</p>
