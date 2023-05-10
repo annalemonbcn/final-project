@@ -24,7 +24,8 @@
           </div>
           <div class="specs spec-date">
             <p>Limit date</p>
-            <input id="limitDate" name="date" type="date" v-model="task.limit_date" />
+            <!-- <input id="limitDate" name="date" type="date" v-model="task.limit_date" /> -->
+            <VueDatePicker v-model="date"></VueDatePicker>
           </div>
           <div class="task-flag specs">
             <p>Priority</p>
@@ -56,9 +57,12 @@ import TasksStore from '@/stores/tasks'
 import UserStore from '@/stores/user.js'
 import { mapActions, mapState } from 'pinia'
 import { useToast } from "vue-toastification";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
   name: 'AddTaskView',
+  components: { VueDatePicker },
   data() {
     return {
       task: {

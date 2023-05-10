@@ -15,6 +15,10 @@ library.add(fas, far) // --> FA
 import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 
+// Import datepicker
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
 import App from './App.vue'
 import router from './router'
 import './assets/main.css'
@@ -31,5 +35,6 @@ app.use(Toast, {
 })
 
 app.component('fa', FontAwesomeIcon) // --> FA
+app.component('VueDatePicker', VueDatePicker);
 
 app.mount('#app')
