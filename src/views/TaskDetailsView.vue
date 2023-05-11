@@ -126,14 +126,15 @@ export default {
     ...mapActions(TasksStore, ['_alternateDone', '_alternateFlag', '_updateTask', '_deleteTask']),
 
     async _handleDeleteTask() {
-      
-      // Continue delete task
-      try {
-        await this._deleteTask(this.taskDetail.id)
-        this.toast.success("Task deleted!");
-        this.$router.push({ name: 'home' })
-      } catch (error) {
-        this.toast.error(error.message)
+      if(confirm('Are you sure to delete this task?')){
+        // Continue delete task
+        try {
+          await this._deleteTask(this.taskDetail.id)
+          this.toast.success("Task deleted!");
+          this.$router.push({ name: 'home' })
+        } catch (error) {
+          this.toast.error(error.message)
+        }
       }
     },
     async _handleUpdateTask(){
