@@ -5,8 +5,8 @@
       <div class="icon">
       </div>
       <div class="icon" @click.prevent="_handleAlternateDone">
-        <fa class="task-status task-pending" icon="fa-regular fa-circle" v-if="!status" />
-        <fa class="task-status task-done" icon="fa-solid fa-circle-check" v-else />
+        <fa class="task-status task-pending" :icon="pendingIcon" @mouseover="updatePendingIcon" @mouseleave="resetPendingIcon" v-if="!status" />
+        <fa class="task-status task-done" :icon="doneIcon" @mouseover="updateDoneIcon" @mouseleave="resetDoneIcon" v-else />
       </div>
     </div>
   </router-link> 
@@ -19,6 +19,20 @@ import { useToast } from "vue-toastification";
 
 export default {
   name: 'SingleTask',
+  data() {
+    return {
+      pendingIconClass: 'fa-regular fa-circle',
+      doneIconClass: 'fa-solid fa-circle-check'
+    }
+  },
+  computed: {
+    pendingIcon() {
+      return `fa ${this.pendingIconClass}`;
+    },
+    doneIcon(){
+      return `fa ${this.doneIconClass}`;
+    }
+  },
   props: {
     title: {
       type: String,
@@ -50,15 +64,25 @@ export default {
       }
     },
 
+    updatePendingIcon() {
+      if (!this.status) {
+        this.pendingIconClass = "fa-solid fa-circle-check";
+      }
+    },
+    resetPendingIcon() {
+      this.pendingIconClass = "fa-regular fa-circle";
+    },
+    updateDoneIcon(){
+      if (this.status) {
+        this.doneIconClass = "fa-regular fa-circle";
+      }
+    },
+    resetDoneIcon() {
+      this.doneIconClass = "fa-solid fa-circle-check";
+    },
+
   }, created() {
     this.toast = useToast();
-  },
-  mounted(){
-    let faIconPending = document.querySelector('.task-status.task-pending');
-
-    faIconPending.addEventListener('mouseover', () => {
-      faIconPending.setAttribute('icon', 'fa-solid fa-circle-check');
-    });
   }
 }
 </script>
