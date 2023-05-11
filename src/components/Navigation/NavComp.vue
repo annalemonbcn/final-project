@@ -124,7 +124,7 @@ header {
   transition: all 0.3s ease;
   z-index: 99999;
 
-  font-family: 'Lexend Deca', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 @media (min-width: 768px) {
   header {

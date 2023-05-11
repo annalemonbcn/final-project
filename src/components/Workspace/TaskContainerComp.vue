@@ -34,7 +34,6 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import TasksStore from '@/stores/tasks'
-
 import TaskComp from './TaskComp.vue'
 
 export default {
@@ -62,8 +61,7 @@ export default {
     } finally {
       this.loading = false;
     }
-  }
-  
+  },
 }
 </script>
 

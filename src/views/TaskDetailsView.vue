@@ -48,17 +48,17 @@
         </div>
 
         <div class="form-actions">
-          <button v-if="formHasChanged" class="btn" @click="_handleUpdateTask">
+          <button v-if="formHasChanged" class="btn btn-update" @click="_handleUpdateTask">
             Update task
           </button>
-          <button class="btn" @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)">
+          <button class="btn" @click="_handeAlternateFlag">
             <fa icon="fa-solid fa-triangle-exclamation" />
             Mark as {{ taskDetail.is_flagged ? 'non-priority' : 'urgent' }}
           </button>
           <button
             class="btn"
             :class="taskDetail.is_complete ? 'undone' : 'btn-primary'"
-            @click="_alternateDone(taskDetail.id, taskDetail.is_complete)"
+            @click="_handleAlternateDone"
           >
             <fa icon="fa-regular fa-circle-check" />
             Mark as {{ taskDetail.is_complete ? 'undone' : 'done' }}
@@ -105,9 +105,7 @@ export default {
         this.newTaskDetail.limit_date = result.limit_date;
         this.newTaskDetail.description = result.description;
       }
-     
       return result;
-
     },
     colorClass() {
       if(!this.taskDetail){
@@ -141,6 +139,7 @@ export default {
       try {
         await this._updateTask(this.taskDetail.id, this.newTaskDetail)
         this.toast.success("Task updated!");
+        this.formHasChanged = false;
       } catch (error) {
         this.toast.error(error.message)
       }
@@ -166,6 +165,7 @@ export default {
     this.toast = useToast();
 
     this.taskUrl = this.$route.params.taskUrl
+    console.log(this.taskUrl);
 
     this.$watch(
       () => this.$route.params,
