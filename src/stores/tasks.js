@@ -24,8 +24,7 @@ export default defineStore('tasks', {
       const { data, error } = await supabase.from('tasks').select()
 
       if (error) {
-        console.error(error)
-        return
+        throw error
       }
 
       console.log('all tasks from supabase -->', data)
@@ -45,8 +44,7 @@ export default defineStore('tasks', {
         .select()
 
       if (error) {
-        console.error(error)
-        return
+        throw error
       }
 
       // Update local state
@@ -60,8 +58,7 @@ export default defineStore('tasks', {
         .select()
 
       if (error) {
-        console.error(error)
-        return
+        throw error
       }
 
       // Update local state
@@ -77,8 +74,7 @@ export default defineStore('tasks', {
         .select()
 
       if (error) {
-        console.error(error)
-        return
+        throw error
       }
 
       // Update local state
@@ -87,8 +83,6 @@ export default defineStore('tasks', {
       this.tasks.push(data[0])
     },
     async _updateTask(task_id, task) {
-      // let newUrl = this._generateUrl(task.title)
-      // console.log(newUrl)
       const { data, error } = await supabase
         .from('tasks')
         .update({
@@ -100,20 +94,16 @@ export default defineStore('tasks', {
         .select()
 
       if (error) {
-        console.error(error)
-        return
+        throw error
       }
 
       // Update local state
       const taskToUpdate = this.tasks.findIndex((task) => task.id === task_id)
-      // console.log(taskToUpdate)
       this.tasks[taskToUpdate].title = task.title;
       this.tasks[taskToUpdate].limit_date = task.limit_date;
       this.tasks[taskToUpdate].description = task.description;
-      // console.log(this.tasks)
     },
     async _deleteTask(task_id) {
-      console.log(task_id)
       const { error } = await supabase.from('tasks').delete().eq('id', task_id)
 
       if (error) {
@@ -123,19 +113,6 @@ export default defineStore('tasks', {
       // Update local state
       const taskToDelete = this.tasks.find(task => task.id === task_id)
       this.tasks = this.tasks.filter(task => task.id !== taskToDelete.id)
-      console.log(this.tasks)
-    },
-    _generateUrl(title) {
-      console.log(`title --> ${title}`)
-      let url = title.toLowerCase()
-
-      console.log(`url --> ${url}`)
-
-      if (url.includes(' ')) {
-        url = url.split(' ').join('_')
-      }
-
-      return url
     }
   }
 })

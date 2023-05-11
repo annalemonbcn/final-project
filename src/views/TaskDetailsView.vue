@@ -51,14 +51,14 @@
           <button v-if="formHasChanged" class="btn btn-update" @click="_handleUpdateTask">
             Update task
           </button>
-          <button class="btn" @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)">
+          <button class="btn" @click="_handeAlternateFlag">
             <fa icon="fa-solid fa-triangle-exclamation" />
             Mark as {{ taskDetail.is_flagged ? 'non-priority' : 'urgent' }}
           </button>
           <button
             class="btn"
             :class="taskDetail.is_complete ? 'undone' : 'btn-primary'"
-            @click="_alternateDone(taskDetail.id, taskDetail.is_complete)"
+            @click="_handleAlternateDone"
           >
             <fa icon="fa-regular fa-circle-check" />
             Mark as {{ taskDetail.is_complete ? 'undone' : 'done' }}
