@@ -26,7 +26,7 @@
           <p class="tooltip tt-status">Click to change the status</p>
           <div class="specs spec-date">
             <p>Limit date</p>
-            <VueDatePicker id="limitDate" v-model="newTaskDetail.limit_date" :enable-time-picker="false" />
+            <VueDatePicker id="limitDate" v-model="newTaskDetail.limit_date" :enable-time-picker="false" @update:model-value="formHasChanged = true" />
           </div>
           <div
             class="task-flag specs"
