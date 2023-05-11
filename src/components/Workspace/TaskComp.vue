@@ -5,8 +5,8 @@
       <div class="icon">
       </div>
       <div class="icon" @click.prevent="_handleAlternateDone">
-        <fa class="task-status task-pending" :icon="pendingIcon" @mouseover="updatePendingIcon" @mouseleave="resetPendingIcon" v-if="!status" />
-        <fa class="task-status task-done" :icon="doneIcon" @mouseover="updateDoneIcon" @mouseleave="resetDoneIcon" v-else />
+        <fa class="task-status task-pending hoverable" :icon="pendingIcon" @mouseover="updatePendingIcon" @mouseleave="resetPendingIcon" v-if="!status" />
+        <fa class="task-status task-done hoverable" :icon="doneIcon" @mouseover="updateDoneIcon" @mouseleave="resetDoneIcon" v-else />
       </div>
     </div>
   </router-link> 
@@ -129,4 +129,9 @@ export default {
   height: 23px;
 }
 
+@media screen and (min-width: 1200px) {
+  .hoverable:hover {
+    display: none;
+  }
+}
 </style>
