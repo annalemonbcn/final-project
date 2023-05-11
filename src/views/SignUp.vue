@@ -25,7 +25,6 @@
             v-model="confirmPassword"
           />
         </div>
-        <p class="warn"></p>
         <button
           class="btn btn-primary"
           type="button"
@@ -35,6 +34,7 @@
           Sign Up
         </button>
       </form>
+      <p class="warn"></p>
       <div class="connect-change">
         <router-link to="/auth/sign-in">Already a user? Click here to <u>Login</u></router-link>
       </div>
@@ -94,7 +94,7 @@ export default {
       try {
         await this.signUp(userData)
         // Show message ok
-        document.querySelector('.container-input').style.display = 'none'
+        document.querySelector('.connect').style.display = 'none'
         document.querySelector('.btn.btn-primary').disabled = true
         showSuccess('Done! Check your inbox and confirm your email to continue :)')
         // this.$router.push({ name: 'home' })
