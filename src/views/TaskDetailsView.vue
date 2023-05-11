@@ -26,13 +26,6 @@
           <p class="tooltip tt-status">Click to change the status</p>
           <div class="specs spec-date">
             <p>Limit date</p>
-            <!-- <input
-              id="limitDate"
-              name="date"
-              type="date"
-              v-model="newTaskDetail.limit_date"
-              @input="formHasChanged = true"
-            /> -->
             <VueDatePicker id="limitDate" v-model="newTaskDetail.limit_date" :enable-time-picker="false" />
           </div>
           <div
@@ -60,7 +53,7 @@
           </button>
           <button class="btn" @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)">
             <fa icon="fa-solid fa-triangle-exclamation" />
-            Mark as {{ taskDetail.is_flagged ? 'urgent' : 'non-priority' }}
+            Mark as {{ taskDetail.is_flagged ? 'non-priority' : 'urgent' }}
           </button>
           <button
             class="btn"
@@ -133,14 +126,15 @@ export default {
     ...mapActions(TasksStore, ['_alternateDone', '_alternateFlag', '_updateTask', '_deleteTask']),
 
     async _handleDeleteTask() {
-      
-      // Continue delete task
-      try {
-        await this._deleteTask(this.taskDetail.id)
-        this.toast.success("Task deleted!");
-        this.$router.push({ name: 'home' })
-      } catch (error) {
-        this.toast.error(error.message)
+      if(confirm('Are you sure to delete this task?')){
+        // Continue delete task
+        try {
+          await this._deleteTask(this.taskDetail.id)
+          this.toast.success("Task deleted!");
+          this.$router.push({ name: 'home' })
+        } catch (error) {
+          this.toast.error(error.message)
+        }
       }
     },
     async _handleUpdateTask(){

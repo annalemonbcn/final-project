@@ -14,6 +14,7 @@
         :title="task.title"
         :id="task.id"
         :status="task.is_complete"
+        :is_flagged="task.is_flagged"
       />
     </div>
     <div class="task-container" v-if="completedTasks">
@@ -24,6 +25,7 @@
         :title="task.title"
         :id="task.id"
         :status="task.is_complete"
+        :is_flagged="task.is_flagged"
       />
     </div>
   </div>
