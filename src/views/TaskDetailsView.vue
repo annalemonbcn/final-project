@@ -48,7 +48,7 @@
         </div>
 
         <div class="form-actions">
-          <button v-if="formHasChanged" class="btn" @click="_handleUpdateTask">
+          <button v-if="formHasChanged" class="btn btn-update" @click="_handleUpdateTask">
             Update task
           </button>
           <button class="btn" @click="_alternateFlag(taskDetail.id, taskDetail.is_flagged)">
@@ -105,9 +105,7 @@ export default {
         this.newTaskDetail.limit_date = result.limit_date;
         this.newTaskDetail.description = result.description;
       }
-     
       return result;
-
     },
     colorClass() {
       if(!this.taskDetail){
@@ -141,6 +139,7 @@ export default {
       try {
         await this._updateTask(this.taskDetail.id, this.newTaskDetail)
         this.toast.success("Task updated!");
+        this.formHasChanged = false;
       } catch (error) {
         this.toast.error(error.message)
       }
@@ -166,6 +165,7 @@ export default {
     this.toast = useToast();
 
     this.taskUrl = this.$route.params.taskUrl
+    console.log(this.taskUrl);
 
     this.$watch(
       () => this.$route.params,

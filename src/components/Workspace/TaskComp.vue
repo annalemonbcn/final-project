@@ -3,10 +3,10 @@
     <p class="task-title">{{ title }}</p>
     <div class="icon-container">
       <div class="icon">
-        <fa class="task-priority" icon="fa-solid fa-circle-exclamation" v-if="is_flagged"/>
+        <!-- <fa class="task-priority" icon="fa-solid fa-circle-exclamation" v-if="is_flagged"/> -->
       </div>
       <div class="icon">
-        <fa class="task-status" icon="fa-regular fa-circle" v-if="status === false"/>
+        <fa class="task-status" icon="fa-regular fa-circle" v-if="!status"/>
         <fa class="task-status task-done" icon="fa-solid fa-circle-check" v-else />
       </div>
     </div>
