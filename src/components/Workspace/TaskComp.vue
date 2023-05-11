@@ -5,8 +5,8 @@
       <div class="icon">
       </div>
       <div class="icon" @click.prevent="_handleAlternateDone">
-        <fa class="task-status task-pending hoverable" :icon="pendingIcon" @mouseover="updatePendingIcon" @mouseleave="resetPendingIcon" v-if="!status" />
-        <fa class="task-status task-done hoverable" :icon="doneIcon" @mouseover="updateDoneIcon" @mouseleave="resetDoneIcon" v-else />
+        <fa class="task-status task-pending" :icon="pendingIcon" @mouseover="updatePendingIcon" @mouseleave="resetPendingIcon" v-if="!status" />
+        <fa class="task-status task-done" :icon="doneIcon" @mouseover="updateDoneIcon" @mouseleave="resetDoneIcon" v-else />
       </div>
     </div>
   </router-link> 
@@ -65,20 +65,28 @@ export default {
     },
 
     updatePendingIcon() {
-      if (!this.status) {
-        this.pendingIconClass = "fa-solid fa-circle-check";
+      if (window.matchMedia("(min-width: 1200px)").matches) {
+        if (!this.status) {
+          this.pendingIconClass = "fa-solid fa-circle-check";
+        }
       }
     },
     resetPendingIcon() {
-      this.pendingIconClass = "fa-regular fa-circle";
+      if (window.matchMedia("(min-width: 1200px)").matches) {
+        this.pendingIconClass = "fa-regular fa-circle";
+      } 
     },
     updateDoneIcon(){
-      if (this.status) {
-        this.doneIconClass = "fa-regular fa-circle";
+      if (window.matchMedia("(min-width: 1200px)").matches) {
+        if (this.status) {
+          this.doneIconClass = "fa-regular fa-circle";
+        }
       }
     },
     resetDoneIcon() {
-      this.doneIconClass = "fa-solid fa-circle-check";
+      if (window.matchMedia("(min-width: 1200px)").matches) {
+        this.doneIconClass = "fa-solid fa-circle-check";
+      }
     },
 
   }, created() {
@@ -127,11 +135,5 @@ export default {
 .task .icon-container .icon{
   width: 23px;
   height: 23px;
-}
-
-@media screen and (min-width: 1200px) {
-  .hoverable:hover {
-    display: none;
-  }
 }
 </style>
