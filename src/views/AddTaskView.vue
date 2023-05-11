@@ -7,10 +7,11 @@
       <form action="" @submit.prevent>
         <div>
           <input
+            ref="taskTitle"
             class="task-view-title"
             type="text"
             name="title"
-            placeholder="Task name"
+            placeholder="This is your task title"
             v-model="task.title"
           />
         </div>
@@ -24,7 +25,6 @@
           </div>
           <div class="specs spec-date">
             <p>Limit date</p>
-            <!-- <input id="limitDate" name="date" type="date" v-model="task.limit_date" /> -->
             <VueDatePicker id="limitDate" v-model="task.limit_date" :enable-time-picker="false" right />
           </div>
           <div class="task-flag specs">
@@ -112,6 +112,9 @@ export default {
         description: '',
         is_flagged: false
       }
+    },
+    focusInput() {
+      this.$refs.taskTitle.focus();
     }
   },
   computed: {
@@ -120,6 +123,9 @@ export default {
   },
   created(){
     this.toast = useToast();
+  },
+  mounted() {
+    this.focusInput();
   }
 }
 </script>

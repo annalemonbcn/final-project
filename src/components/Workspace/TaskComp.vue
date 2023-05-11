@@ -1,9 +1,14 @@
 <template>
   <router-link :to="`/task/${id}`" class="task" :class="status === false ? 'pending' : 'done'">
     <p class="task-title">{{ title }}</p>
-    <div>
-      <fa class="task-status" icon="fa-circle-xmark" v-if="status === false"/>
-      <fa class="task-status task-done" icon="fa-solid fa-circle-check" v-else />
+    <div class="icon-container">
+      <div class="icon">
+        <fa class="task-priority" icon="fa-solid fa-circle-exclamation" v-if="is_flagged"/>
+      </div>
+      <div class="icon">
+        <fa class="task-status" icon="fa-regular fa-circle" v-if="status === false"/>
+        <fa class="task-status task-done" icon="fa-solid fa-circle-check" v-else />
+      </div>
     </div>
   </router-link> 
 </template>
@@ -24,8 +29,9 @@ export default {
       type: Number,
       required: true
     },
-    created(){
-      console.log(id);
+    is_flagged: {
+      type: Boolean,
+      required: true
     }
   }
 }
@@ -63,5 +69,13 @@ export default {
 }
 .task .task-status.task-done{
   color: var(--green-accent);
+}
+.task .icon-container {
+  display: flex;
+    gap: 20px;
+}
+.task .icon-container .icon{
+  width: 23px;
+  height: 23px;
 }
 </style>
