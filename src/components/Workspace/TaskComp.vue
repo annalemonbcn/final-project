@@ -3,10 +3,9 @@
     <p class="task-title">{{ title }}</p>
     <div class="icon-container">
       <div class="icon">
-        <!-- <fa class="task-priority" icon="fa-solid fa-circle-exclamation" v-if="is_flagged"/> -->
       </div>
-      <div class="icon">
-        <fa class="task-status" icon="fa-regular fa-circle" v-if="!status"/>
+      <div class="icon" @click.prevent="_handleAlternateDone">
+        <fa class="task-status task-pending" icon="fa-regular fa-circle" v-if="!status" />
         <fa class="task-status task-done" icon="fa-solid fa-circle-check" v-else />
       </div>
     </div>
@@ -14,6 +13,10 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia'
+import TasksStore from '@/stores/tasks'
+import { useToast } from "vue-toastification";
+
 export default {
   name: 'SingleTask',
   props: {
@@ -33,6 +36,29 @@ export default {
       type: Boolean,
       required: true
     }
+  },
+  methods: {
+    ...mapActions(TasksStore, ['_alternateDone']),
+
+    async _handleAlternateDone(){
+      console.log(`id --> ${this.id}, status --> ${this.status}`);
+      try {
+        await this._alternateDone(this.id, this.status)
+        this.toast.success("Task updated!");
+      } catch (error) {
+        this.toast.error(error.message)
+      }
+    },
+
+  }, created() {
+    this.toast = useToast();
+  },
+  mounted(){
+    let faIconPending = document.querySelector('.task-status.task-pending');
+
+    faIconPending.addEventListener('mouseover', () => {
+      faIconPending.setAttribute('icon', 'fa-solid fa-circle-check');
+    });
   }
 }
 </script>
@@ -78,4 +104,5 @@ export default {
   width: 23px;
   height: 23px;
 }
+
 </style>
