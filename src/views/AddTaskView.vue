@@ -68,7 +68,6 @@ export default {
       task: {
         title: '',
         is_complete: false,
-        url: '',
         limit_date: null,
         description: '',
         is_flagged: false
@@ -76,7 +75,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(TasksStore, ['_generateUrl', '_addNewTask']),
+    ...mapActions(TasksStore, ['_addNewTask']),
 
     async _createNewTask() {
       // Check if title is empty
@@ -86,13 +85,13 @@ export default {
       }
       
       // Set url && user_id
-      this.task.url = this._generateUrl(this.task.title)
       this._setUser()
 
       // Add task
       try {
         await this._addNewTask(this.task)
         this.toast.success("Task added successfully!");
+        this.$router.push({ name: 'home' })
         // Reset fields
         this._resetFields()
       } catch (error) {
