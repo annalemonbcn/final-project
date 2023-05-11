@@ -65,20 +65,28 @@ export default {
     },
 
     updatePendingIcon() {
-      if (!this.status) {
-        this.pendingIconClass = "fa-solid fa-circle-check";
+      if (window.matchMedia("(min-width: 1200px)").matches) {
+        if (!this.status) {
+          this.pendingIconClass = "fa-solid fa-circle-check";
+        }
       }
     },
     resetPendingIcon() {
-      this.pendingIconClass = "fa-regular fa-circle";
+      if (window.matchMedia("(min-width: 1200px)").matches) {
+        this.pendingIconClass = "fa-regular fa-circle";
+      } 
     },
     updateDoneIcon(){
-      if (this.status) {
-        this.doneIconClass = "fa-regular fa-circle";
+      if (window.matchMedia("(min-width: 1200px)").matches) {
+        if (this.status) {
+          this.doneIconClass = "fa-regular fa-circle";
+        }
       }
     },
     resetDoneIcon() {
-      this.doneIconClass = "fa-solid fa-circle-check";
+      if (window.matchMedia("(min-width: 1200px)").matches) {
+        this.doneIconClass = "fa-solid fa-circle-check";
+      }
     },
 
   }, created() {
@@ -128,5 +136,4 @@ export default {
   width: 23px;
   height: 23px;
 }
-
 </style>
