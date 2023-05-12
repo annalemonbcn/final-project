@@ -31,6 +31,9 @@ export default{
   gap: 70px;
 
   background-image: url('@/img/bg_recovery.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top left;
 }
 
 #not-found > div{
