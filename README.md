@@ -36,6 +36,6 @@ The project has been developed under defined technical principles, as well as mi
 * **What I liked the most:** the onboarding part. It's been interesting for me to learn about this process first hand.
 * **The biggest challenge:** the connection and persistence of the logged in user. I have requested help from the teachers to get it going. Also fight with the docu of different plugins and libraries to implement according to what functionalities.
 * **What I liked least:** think about the design of the application and the UX/UI
-## FINAL CONCLUSIONS
+
 This project will have updates and improvements in the future.
-However, I am happy with the final result.
+However, I am happy with the final result :)
