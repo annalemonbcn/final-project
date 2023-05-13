@@ -27,7 +27,6 @@ export default defineStore('tasks', {
         throw error
       }
 
-      console.log('all tasks from supabase -->', data)
       this.tasks = data
     },
     async _addNewTask(newTask) {

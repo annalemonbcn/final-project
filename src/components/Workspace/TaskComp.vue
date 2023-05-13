@@ -55,7 +55,6 @@ export default {
     ...mapActions(TasksStore, ['_alternateDone']),
 
     async _handleAlternateDone(){
-      console.log(`id --> ${this.id}, status --> ${this.status}`);
       try {
         await this._alternateDone(this.id, this.status)
         this.toast.success("Task updated!");

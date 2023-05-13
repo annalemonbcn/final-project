@@ -165,7 +165,6 @@ export default {
     this.toast = useToast();
 
     this.taskUrl = this.$route.params.taskUrl
-    console.log(this.taskUrl);
 
     this.$watch(
       () => this.$route.params,
