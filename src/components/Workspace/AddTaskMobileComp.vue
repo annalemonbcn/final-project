@@ -21,7 +21,7 @@
   position: absolute;
   top: auto;
   left: auto;
-  bottom: 80px;
+  bottom: 100px;
   right: 50px;
 }
 
