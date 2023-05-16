@@ -68,7 +68,7 @@ export default {
     display: block;
   }
   .addTask-mobile{
-    display: none;
+    display: none !important;
   }
 }
 
