@@ -1,13 +1,13 @@
 <template>
   <NavComp ref="navComp" />
-  <main id="board" @click="hideHeader">
-    <!-- <ProjectTitle /> -->
-    <ActionButtons />
+  <main id="board" @click="hideNav">
+    <ActionButtons class="addTask-desktop" />
 
     <div id="task-info">
       <TasksContainer />
       <router-view></router-view>
     </div>
+    <AddTaskMobile class="addTask-mobile" />
   </main>
 </template>
 
@@ -16,6 +16,7 @@ import NavComp from '@/components/Navigation/NavComp.vue'
 import ProjectTitle from '@/components/Workspace/ProjectTitleComp.vue'
 import ActionButtons from '@/components/Workspace/ActionButtonsComp.vue'
 import TasksContainer from '@/components/Workspace/TaskContainerComp.vue'
+import AddTaskMobile from '@/components/Workspace/AddTaskMobileComp.vue'
 
 export default {
   name: 'HomeView',
@@ -23,10 +24,11 @@ export default {
     NavComp,
     ProjectTitle,
     ActionButtons,
-    TasksContainer
+    TasksContainer,
+    AddTaskMobile
   },
   methods: {
-    hideHeader() {
+    hideNav() {
       if (window.innerWidth < 1024) {
         this.$refs.navComp.showHeader = false
       }
@@ -57,11 +59,25 @@ export default {
     left: 90px;
   }
 }
+
+.addTask-desktop{
+  display: none;
+}
+@media(min-width: 1024px){
+  .addTask-desktop{
+    display: block;
+  }
+  .addTask-mobile{
+    display: none;
+  }
+}
+
+
 #task-info {
   display: flex;
   flex-flow: column nowrap;
   gap: 70px;
-  margin-top: 30px;
+  margin-top: 80px;
 }
 @media (min-width: 1024px) {
   #task-info {

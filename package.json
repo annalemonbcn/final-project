@@ -15,7 +15,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@supabase/supabase-js": "^2.21.0",
-    "@vuepic/vue-datepicker": "^5.0.1",
+    "@vuepic/vue-datepicker": "^5.1.0",
     "pinia": "^2.0.32",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",

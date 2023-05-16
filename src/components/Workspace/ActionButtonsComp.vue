@@ -58,8 +58,8 @@ export default {
     display: none;
   }
   @media(min-width: 768px){
-  #actionButtons #percentage{
-    display: block;
-  }
+    #actionButtons #percentage{
+      display: block;
+    }
   }
 </style>
