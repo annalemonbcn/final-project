@@ -106,11 +106,13 @@ export default {
   background-color: var(--active-text);
   box-sizing: border-box;
   padding: 30px 10px;
+  
 }
 @media(min-width: 390px){
   .info-right{
     top: 50%;
     padding: 30px 20px;
+    
   }
 }
 @media (min-width: 768px){
