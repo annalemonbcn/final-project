@@ -2,9 +2,8 @@
   <router-link :to="`/task/${id}`" class="task" :class="status === false ? 'pending' : 'done'">
     <p class="task-title">{{ title }}</p>
     <div class="icon-container">
-      <div class="icon icon-mobile">
-        <!-- <fa icon="fa-solid fa-ellipsis" @click="_showDropdown" /> -->
-        <fa icon="fa-solid fa-ellipsis" />
+      <div class="icon icon-mobile" @click.prevent>
+        <Dropdown :items="dropdownOptions" />
       </div>
       <div class="icon icon-desktop" @click.prevent="_handleAlternateDone">
         <fa
@@ -30,13 +29,29 @@
 import { mapActions } from 'pinia'
 import TasksStore from '@/stores/tasks'
 import { useToast } from 'vue-toastification'
+import Dropdown from '@/components/Utility/Dropdown.vue'
 
 export default {
   name: 'SingleTask',
+  components: {
+    Dropdown
+  },
   data() {
     return {
       pendingIconClass: 'fa-regular fa-circle',
       doneIconClass: 'fa-solid fa-circle-check',
+      dropdownOptions: [
+        {
+          title: 'Edit task',
+          link: '#',
+          icon: 'fa-regular fa-pen-to-square'
+        },
+        {
+          title: 'Delete task',
+          link: '#',
+          icon: 'fa-regular fa-trash-can'
+        },
+      ]
     }
   },
   computed: {
@@ -76,9 +91,6 @@ export default {
         this.toast.error(error.message)
       }
     },
-    // _showDropdown(){
-
-    // },
     updatePendingIcon() {
       if (window.matchMedia('(min-width: 1200px)').matches) {
         if (!this.status) {
@@ -112,6 +124,7 @@ export default {
 
 <style scoped>
 .task {
+  position: relative;
   color: var(--active-text);
   background-color: var(--secondary-text);
   border-radius: 12px;
@@ -123,6 +136,8 @@ export default {
   justify-content: space-between;
 
   transition: all 0.2s ease-in-out;
+
+  z-index: 0;
 }
 @media (min-width: 768px) {
   .task {
@@ -132,6 +147,7 @@ export default {
 
 .task:hover {
   transform: scale(1.05);
+  z-index: 0;
 }
 
 .task p.task-title {
