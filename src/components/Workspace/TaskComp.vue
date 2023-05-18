@@ -42,12 +42,12 @@ export default {
       doneIconClass: 'fa-solid fa-circle-check',
       dropdownOptions: [
         {
-          title: 'Edit task',
+          title: 'Edit',
           link: '#',
           icon: 'fa-regular fa-pen-to-square'
         },
         {
-          title: 'Delete task',
+          title: 'Delete',
           link: '#',
           icon: 'fa-regular fa-trash-can'
         },
@@ -137,7 +137,7 @@ export default {
 
   transition: all 0.2s ease-in-out;
 
-  z-index: 0;
+  z-index: auto;
 }
 @media (min-width: 768px) {
   .task {
@@ -145,9 +145,10 @@ export default {
   }
 }
 
-.task:hover {
-  transform: scale(1.05);
-  z-index: 0;
+@media(min-width: 1024px){
+  .task:hover {
+    transform: scale(1.05);
+  }
 }
 
 .task p.task-title {
