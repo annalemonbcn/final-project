@@ -41,10 +41,11 @@ export default{
   background-color: white;
   border: 1px solid var(--secondary-color);
   border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 8px 12px;
-  width: 130px;
+  width: 100px;
 
-  z-index: 10000;
+  z-index: 100;
 }
 
 .dropdown-list a{
