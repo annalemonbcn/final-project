@@ -57,13 +57,13 @@ export default {
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 8px 12px;
-  width: 100px;
+  width: 130px;
 
   z-index: 100;
 }
 
 .dropdown-list a {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .dropdown-list a svg {
