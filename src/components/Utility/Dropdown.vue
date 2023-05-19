@@ -4,24 +4,38 @@
       <fa icon="fa-solid fa-ellipsis" />
     </div>
     <div class="dropdown-list" v-if="isOpen">
-      <div v-for="(item, i) in items" :key="i" class="dropdown-list-item">
-        <a :href="item.link"><fa :icon="item.icon" /> {{ item.title }}</a>
+      <div class="dropdown-list-item">
+        <router-link :to="url">
+          <fa icon="fa-regular fa-pen-to-square" /> 
+          Edit
+        </router-link>
+      </div>
+      <div class="dropdown-list-item" @click="deleteTask">
+        <a href="#">
+          <fa icon="fa-regular fa-trash-can" /> 
+          Delete
+        </a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default{
+export default {
   name: 'dropdown',
-  data(){
+  data() {
     return {
       isOpen: false
     }
   },
+  methods: {
+    deleteTask(){
+      this.$emit('delete-task')
+    }
+  },
   props: {
-    items: {
-      type: Object,
+    url: {
+      type: String,
       required: true
     }
   }
@@ -29,7 +43,7 @@ export default{
 </script>
 
 <style>
-.dropdown-list{
+.dropdown-list {
   position: absolute;
   right: 0;
 
@@ -48,11 +62,11 @@ export default{
   z-index: 100;
 }
 
-.dropdown-list a{
+.dropdown-list a {
   font-size: 14px;
 }
 
-.dropdown-list a svg{
+.dropdown-list a svg {
   margin-right: 5px;
 }
 </style>

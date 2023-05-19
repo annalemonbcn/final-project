@@ -3,7 +3,7 @@
     <p class="task-title">{{ title }}</p>
     <div class="icon-container">
       <div class="icon icon-mobile" @click.prevent>
-        <Dropdown :items="dropdownOptions" />
+        <Dropdown :url="url" @delete-task="_handleDeleteTask" />
       </div>
       <div class="icon icon-desktop" @click.prevent="_handleAlternateDone">
         <fa
@@ -40,18 +40,6 @@ export default {
     return {
       pendingIconClass: 'fa-regular fa-circle',
       doneIconClass: 'fa-solid fa-circle-check',
-      dropdownOptions: [
-        {
-          title: 'Edit',
-          link: '#',
-          icon: 'fa-regular fa-pen-to-square'
-        },
-        {
-          title: 'Delete',
-          link: '#',
-          icon: 'fa-regular fa-trash-can'
-        },
-      ]
     }
   },
   computed: {
@@ -60,7 +48,10 @@ export default {
     },
     doneIcon() {
       return `fa ${this.doneIconClass}`
-    }
+    },
+    url(){
+      return `/task/${this.id}`;
+    } 
   },
   props: {
     title: {
@@ -81,7 +72,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(TasksStore, ['_alternateDone']),
+    ...mapActions(TasksStore, ['_alternateDone','_deleteTask']),
 
     async _handleAlternateDone() {
       try {
@@ -89,6 +80,18 @@ export default {
         this.toast.success('Task updated!')
       } catch (error) {
         this.toast.error(error.message)
+      }
+    },
+    async _handleDeleteTask() {
+      if(confirm('Are you sure to delete this task?')){
+        // Continue delete task
+        try {
+          await this._deleteTask(this.id)
+          this.toast.success("Task deleted!");
+          this.$router.push({ name: 'home' })
+        } catch (error) {
+          this.toast.error(error.message)
+        }
       }
     },
     updatePendingIcon() {
@@ -117,7 +120,7 @@ export default {
     }
   },
   created() {
-    this.toast = useToast()
+    this.toast = useToast();
   }
 }
 </script>
