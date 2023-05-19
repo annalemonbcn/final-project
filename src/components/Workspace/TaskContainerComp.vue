@@ -1,7 +1,6 @@
 <template>
   <div v-if="loading">Loading tasks...</div>
-  <div
-    v-else-if="this.pendingTasks.length === 0 && this.completedTasks.length === 0"
+  <div v-else-if="!pendingTasks.length && !completedTasks.length"
     class="warn empty"
   >
     <router-link to="/task/add-task">
