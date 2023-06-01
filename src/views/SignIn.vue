@@ -23,6 +23,9 @@
         </div>
         <button class="btn btn-primary" type="button" @click="_handleSignIn">Login</button>
       </form>
+      <div class="signin-oauth">
+        <button class="btn" @click="_handleSignInWithGoogle">Signin with Google</button>
+      </div>
       <div class="connect-change">
         <router-link to="/auth/sign-up"
           ><fa icon="fa-solid fa-circle-arrow-right" /> New user? Click here to
@@ -51,7 +54,7 @@ export default {
     ...mapState(UserStore, ['user'])
   },
   methods: {
-    ...mapActions(UserStore, ['_validateEmail', '_validatePassword', 'signIn']),
+    ...mapActions(UserStore, ['_validateEmail', '_validatePassword', 'signIn', 'signInWithGoogle']),
 
     async _handleSignIn() {
       // Reset errors and fields
@@ -85,6 +88,16 @@ export default {
           this.$router.push({ name: 'home' })
         }, 2000)
       } catch (error) {
+        showError(error.message)
+      }
+    },
+    async _handleSignInWithGoogle() {
+      // --> HERE
+      // desenvolupar un missatge de welcome
+      try {
+        await this.signInWithGoogle();
+      }
+      catch(error){
         showError(error.message)
       }
     }
