@@ -9,13 +9,13 @@
           <input type="text" id="input-email" name="email" placeholder="Email" v-model="email" />
         </div>
         <div class="container-input">
-          <input
-            type="password"
+          <input type="password"
             id="input-password"
             name="password"
             placeholder="Password"
             v-model="password"
-          />
+          /> 
+          <fa class="icon-mayus" icon="fa-regular fa-circle-up" v-show="bloqMayusOn"/>
         </div>
         <p class="warn"></p>
         <div id="connect-forgot">
@@ -48,6 +48,7 @@ export default {
     return {
       email: '',
       password: '',
+      bloqMayusOn: false,
       toast: null
     }
   },
@@ -101,7 +102,17 @@ export default {
       catch(error){
         showError(error.message)
       }
+    },
+  },
+  mounted() {
+    // Bloq mayus ON
+    const inputPassword = document.querySelector('input#input-password')
+
+    const checkCapsLock = (event) => {
+      this.bloqMayusOn = event.getModifierState('CapsLock');
     }
+    
+    inputPassword.addEventListener('keyup', checkCapsLock)
   }
 }
 </script>
