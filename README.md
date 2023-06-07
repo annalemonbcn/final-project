@@ -39,3 +39,9 @@ The project has been developed under defined technical principles, as well as mi
 
 This project will have updates and improvements in the future.
 However, I am happy with the final result :)
+
+## Afaire v2.0 IS OUT NOW
+New features:
+* Sign in/sign up with Google
+* Dropdown options menu in mobile: edit or delete task
+* Collapsible task lists: hide or show the tasks you want
