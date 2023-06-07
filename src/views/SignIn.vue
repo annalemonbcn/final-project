@@ -9,8 +9,7 @@
           <input type="text" id="input-email" name="email" placeholder="Email" v-model="email" />
         </div>
         <div class="container-input">
-          <input
-            type="password"
+          <input type="password"
             id="input-password"
             name="password"
             placeholder="Password"
