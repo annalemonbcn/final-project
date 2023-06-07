@@ -44,6 +44,17 @@ export default defineStore('userStore', {
       }
       this.user = user
     },
+    async signInWithGoogle() {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          // redirectTo: '/'
+        }      
+      })
+      if (error) {
+        throw error
+      }
+    },
     async signOut() {
       const { error } = await supabase.auth.signOut()
       if (error) {

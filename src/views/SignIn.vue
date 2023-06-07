@@ -23,6 +23,10 @@
         </div>
         <button class="btn btn-primary" type="button" @click="_handleSignIn">Login</button>
       </form>
+      <div class="signin-oauth">
+        <p>Or you can also...</p>
+        <button class="btn btn-oauth" @click="_handleSignInWithGoogle"><img src="@/assets/google-icon.png" alt="" /> Sign in with Google</button>
+      </div>
       <div class="connect-change">
         <router-link to="/auth/sign-up"
           ><fa icon="fa-solid fa-circle-arrow-right" /> New user? Click here to
@@ -51,7 +55,7 @@ export default {
     ...mapState(UserStore, ['user'])
   },
   methods: {
-    ...mapActions(UserStore, ['_validateEmail', '_validatePassword', 'signIn']),
+    ...mapActions(UserStore, ['_validateEmail', '_validatePassword', 'signIn', 'signInWithGoogle']),
 
     async _handleSignIn() {
       // Reset errors and fields
@@ -87,6 +91,16 @@ export default {
       } catch (error) {
         showError(error.message)
       }
+    },
+    async _handleSignInWithGoogle() {
+      // --> HERE
+      // desenvolupar un missatge de welcome
+      try {
+        await this.signInWithGoogle();
+      }
+      catch(error){
+        showError(error.message)
+      }
     }
   }
 }
@@ -98,11 +112,18 @@ body {
 }
 #connect-forgot {
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 #connect-forgot a {
   color: var(--green-accent);
   font-size: 14px;
   cursor: pointer;
+}
+.signin-oauth{
+  margin-top: 30px;
+  text-align: center
+}
+.signin-oauth p{
+  font-size: 16px;
 }
 </style>

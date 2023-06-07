@@ -34,6 +34,10 @@
           Sign Up
         </button>
       </form>
+      <div class="signin-oauth">
+        <p>Or you can also...</p>
+        <button class="btn btn-oauth" @click="_handleSignUpWithGoogle"><img src="@/assets/google-icon.png" alt="" /> Sign up with Google</button>
+      </div>
       <p class="warn"></p>
       <div class="connect-change">
         <router-link to="/auth/sign-in">Already a user? Click here to <u>Login</u></router-link>
@@ -60,7 +64,7 @@ export default {
     ...mapState(UserStore, ['user'])
   },
   methods: {
-    ...mapActions(UserStore, ['_validateEmail', '_validatePassword', 'signUp']),
+    ...mapActions(UserStore, ['_validateEmail', '_validatePassword', 'signUp', 'signInWithGoogle']),
 
     async _handleSignUp() {
       // Reset errors and fields
@@ -101,6 +105,16 @@ export default {
       } catch (error) {
         showError(error.message)
       }
+    },
+    async _handleSignUpWithGoogle() {
+      // --> HERE
+      // desenvolupar un missatge de welcome
+      try {
+        await this.signInWithGoogle();
+      }
+      catch(error){
+        showError(error.message)
+      }
     }
   }
 }
@@ -112,5 +126,12 @@ export default {
 }
 div.container-input:nth-child(2) {
   margin-bottom: 15px;
+}
+.signin-oauth{
+  margin-top: 30px;
+  text-align: center
+}
+.signin-oauth p{
+  font-size: 16px;
 }
 </style>
