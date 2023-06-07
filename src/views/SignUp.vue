@@ -14,7 +14,9 @@
             name="password"
             placeholder="Password"
             v-model="password"
-          /><br />
+          />
+          <fa class="icon-mayus" icon="fa-regular fa-circle-up" v-show="bloqMayusOn" />
+          <br />
         </div>
         <div class="container-input">
           <input
@@ -24,6 +26,7 @@
             placeholder="Confirm password"
             v-model="confirmPassword"
           />
+          <fa class="icon-mayus" icon="fa-regular fa-circle-up" v-show="bloqMayusOn" />
         </div>
         <button
           class="btn btn-primary"
@@ -36,11 +39,16 @@
       </form>
       <div class="signin-oauth">
         <p>Or you can also...</p>
-        <button class="btn btn-oauth" @click="_handleSignUpWithGoogle"><img src="@/assets/google-icon.png" alt="" /> Sign up with Google</button>
+        <button class="btn btn-oauth" @click="_handleSignUpWithGoogle">
+          <img src="@/assets/google-icon.png" alt="" /> Sign up with Google
+        </button>
       </div>
       <p class="warn"></p>
       <div class="connect-change">
-        <router-link to="/auth/sign-in">Already a user? Click here to <u>Login</u></router-link>
+        <router-link to="/auth/sign-in"
+          ><fa icon="fa-solid fa-circle-arrow-right" /> Already a user? Click here to
+          <u>Login</u></router-link
+        >
       </div>
     </div>
   </div>
@@ -57,7 +65,8 @@ export default {
     return {
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      bloqMayusOn: false
     }
   },
   computed: {
@@ -110,12 +119,23 @@ export default {
       // --> HERE
       // desenvolupar un missatge de welcome
       try {
-        await this.signInWithGoogle();
-      }
-      catch(error){
+        await this.signInWithGoogle()
+      } catch (error) {
         showError(error.message)
       }
     }
+  },
+  mounted() {
+    // Bloq mayus ON
+    const inputPassword = document.querySelector('input#input-password')
+    const confirmPassword = document.querySelector('input#input-confirmPassword')
+
+    const checkCapsLock = (event) => {
+      this.bloMayusOn = event.getModifierState('CapsLock');
+    }
+    
+    inputPassword.addEventListener('keyup', checkCapsLock)
+    confirmPassword.addEventListener('keyup', checkCapsLock)
   }
 }
 </script>
@@ -127,11 +147,11 @@ export default {
 div.container-input:nth-child(2) {
   margin-bottom: 15px;
 }
-.signin-oauth{
+.signin-oauth {
   margin-top: 30px;
-  text-align: center
+  text-align: center;
 }
-.signin-oauth p{
+.signin-oauth p {
   font-size: 16px;
 }
 </style>

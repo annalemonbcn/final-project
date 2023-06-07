@@ -181,7 +181,7 @@ input.task-view-title {
 
 .modal-back {
   position: relative;
-  left: 30px;
+  left: 10px;
 }
 @media (min-width: 1024px) {
   .modal-back {

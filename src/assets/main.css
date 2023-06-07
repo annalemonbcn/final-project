@@ -58,6 +58,13 @@
 
 .container.user form.connect .container-input {
   margin-bottom: 30px;
+  position: relative;
+}
+.container.user .container-input svg.icon-mayus{
+  position: absolute;
+  left: auto;
+  right: 10px;
+  top: 13px;
 }
 .container.user form.connect input {
   color: white;
