@@ -106,16 +106,13 @@ export default {
   },
   mounted() {
     // Bloq mayus ON
-    const inputPassword = document.querySelector('input#input-password');
+    const inputPassword = document.querySelector('input#input-password')
 
-    inputPassword.addEventListener('keyup', (event) => {
-      if (event.getModifierState('CapsLock')) {
-        this.bloqMayusOn = true;
-      }
-      else {
-        this.bloqMayusOn = false;
-      }
-    });
+    const checkCapsLock = (event) => {
+      this.bloqMayusOn = event.getModifierState('CapsLock');
+    }
+    
+    inputPassword.addEventListener('keyup', checkCapsLock)
   }
 }
 </script>

@@ -14,8 +14,9 @@
             name="password"
             placeholder="Password"
             v-model="password"
+            @keyup="checkCapsLock($event, 'password')"
           />
-          <fa class="icon-mayus" icon="fa-regular fa-circle-up" v-show="bloqMayusOn" />
+          <fa class="icon-mayus" icon="fa-regular fa-circle-up" v-show="bloqMayusOnPassword" />
           <br />
         </div>
         <div class="container-input">
@@ -25,8 +26,9 @@
             name="confirmPassword"
             placeholder="Confirm password"
             v-model="confirmPassword"
+            @keyup="checkCapsLock($event, 'confirmPassword')"
           />
-          <fa class="icon-mayus" icon="fa-regular fa-circle-up" v-show="bloqMayusOn" />
+          <fa class="icon-mayus" icon="fa-regular fa-circle-up" v-show="bloqMayusOnConfirmPassword" />
         </div>
         <button
           class="btn btn-primary"
@@ -66,7 +68,8 @@ export default {
       email: '',
       password: '',
       confirmPassword: '',
-      bloqMayusOn: false
+      bloqMayusOnPassword: false,
+      bloqMayusOnConfirmPassword: false
     }
   },
   computed: {
@@ -123,6 +126,21 @@ export default {
       } catch (error) {
         showError(error.message)
       }
+    },
+    checkCapsLock(event, input) {
+      if (event.getModifierState('CapsLock')) {
+        if (input === 'password') {
+          this.bloqMayusOnPassword = true;
+        } else if (input === 'confirmPassword') {
+          this.bloqMayusOnConfirmPassword = true;
+        }
+      } else {
+        if (input === 'password') {
+          this.bloqMayusOnPassword = false;
+        } else if (input === 'confirmPassword') {
+          this.bloqMayusOnConfirmPassword = false;
+        }
+      }
     }
   },
   mounted() {
@@ -131,7 +149,7 @@ export default {
     const confirmPassword = document.querySelector('input#input-confirmPassword')
 
     const checkCapsLock = (event) => {
-      this.bloMayusOn = event.getModifierState('CapsLock');
+      this.bloqMayusOn = event.getModifierState('CapsLock');
     }
     
     inputPassword.addEventListener('keyup', checkCapsLock)

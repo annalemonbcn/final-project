@@ -65,6 +65,12 @@
   left: auto;
   right: 10px;
   top: 13px;
+  width: 16px;
+}
+@media(min-width: 768px){
+  .container.user .container-input svg.icon-mayus{
+    width: 20px;
+  }
 }
 .container.user form.connect input {
   color: white;
