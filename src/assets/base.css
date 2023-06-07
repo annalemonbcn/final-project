@@ -136,6 +136,16 @@ body p {
   color: white;
   background-color: var(--green-accent);
 }
+.btn-oauth{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 5px;
+}
+.btn-oauth img{
+  width: 30px;
+}
 
 .arrow-back {
   color: var(--green-accent);

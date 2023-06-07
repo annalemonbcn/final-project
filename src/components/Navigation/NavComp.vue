@@ -8,7 +8,7 @@
       <router-link to="/">
         <fa icon="fa-regular fa-user" /> <span class="hide">{{ user.email }}</span>
       </router-link>
-      </div>
+    </div>
     <nav id="nav-main">
       <div>
         <ul>
@@ -54,7 +54,7 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import UserStore from '@/stores/user'
-import { useToast } from "vue-toastification";
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'HeaderComp',
@@ -72,30 +72,29 @@ export default {
     async handleSignOut() {
       try {
         await this.signOut()
-        this.toast.success("Hope to see you soon!");
+        this.toast.success('Hope to see you soon!')
         this.$router.push({ name: 'sign-in' })
       } catch (error) {
         this.toast.error(error.message)
       }
     },
     toggleHeader() {
-      this.showHeader = !this.showHeader;
+      this.showHeader = !this.showHeader
     }
   },
-  created(){
-    this.toast = useToast();
+  created() {
+    this.toast = useToast()
 
-    if (window.innerWidth > 1023){
-      this.showHeader = true;
+    if (window.innerWidth > 1023) {
+      this.showHeader = true
     }
   }
-  
 }
 </script>
 
 <style scoped>
 /** HOVER **/
-@media(min-width: 1024px){
+@media (min-width: 1024px) {
   header:hover {
     width: 270px;
   }
@@ -131,7 +130,7 @@ header {
     padding: 25px;
   }
 }
-@media(min-width: 1024px){
+@media (min-width: 1024px) {
   header {
     width: 90px;
   }
@@ -180,12 +179,12 @@ header #nav-settings {
   position: absolute;
   bottom: 100px;
 }
-@media(min-width: 768px){
+@media (min-width: 768px) {
   header #nav-settings {
     bottom: 90px;
   }
 }
-@media(min-width: 1200px){
+@media (min-width: 1200px) {
   header #nav-settings {
     bottom: 20px;
   }
@@ -207,17 +206,18 @@ header #nav-settings {
   }
 }
 
-.nav-item a span{
+.nav-item a span {
   color: var(--primary-text);
   font-size: 16px;
 }
-@media(min-width: 768px){
-  .nav-item a span{
+@media (min-width: 768px) {
+  .nav-item a span {
     font-size: 18px;
   }
 }
 
-.nav-item.active a, .nav-item.active a span{
+.nav-item.active a,
+.nav-item.active a span {
   color: var(--green-accent);
 }
 </style>

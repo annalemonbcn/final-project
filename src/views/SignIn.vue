@@ -24,7 +24,8 @@
         <button class="btn btn-primary" type="button" @click="_handleSignIn">Login</button>
       </form>
       <div class="signin-oauth">
-        <button class="btn" @click="_handleSignInWithGoogle">Signin with Google</button>
+        <p>Or you can also...</p>
+        <button class="btn btn-oauth" @click="_handleSignInWithGoogle"><img src="@/assets/google-icon.png" alt="" /> Sign in with Google</button>
       </div>
       <div class="connect-change">
         <router-link to="/auth/sign-up"
@@ -111,11 +112,18 @@ body {
 }
 #connect-forgot {
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 #connect-forgot a {
   color: var(--green-accent);
   font-size: 14px;
   cursor: pointer;
+}
+.signin-oauth{
+  margin-top: 30px;
+  text-align: center
+}
+.signin-oauth p{
+  font-size: 16px;
 }
 </style>
